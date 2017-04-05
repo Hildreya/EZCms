@@ -1,0 +1,10 @@
+{% for bundle in bundles %}
+        <h5>{{ bundle['name'] }}</h5>
+        {% if bundle|length - 1 > 1 %}
+            <ul>
+            {% for i in 0..bundle|length - 2  %}
+                <li>{{ bundle[i] }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+{% endfor %}
