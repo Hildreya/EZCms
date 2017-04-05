@@ -1,0 +1,11 @@
+ez_user:
+    resource: "@EZUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ez_core:
+    resource: "@EZCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

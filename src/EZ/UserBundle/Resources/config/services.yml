@@ -1,0 +1,4 @@
+services:
+#    ez_user.example:
+#        class: EZ\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
