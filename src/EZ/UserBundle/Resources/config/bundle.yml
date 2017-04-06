@@ -1,4 +1,5 @@
 name: Utilisateurs
+icon: fa fa-user-o
 0: Creer
 1: Supprimer
 2: Modifier

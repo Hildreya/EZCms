@@ -7,6 +7,11 @@ use Symfony\Component\Yaml\Yaml;
 
 class DefaultController extends Controller
 {
+    public function indexAction()
+    {
+        return $this->render('EZCoreBundle:Layout:admin/admin.html.twig');
+    }
+
     public function BundleAction()
     {
         $directories = __DIR__.'/../../';

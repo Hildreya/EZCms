@@ -1,3 +1,3 @@
 ez_core_homepage:
     path:     /
-    defaults: { _controller: EZCoreBundle:Default:bundle }
+    defaults: { _controller: EZCoreBundle:Default:index }
