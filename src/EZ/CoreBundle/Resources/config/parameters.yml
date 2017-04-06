@@ -1,0 +1,35 @@
+imports:
+    - {resource:"@app/config/parameters.yml"}
+
+jsonapi:
+    jsonapi_ip:       null
+    jsonapi_port:     null
+    jsonapi_username: null
+    jsonapi_password: null
+    jsonapi_salt:     null
+
+server:
+    server_name:      null
+    server_ip:        null
+    server_port:      null
+    server_money:     null
+
+
+information:
+    info_site_url:    null
+    info_banner_url:  null
+    info_logo_url:    null
+
+
+#
+# Values here are only booleans, 0 => features not used, 1 => features used
+#
+config:
+    config_store:     null
+    config_paypal:    null
+    config_starpass:  null
+    config_economy:   null
+    config_team:      null
+    config_contact:   null
+    config_rules:     null
+    config_server_money: null

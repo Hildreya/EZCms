@@ -38,6 +38,9 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        servename: Devcraft
+        serveip: play.devcraft.fr
 
 # Doctrine Configuration
 doctrine:
@@ -77,3 +80,11 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+#AsseticBundle Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ EZCoreBundle ]
+    filters:
+        cssrewrite: ~
