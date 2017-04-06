@@ -5,7 +5,7 @@ namespace EZ\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 
-class DefaultController extends Controller
+class AdminController extends Controller
 {
     public function indexAction()
     {
@@ -14,6 +14,7 @@ class DefaultController extends Controller
 
     public function BundleAction()
     {
+        $bundles = array();
         $directories = __DIR__.'/../../';
         $scanned_directory = array_diff(scandir($directories), array('..', '.'));
 
@@ -21,7 +22,7 @@ class DefaultController extends Controller
 
             $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
         }
-        return $this->render('EZCoreBundle:Default:module.html.twig', array(
+        return $this->render('EZCoreBundle:Layout/admin:module.html.twig', array(
             'bundles' => $bundles
         ));
     }
