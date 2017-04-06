@@ -1,0 +1,22 @@
+{% for bundle in bundles %}
+
+    {% if bundle['display'] == true  %}
+        {% if bundle|length - 3 > 0 %}
+            <li class="treeview">
+                <a href=""><i class="{{ bundle['icon'] }}"></i> <span>{{ bundle['name'] }}</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                {% for i in 0..bundle|length - 5  %}
+                    <li><a href="{{ bundle[i]['path'] }}">{{ bundle[i]['name'] }}</a></li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li><a href="{{ bundle['path'] }}"><i class="{{ bundle['icon'] }}"></i> <span>{{ bundle['name'] }}</span></a></li>
+        {% endif %}
+    {% endif %}
+
+{% endfor %}

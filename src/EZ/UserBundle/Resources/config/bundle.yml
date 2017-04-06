@@ -1,0 +1,13 @@
+name: Utilisateurs
+path: "#"
+icon: fa fa-user-o
+display : true
+0:
+    name: Créer
+    path: "#"
+1:
+    name: Supprimer
+    path: "#"
+2:
+    name: Modifier
+    path: "#"

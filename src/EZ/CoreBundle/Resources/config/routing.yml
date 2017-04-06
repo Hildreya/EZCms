@@ -1,3 +1,8 @@
 ez_core_homepage:
     path:     /
-    defaults: { _controller: EZCoreBundle:Default:index }
+    defaults: { _controller: EZCoreBundle:Main:index }
+
+ez_core_admin:
+    path:     /admin
+    defaults: { _controller: EZCoreBundle:Admin:index }
+
