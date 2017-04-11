@@ -1,0 +1,26 @@
+{% extends "EZCoreBundle:Layout/office:red.html.twig" %}
+
+{% block title %}
+    Inscription - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-6">
+                <div class="content">
+                    <div class="title-log">S'inscrire</div>
+                    {% trans_default_domain 'FOSUserBundle' %}
+
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                    {{ form_widget(form) }}
+                    <div>
+                        <input type="submit" class="button-green right" value="{{ 'registration.submit'|trans }}" />
+                    </div>
+                    {{ form_end(form) }}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
