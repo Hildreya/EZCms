@@ -1,0 +1,20 @@
+{% extends "EZCoreBundle:Layout/office:red.html.twig" %}
+
+{% block title %}
+    Inscription - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title-log">S'inscrire</div>
+                        {% trans_default_domain 'FOSUserBundle' %}
+                            <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
