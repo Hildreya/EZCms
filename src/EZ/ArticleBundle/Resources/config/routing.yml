@@ -1,0 +1,3 @@
+ez_article_homepage:
+    path:     /
+    defaults: { _controller: EZArticleBundle:Default:index }
