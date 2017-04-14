@@ -1,0 +1,23 @@
+{% extends "EZCoreBundle:Layout/office:red.html.twig" %}
+
+{% block title %}
+    Réinitialiser mon mot de passe - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title-log">Réinitialiser mon mot de passe</div>
+
+                    {% trans_default_domain 'FOSUserBundle' %}
+                        <p>
+                            {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                        </p>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

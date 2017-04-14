@@ -1,0 +1,26 @@
+{% extends "EZCoreBundle:Layout/office:red.html.twig" %}
+
+{% block title %}
+    Profil - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title-log">Mon profil</div>
+                    {% trans_default_domain 'FOSUserBundle' %}
+
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                    {{ form_widget(form) }}
+                    <div>
+                        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                    </div>
+                    {{ form_end(form) }}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
