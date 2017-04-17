@@ -1,3 +1,7 @@
+ez_article:
+    resource: "@EZArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ez_user:
     resource: "@EZUserBundle/Resources/config/routing.yml"
     prefix:   /
