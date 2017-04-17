@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new EZ\CoreBundle\EZCoreBundle(),
             new EZ\UserBundle\EZUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new EZ\ArticleBundle\EZArticleBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

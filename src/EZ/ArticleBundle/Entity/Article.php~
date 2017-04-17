@@ -1,0 +1,73 @@
+<?php
+
+namespace EZ\ArticleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity(repositoryClass="EZ\ArticleBundle\Repository\ArticleRepository")
+ */
+class Article
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="modificationDate", type="datetime", nullable=true)
+     */
+    private $modificationDate;
+
+    /**
+     * @var \EZ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="EZ\UserBundle\Entity\User")
+     */
+    private $author;
+
+    /**
+     * @var \EZ\ArticleBundle\Entity\Comment
+     *
+     * @ORM\ManyToMany(targetEntity="EZ\ArticleBundle\Entity\Comment", cascade={"persist"})
+     */
+    private $comment;
+
+    public function __construct()
+    {
+        $this->creationDate = new \Datetime();
+        $this->comment = new ArrayCollection();
+    }
+
+}
