@@ -1,13 +1,18 @@
-name: Utilisateurs
-path: "#"
-icon: fa fa-user-o
-display : true
-0:
-    name: Créer
+admin:
+    name: Utilisateurs
     path: "#"
-1:
-    name: Supprimer
-    path: "#"
-2:
-    name: Modifier
-    path: "#"
+    icon: fa fa-user-o
+    display : true
+    0:
+        name: Créer
+        path: "#"
+    1:
+        name: Supprimer
+        path: "#"
+    2:
+        name: Modifier
+        path: "#"
+
+default:
+    name:
+    path:
