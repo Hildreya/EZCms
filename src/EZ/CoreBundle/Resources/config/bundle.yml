@@ -18,17 +18,17 @@ admin:
 
 default:
   #Boolean value, if the bundle is showed in the userstemplate
-  display:
+  display: true
   path:     "#"
   #name show if displayed
-  name:
+  name: Core
   #Lower Categories, don't write it if you don't want them
     0:
-        name:
+        name: 1
         path: "#"
     1:
-        name:
+        name: 2
         path: "#"
     2:
-        name:
+        name: 3
         path: "#"
