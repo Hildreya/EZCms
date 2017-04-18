@@ -1,7 +1,7 @@
 {% for bundle in bundles %}
 
     {% if bundle['default']['display'] == true %}
-        {% if bundle['default']|lenght - 3 > 0 %}
+        {% if bundle['default']|length - 3 > 0 %}
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     {{ bundle['default']['name'] }}
@@ -9,7 +9,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        {% for i in 0..bundle['default']|lenght-3 %}
+                        {% for i in 0..bundle['default']|length - 4 %}
 
                         <a href="{{ bundle['default'][i]['path'] }}">{{ bundle['default'][i]['name'] }}</a>
 
@@ -17,9 +17,9 @@
                     </li>
                 </ul>
             </li>
-
+        {% else %}
+            <li><a href="{{ bundle['default']['path'] }}">{{ bundle['default']['name'] }}</a></li>
         {% endif %}
-        <li><a href="{{ bundle['default']['path'] }}">{{ bundle['default']['name'] }}</a></li>
     {% endif %}
 
 {% endfor %}

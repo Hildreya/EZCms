@@ -1,34 +1,32 @@
 admin:
-  #Boolean value, if the bundle is showed in the admin template
-  display:
-  path:     "#"
-  #name show if displayed
+  # Boolean value, if the bundle is showed in the admin template
+  display: false
+  path:
+  # name show if displayed "
   name:
   icon:
-  #Lower Categories, don't write it if you don't want them
+  # Lower Categories, don't write it if you don't want them
   0:
       name:
-      path: "#"
+      path:
   1:
       name:
-      path: "#"
+      path:
   2:
       name:
-      path: "#"
+      path:
 
 default:
-  #Boolean value, if the bundle is showed in the userstemplate
-  display: true
-  path:     "#"
-  #name show if displayed
-  name: Core
-  #Lower Categories, don't write it if you don't want them
-    0:
-        name: 1
-        path: "#"
-    1:
-        name: 2
-        path: "#"
-    2:
-        name: 3
-        path: "#"
+  # Boolean value, if the bundle is showed in the userstemplate
+  display: false
+  path:
+  # name show if displayed #
+  name:
+  # Lower Categories, don't write it if you don't want them
+  0:
+      name:
+      path:
+  1:
+      name:
+      path:
+
