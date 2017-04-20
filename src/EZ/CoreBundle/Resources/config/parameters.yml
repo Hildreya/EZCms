@@ -1,23 +1,13 @@
-imports:
-    - {resource:"@app/config/parameters.yml"}
-
-jsonapi:
-    jsonapi_ip:       null
-    jsonapi_port:     null
-    jsonapi_username: null
-    jsonapi_password: null
-    jsonapi_salt:     null
-
-server:
-    server_name:      null
-    server_ip:        null
-    server_port:      null
-    server_money:     null
-
-
-information:
-    info_site_url:    null
-    info_banner_url:  null
-    info_logo_url:    null
-
-template:             red
+jsonapi_ip: null
+jsonapi_port: null
+jsonapi_username: null
+jsonapi_password: null
+jsonapi_salt: null
+server_name: null
+server_ip: null
+server_port: null
+server_money: null
+info_site_url: null
+info_banner_url: null
+info_logo_url: null
+template: red
