@@ -27,10 +27,12 @@
             {% for template in templates %}
                 {% if template == template_used %}
                     <div class="col-sm-2">
+                        <img src="{{ asset('img/template/' ~ template) }}"/></br>
                         <p><b>{{ template }}</b></p>
                     </div>
                 {% else %}
                     <div class="col-sm-2">
+                        <img src="{{ asset('img/template/' ~ template) }}"/></br>
                         <p><a href="{{ path('ez_core_template_select', { 'name' : template }) }}">{{ template }}</a></p>
                     </div>
                 {% endif %}

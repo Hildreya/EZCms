@@ -36,14 +36,27 @@ class TemplateController extends Controller
             {
 
                 $file_name = $file->getClientOriginalName();
-                $file->move(__DIR__.'/../Resources/views/layout/office',$file_name);
+                $file->move(__DIR__.'/../Resources/views/Layout/office',$file_name);
 
                 $zip = new ZipArchive();
-                if($zip->open(__DIR__.'/../Resources/views/layout/office/'.$file_name) === TRUE )
+                if($zip->open(__DIR__.'/../Resources/views/Layout/office/'.$file_name) === TRUE )
                 {
-                    $zip->extractTo( __DIR__.'/../Resources/views/layout/office');
+                    $zip->extractTo( __DIR__.'/../Resources/views/Layout/office');
                     $zip->close();
-                    unlink(__DIR__.'/../Resources/views/layout/office/'.$file_name);
+                    unlink(__DIR__.'/../Resources/views/Layout/office/'.$file_name);
+
+                    if(is_dir(__DIR__.'/../../../../web/img/template'))
+                    {
+                        $template_img = str_replace('.zip', '.png', $file_name);
+                        rename(__DIR__.'/../Resources/views/Layout/office/'.$template_img ,__DIR__.'/../../../../web/img/template/'.$template_img);
+                    }
+                    else
+                    {
+                        mkdir(__DIR__.'/../../../../web/img/template');
+                        $template_img = str_replace('.zip', '.png', $file_name);
+                        rename(__DIR__.'/../Resources/views/Layout/office/'.$template_img,__DIR__.'/../../../../web/img/template/'.$template_img);
+
+                    }
 
                     $this->get('session')->getFlashBag()->set('success', 'Theme telecharge avec succes !');
                 }
