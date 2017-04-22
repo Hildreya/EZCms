@@ -37,7 +37,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-servername nav-menu">
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="{{ path('ez_core_homepage') }}">Accueil</a></li>
+                <li {% if app.request.get('_route') == 'ez_core_homepage' %} class="active"{% endif %}>
+                    <a href="{{ path('ez_core_homepage') }}">Accueil</a>
+                </li>
                 {{ render(controller("EZCoreBundle:Main:bundle")) }}
             </ul>
             <ul class="nav navbar-nav navbar-right">

@@ -43,6 +43,7 @@ twig:
     globals:
         servename: %server_name%
         serveip: %server_ip%
+        template: %template%
 
 # Doctrine Configuration
 doctrine:
