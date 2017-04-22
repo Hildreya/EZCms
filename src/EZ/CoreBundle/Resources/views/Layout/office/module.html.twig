@@ -18,7 +18,9 @@
                 </ul>
             </li>
         {% else %}
-            <li><a href="{{ bundle['default']['path'] }}">{{ bundle['default']['name'] }}</a></li>
+            <li {% if app.request.get('_route') == bundle['default']['path'] %} class="active"{% endif %}>
+                <a href="{{ path(bundle['default']['path']) }}">{{ bundle['default']['name'] }}</a>
+            </li>
         {% endif %}
     {% endif %}
 

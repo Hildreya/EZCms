@@ -1,0 +1,30 @@
+{% extends selectedTemplate %}
+
+{% block title %}
+    Articles - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="back-white">
+        <div class="container-site">
+            <div class="rows">
+                <div class="col-md-12">
+                    <div class="title-red pady">Les derniers articles</div>
+                    {% if articles %}
+                        {% for article in articles %}
+                            <div class="col-md-4">
+                                <div class="news">
+                                    <img src="http://www.erenumerique.fr/wp-content/uploads/2016/02/Minecraft.jpeg" class="img-responsive" alt="">
+                                    <div class="title-news">{{ article.title }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Aucun article disponible pour le moment ...</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock %}

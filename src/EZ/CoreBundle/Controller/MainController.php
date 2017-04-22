@@ -2,6 +2,7 @@
 
 namespace EZ\CoreBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 
@@ -11,9 +12,14 @@ class MainController extends Controller
     {
         //Get the current template use
         $template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $template = $template['template'];
+        $template = $template['parameters']['template'];
 
-        return $this->render('EZCoreBundle:Layout:office/' . $template . '/index.html.twig');
+        //Get users
+        $users = $this->getUsersAction();
+
+        return $this->render('EZCoreBundle:Layout:office/' . $template . '/index.html.twig', array(
+            'users' => $users
+        ));
     }
     public function bundleAction()
     {
@@ -34,5 +40,13 @@ class MainController extends Controller
         return $this->render('EZCoreBundle:Layout/office:module.html.twig', array(
             'bundles' => $bundles
         ));
+    }
+
+    public function getUsersAction() {
+        $userManager = $this->get('fos_user.user_manager');
+        $users = $userManager->findUsers();
+        $nbUsers = count($users);
+
+        return $nbUsers;
     }
 }

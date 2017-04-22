@@ -1,13 +1,14 @@
-jsonapi_ip: null
-jsonapi_port: null
-jsonapi_username: null
-jsonapi_password: null
-jsonapi_salt: null
-server_name: null
-server_ip: null
-server_port: null
-server_money: null
-info_site_url: null
-info_banner_url: null
-info_logo_url: null
-template: red
+parameters:
+    jsonapi_ip: null
+    jsonapi_port: null
+    jsonapi_username: null
+    jsonapi_password: null
+    jsonapi_salt: null
+    server_name: DevCraft
+    server_ip: devcraft.extaz.fr
+    server_port: null
+    server_money: null
+    info_site_url: null
+    info_banner_url: null
+    info_logo_url: null
+    template: red
