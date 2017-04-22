@@ -1,3 +1,7 @@
 ez_article_homepage:
     path:     /articles
     defaults: { _controller: EZArticleBundle:Home:index }
+
+ez_article_select:
+    path:     /articles/{id}
+    defaults: { _controller: EZArticleBundle:Home:select }
