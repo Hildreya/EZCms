@@ -13,4 +13,4 @@ admin:
 default:
     display: true
     name: Articles
-    path: "#"
+    path: 'ez_article_homepage'
