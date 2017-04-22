@@ -9,8 +9,30 @@ class MainController extends Controller
 {
     public function indexAction()
     {
+        //Get the current template use
         $template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
         $template = $template['template'];
+
         return $this->render('EZCoreBundle:Layout:office/' . $template . '/index.html.twig');
+    }
+    public function bundleAction()
+    {
+        //Get the current template use
+        //$template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
+        //$template = $template['template'];
+
+        //Get all the bundles present on the cms
+        $bundles = array();
+        $directories = __DIR__.'/../../';
+        $scanned_directory = array_diff(scandir($directories), array('..', '.'));
+
+        foreach ($scanned_directory as $directory) {
+
+            $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
+        }
+
+        return $this->render('EZCoreBundle:Layout/office:module.html.twig', array(
+            'bundles' => $bundles
+        ));
     }
 }

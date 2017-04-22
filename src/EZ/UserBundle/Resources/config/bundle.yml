@@ -14,5 +14,12 @@ admin:
         path: "#"
 
 default:
-    name:
-    path:
+    display: false
+#    name:
+#    path:
+#    0:
+#         name:
+#         path:
+#    1:
+#         name:
+#         path:
