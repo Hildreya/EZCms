@@ -38,12 +38,7 @@
         <div class="collapse navbar-collapse navbar-servername nav-menu">
             <ul class="nav navbar-nav navbar-left">
                 <li class="active"><a href="{{ path('ez_core_homepage') }}">Accueil</a></li>
-                <li><a href="">Boutique</a></li>
-                <li><a href="">Vote et gagne</a></li>
-                <li><a href="">Règlement</a></li>
-                <li><a href="">Équipe</a></li>
-                <li><a href="">Support</a></li>
-                <li><a href="">F.A.Q</a></li>
+                {{ render(controller("EZCoreBundle:Main:bundle")) }}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown pull-right">

@@ -11,5 +11,6 @@ admin:
         path: "#"
 
 default:
-    name:
-    path:
+    display: true
+    name: Articles
+    path: "#"

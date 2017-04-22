@@ -6,3 +6,10 @@ ez_core_admin:
     path:     /admin
     defaults: { _controller: EZCoreBundle:Admin:index }
 
+ez_core_template:
+    path:     /template
+    defaults: { _controller: EZCoreBundle:Template:template}
+
+ez_core_template_select:
+    path:     /template/{name}
+    defaults: { _controller: EZCoreBundle:Template:select}
