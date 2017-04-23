@@ -65,7 +65,8 @@ class TemplateController extends Controller
             }
             else
             {
-                die('It must be a zip file');
+                $this->get('session')->getFlashBag()->set('error', 'Le fichier doit être un zip !');
+                return $this->redirect($this->generateUrl('ez_core_template'));
             }
 
 
