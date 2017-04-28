@@ -19,7 +19,7 @@ class HomeController extends DataController
         $articles = $this->getArticlesAction();
 
         return $this->render('EZArticleBundle:office:home.html.twig', array(
-            'selectedTemplate' => "EZCoreBundle:Layout/office:". $template .".html.twig",
+            'selectedTemplate' => "EZCoreBundle:office:Layout:". $template .".html.twig",
             'articles' => $articles
         ));
     }

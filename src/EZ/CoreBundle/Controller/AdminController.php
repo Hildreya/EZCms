@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('EZCoreBundle:Layout:admin/pages/dashbord.html.twig');
+        return $this->render('EZCoreBundle:admin/pages:dashbord.html.twig');
     }
 
     public function bundleAction()
@@ -24,7 +24,7 @@ class AdminController extends Controller
             $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
         }
 
-        return $this->render('EZCoreBundle:Layout/admin:module.html.twig', array(
+        return $this->render('EZCoreBundle:admin/Layout:module.html.twig', array(
             'bundles' => $bundles
         ));
     }

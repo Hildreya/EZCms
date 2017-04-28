@@ -14,7 +14,7 @@ class MainController extends Controller
         //Get users
         $users = $this->getUsersAction();
 
-        return $this->render('EZCoreBundle:Layout:office/' . $template . '/index.html.twig', array(
+        return $this->render('EZCoreBundle:office/Layout/' . $template . ':index.html.twig', array(
             'users' => $users
         ));
     }
@@ -34,7 +34,7 @@ class MainController extends Controller
             $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
         }
 
-        return $this->render('EZCoreBundle:Layout/office:module.html.twig', array(
+        return $this->render('EZCoreBundle:office/Layout:module.html.twig', array(
             'bundles' => $bundles
         ));
     }
