@@ -8,7 +8,7 @@ admin:
         path: "#"
     1:
         name: Liste
-        path: "#"
+        path: "admin/article"
 
 default:
     display: true

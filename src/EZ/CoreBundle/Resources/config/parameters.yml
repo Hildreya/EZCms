@@ -1,12 +1,8 @@
 parameters:
-    jsonapi_ip: null
-    jsonapi_port: null
-    jsonapi_username: null
-    jsonapi_password: null
-    jsonapi_salt: null
+    jsonapi: { jsonapi_ip: vps02.spaceblock.fr, jsonapi_port: '20059', jsonapi_username: admin, jsonapi_password: changeme, jsonapi_salt: null }
     server_name: DevCraft
     server_ip: devcraft.extaz.fr
-    server_port: null
+    server_port: 2555
     server_money: null
     info_site_url: null
     info_banner_url: null

@@ -5,3 +5,7 @@ ez_article_homepage:
 ez_article_select:
     path:     /articles/{id}
     defaults: { _controller: EZArticleBundle:Home:select }
+
+ez_article_admin_list:
+    path:     /admin/article
+    defaults: { _controller: EZArticleBundle:Admin:list }

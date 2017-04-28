@@ -10,14 +10,11 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        //Get the current template use
-        $template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $template = $template['parameters']['template'];
-
+        $template = $this->getParameter('template');
         //Get users
         $users = $this->getUsersAction();
 
-        return $this->render('EZCoreBundle:Layout:office/' . $template . '/index.html.twig', array(
+        return $this->render('EZCoreBundle:office/Layout/' . $template . ':index.html.twig', array(
             'users' => $users
         ));
     }
@@ -37,7 +34,7 @@ class MainController extends Controller
             $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
         }
 
-        return $this->render('EZCoreBundle:Layout/office:module.html.twig', array(
+        return $this->render('EZCoreBundle:office/Layout:module.html.twig', array(
             'bundles' => $bundles
         ));
     }
