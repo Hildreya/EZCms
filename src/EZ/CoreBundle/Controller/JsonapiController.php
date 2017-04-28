@@ -38,12 +38,12 @@ class JsonapiController extends Controller
 
             if($api->call("getServer")[0]["is_success"] != NULL)
             {
-                $this->get('session')->getFlashBag()->set('success', 'Connexion avec le serveur effectuée avec succès !');
+                $this->get('session')->getFlashBag()->set('success', 'Connexion avec le serveur effectuÃ©e avec succÃ¨s !');
 
             }
             else
             {
-                $this->get('session')->getFlashBag()->set('error', 'Connexion impossible ! Le serveur est éteint ou les informations entrées ne sont pas valables');
+                $this->get('session')->getFlashBag()->set('error', 'Connexion impossible ! Le serveur est Ã©teint ou les informations entrÃ©es ne sont pas valables');
             }
             return $this->redirect($this->generateUrl('ez_core_jsonapi'));
         }

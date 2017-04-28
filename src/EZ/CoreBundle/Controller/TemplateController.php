@@ -83,7 +83,7 @@ class TemplateController extends Controller
     public function SelectAction($name){
 
         $value = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
-        
+
         $value['parameters']['template'] = $name;
 
         $yaml = YAML::dump($value);
