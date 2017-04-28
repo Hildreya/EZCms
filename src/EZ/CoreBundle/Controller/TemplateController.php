@@ -73,7 +73,7 @@ class TemplateController extends Controller
 
         }
 
-        return $this->render('EZCoreBundle:Configuration/template:index.html.twig', array(
+        return $this->render('EZCoreBundle:admin/pages:template.html.twig', array(
             'template_used' => $template_used,
             'templates' => $templates,
             'form' => $form->createView()

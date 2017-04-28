@@ -50,7 +50,7 @@ class JsonapiController extends Controller
         $api = $this->get('ez_core.jsonapi');
         $server_data = $api->call("getServer")[0]["success"];
 
-        return $this->render('EZCoreBundle:Configuration:jsonapi.html.twig', array(
+        return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi' => $jsonapi_data,
             'server' => $server_data,
             'form' => $form->createView()));
