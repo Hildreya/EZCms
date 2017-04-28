@@ -4,10 +4,13 @@ namespace EZ\ArticleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
+use EZ\ArticleBundle\Controller\DataController;
 
-class HomeController extends Controller
+class HomeController extends DataController
 {
+
     public function indexAction() {
+
         //Get the current template use
         $template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
         $template = $template['parameters']['template'];
@@ -19,12 +22,5 @@ class HomeController extends Controller
             'selectedTemplate' => "EZCoreBundle:Layout/office:". $template .".html.twig",
             'articles' => $articles
         ));
-    }
-
-    public function getArticlesAction() {
-        $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository('EZArticleBundle:Article')->findAll();
-
-        return $articles;
     }
 }
