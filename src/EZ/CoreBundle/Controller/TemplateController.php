@@ -4,6 +4,7 @@ namespace EZ\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use EZ\CoreBundle\Form\TemplateType;
 use ZipArchive;
@@ -12,8 +13,7 @@ class TemplateController extends Controller
 {
     public function templateAction(Request $request){
 
-        $template_used = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $template_used = $template_used['template'];
+        $template_used = $this->getParameter('template');
 
         $templates_dir = __DIR__.'/../Resources/views/layout/office';
         $templates_dir = array_diff(scandir($templates_dir), array('..', '.'));
@@ -73,7 +73,7 @@ class TemplateController extends Controller
 
         }
 
-        return $this->render('EZCoreBundle:template:index.html.twig', array(
+        return $this->render('EZCoreBundle:Configuration/template:index.html.twig', array(
             'template_used' => $template_used,
             'templates' => $templates,
             'form' => $form->createView()
@@ -82,11 +82,12 @@ class TemplateController extends Controller
 
     public function SelectAction($name){
 
-        $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $parameters['template'] = $name;
-        $parameters_yml = Yaml::dump($parameters);
+        $value = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
+        
+        $value['parameters']['template'] = $name;
 
-        file_put_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml', $parameters_yml);
+        $yaml = YAML::dump($value);
+        file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
 
         $this->get('session')->getFlashBag()->set('success', 'Theme actuel modifie pourr le theme : '. $name.' !');
 

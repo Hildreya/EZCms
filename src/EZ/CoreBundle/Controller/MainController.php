@@ -10,10 +10,7 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        //Get the current template use
-        $template = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $template = $template['parameters']['template'];
-
+        $template = $this->getParameter('template');
         //Get users
         $users = $this->getUsersAction();
 
