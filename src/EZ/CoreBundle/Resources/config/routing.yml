@@ -7,9 +7,13 @@ ez_core_admin:
     defaults: { _controller: EZCoreBundle:Admin:index }
 
 ez_core_template:
-    path:     /template
-    defaults: { _controller: EZCoreBundle:Template:template}
+    path:     /admin/template
+    defaults: { _controller: EZCoreBundle:Template:template }
 
 ez_core_template_select:
-    path:     /template/{name}
-    defaults: { _controller: EZCoreBundle:Template:select}
+    path:     /admin/template/{name}
+    defaults: { _controller: EZCoreBundle:Template:select }
+
+ez_core_jsonapi:
+    path:     /admin/jsonapi
+    defaults: { _controller: EZCoreBundle:Jsonapi:index }
