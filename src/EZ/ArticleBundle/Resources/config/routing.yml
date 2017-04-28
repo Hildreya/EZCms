@@ -1,7 +1,3 @@
 ez_article_homepage:
     path:     /articles
     defaults: { _controller: EZArticleBundle:Home:index }
-
-ez_article_admin_list:
-    path:     /admin/article
-    defaults: { _controller: EZArticleBundle:Admin:list }

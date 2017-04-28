@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('EZCoreBundle:Layout:admin/pages/dashbord.html.twig');
+        return $this->render('EZCoreBundle:Layout:admin/admin.html.twig');
     }
 
     public function bundleAction()
