@@ -26,8 +26,58 @@
 
             <!-- Your Page Content Here -->
 
+            <table id="articleTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Date de création</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Date de création</th>
+                    <th>Actions</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.author }}</td>
+                            <td>{{ article.creationDate | date('d/m/Y') }}</td>
+                            <td>Editer | Supprimer | Gérer les commentaires</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            $('#articleTable').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
 {% endblock %}
