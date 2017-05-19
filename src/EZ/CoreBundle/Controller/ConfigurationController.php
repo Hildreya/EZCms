@@ -38,6 +38,7 @@ class ConfigurationController extends Controller
 
         // general_form treatment
         if($general_form->isSubmitted() && $general_form->isValid()){
+
             //Get actual parameters array
             $form_data = $general_form->getData();
 
@@ -51,6 +52,39 @@ class ConfigurationController extends Controller
             //Transform array into yaml, then set new parameters back in parameters.yml
             $yaml = YAML::dump($value);
             file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
+
+            //Moving logo/banner/favicon into web/img/
+            $logo = $form_data['info_logo'];
+            $banner = $form_data['info_banner'];
+            $favicon = $form_data['info_favicon'];
+
+            if ($logo != NULL )
+            {
+                if($logo->move(__DIR__.'/../../../../web/img/', 'logo.'.$logo->guessExtension())){
+                    $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
+                }else{
+                    $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
+                }
+            }
+            if ($favicon != NULL )
+            {
+                if($favicon->move(__DIR__.'/../../../../web/img/', 'favicon.'.$favicon->guessExtension())){
+                    $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
+                }else{
+                    $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
+                }
+            }
+            if ($banner != NULL )
+            {
+                if($banner->move(__DIR__.'/../../../../web/img/', 'banner.'.$banner->guessExtension())){
+                    $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
+                }else{
+                    $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
+                }
+            }
+
+
+
         }
 
         // reglement_form treatment

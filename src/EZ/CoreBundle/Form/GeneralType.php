@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
@@ -15,26 +16,44 @@ class GeneralType extends AbstractType
     {
         $builder
             ->add('server_name', null, array(
+                'label' => 'Nom du serveur',
                 'attr' => array(
                     'value' => $options['data']['parameters']['server_name']
                 )))
             ->add('info_site_url', null, array(
+                'label' => 'URL/Adresse du site (www.monsite.fr)',
                 'attr' => array(
                     'value' => $options['data']['parameters']['info_site_url']
                 )))
-            ->add('info_banner')
-            ->add('info_favicon')
-            ->add('info_logo')
+            ->add('info_logo', FileType::class, array(
+                'label' => 'Upload logo du serveur',
+                'required' => false
+            ))
+            ->add('info_favicon', FileType::class, array(
+                'label' => 'Upload favicon (logo de l\'onglet)',
+                'required' => false
+            ))
+            ->add('info_banner', FileType::class, array(
+                'label' => 'Upload bannière',
+                'required' => false
+            ))
             ->add('server_ip', null, array(
+                'label' => 'IP du serveur',
                 'attr' => array(
                     'value' => $options['data']['parameters']['server_ip']
                 )))
             ->add('server_port', NumberType::class, array(
+                'label' => 'Port du serveur',
                 'attr' => array(
                     'value' => $options['data']['parameters']['server_port']
                 )))
-            ->add('email_contact', EmailType::class)
-            ->add('Submit', SubmitType::class)
+            ->add('email_contact', EmailType::class, array(
+                'label' => 'email de contact'
+            ))
+            ->add('Submit', SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'button-green'
+            )))
         ;
 
     }

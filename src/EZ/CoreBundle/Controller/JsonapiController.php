@@ -37,7 +37,6 @@ class JsonapiController extends Controller
             $api->setPassword($new_jsonapi['jsonapi_password']);
 
             $check_connection = $api->call("getServer");
-            //die(var_dump($check_connection));
             if($check_connection[0]["is_success"] != TRUE && is_null($check_connection[0]["is_success"]) )
             {
                 $this->get('session')->getFlashBag()->set('error', '<center>Connexion impossible !<br>Serveur éteint ou mauvais parametres</center>');

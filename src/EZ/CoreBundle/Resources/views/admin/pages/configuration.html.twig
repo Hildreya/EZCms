@@ -19,6 +19,15 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    {% for type, flash_messages in app.session.flashBag.all %}
+                        {% for flash_message in flash_messages %}
+                            <div class="alert alert-{{ type }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> {{ type }}</h4>
+                                {{ flash_message|raw }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#general" data-toggle="tab" aria-expanded="true">General</a></li>
@@ -46,7 +55,7 @@
                                 {{ form_widget(legal_form.activate_lm) }}
                                 <div class="nav-tabs-custom">
                                     <ul class="nav nav-tabs">
-                                        <li class=""><a href="#cgv_cgu" data-toggle="tab" aria-expanded="false">CGV / CGU</a></li>
+                                        <li class="active"><a href="#cgv_cgu" data-toggle="tab" aria-expanded="false">CGV / CGU</a></li>
                                         <li class=""><a href="#mentions_legales" data-toggle="tab" aria-expanded="false">Mention légales</a></li>
                                     </ul>
                                     <div class="tab-content">
