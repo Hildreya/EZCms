@@ -27,7 +27,6 @@ class JsonapiController extends Controller
                 $api = $this->get('ez_core.jsonapi');
             }
             catch(Exception $e){
-                die(var_dump($e));
                 $this->get('session')->getFlashBag()->set('error', 'Erreur :'. $e->getMessage());
                 return $this->redirect($this->generateUrl('ez_core_jsonapi'));
             }

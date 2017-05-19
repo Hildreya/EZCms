@@ -13,7 +13,6 @@ class JsonapiType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
             ->add('jsonapi_ip', TextType::class, array(
                 'label' => 'Adresse IP',
                 'attr' => array(
@@ -51,8 +50,9 @@ class JsonapiType extends AbstractType
                 )))
 
         ->add('jsonapi_save', SubmitType::class, array(
-                'label' => 'Enregistrer'))
-        ;
+                'label' => 'Enregistrer',
+                'attr' => array('class' => 'button-blue')
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -17,3 +17,7 @@ ez_core_template_select:
 ez_core_jsonapi:
     path:     /admin/jsonapi
     defaults: { _controller: EZCoreBundle:Jsonapi:index }
+
+ez_core_configuration:
+    path:     /admin/configuration
+    defaults: { _controller: EZCoreBundle:Configuration:index }
