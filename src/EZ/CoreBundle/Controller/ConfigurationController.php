@@ -33,6 +33,8 @@ class ConfigurationController extends Controller
         // legal_form treatment
         if($legal_form->isSubmitted() && $legal_form->isValid()){
             $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
 
 
@@ -84,12 +86,13 @@ class ConfigurationController extends Controller
             }
 
 
-
+            return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
 
         // reglement_form treatment
         if($reglement_form->isSubmitted() && $reglement_form->isValid()){
             $this->getDoctrine()->getManager()->flush();
+            return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
 
         return $this->render('EZCoreBundle:admin/pages:configuration.html.twig', array(

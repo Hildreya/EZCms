@@ -1,61 +1,59 @@
 <?php
+
 namespace EZ\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class JsonapiType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('jsonapi_ip', TextType::class, array(
-                'label' => 'Adresse IP',
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Adresse IP du serveur'
-                ),
-                'required' => true))
-            ->add('jsonapi_port', TextType::class, array(
-                'label' => 'Port',
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Port du serveur'
-                ),
-                'required' => true))
-            ->add('jsonapi_username', TextType::class, array(
-                'label' => 'Username',
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Username JSONAPI'
-                ),
-                'required' => true))
-            ->add('jsonapi_password', PasswordType::class, array(
-                'label' =>'Mot de passe',
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Mot de passe JSONAPI'
-                ),
-                'required' => true))
-            ->add('jsonapi_salt', TextType::class, array(
-                'label' =>'Salt',
-                'required' => false,
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Salt (facultatif)'
-                )))
-
-        ->add('jsonapi_save', SubmitType::class, array(
-                'label' => 'Enregistrer',
-                'attr' => array('class' => 'button-blue')
+            ->add('position', null, array(
+                'label' => 'Position'
+            ))
+            ->add('ip', null, array(
+                'label' => 'Adresse IP'
+            ))
+            ->add('port', null, array(
+                'label' => 'Port'
+            ))
+            ->add('username', null, array(
+                'label' => 'Nom d\'utilisateur'
+            ))
+            ->add('password', null, array(
+                'label' => 'Mot de pass'
+            ))
+            ->add('submit', SubmitType::class, array(
+                'label' => 'Sauvegarder',
+                'attr' => array('class' => 'button-green')
+            ));
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi'
         ));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
+        return 'ez_corebundle_jsonapi';
     }
+
+
 }

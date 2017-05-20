@@ -18,47 +18,53 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+            {% for type, flash_messages in app.session.flashBag.all %}
+                {% for flash_message in flash_messages %}
+                    <div class="alert alert-{{ type }} alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-check"></i> {{ type }}</h4>
+                        {{ flash_message|raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             <div class="col-md-8">
-                {% if server == null %}
-                <div class="box box-danger">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Serveur Minecraft</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <p style="text-align:center;"><span style="color:#dd4b39;font-weight:bold;">Echec de la connexion au serveur minecraft.
-                        Celui-ci est �teint ou les informations fournies ne sont pas valables.</span></p>
-                        <br><br>
-                        <ul>
-                            <li>IP : {{ jsonapi.jsonapi_ip }}</li>
-                            <li>Port : {{ jsonapi.jsonapi_port }}</li>
-                        </ul>
-                        <br>
-                        <br>
-                        <button type="button" class="btn btn-danger">R�essayer</button>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                {% else %}
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Serveur Minecraft</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <p style="text-align:center;"><span style="color:#00a65a;font-weight:bold;">Liaison réussie</span></p>
-                        <ul>
-                            <li>IP : {{ jsonapi.jsonapi_ip }}</li>
-                            <li>Port : {{ jsonapi.jsonapi_port }}</li>
-                        </ul>
-                        <h3>Nom :</h3>
-                        {{ server.serverName }}
-                        <h3>Version :</h3>
-                        {{ server.version }}
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                {% endif %}
+                {% for server in jsonapi_servers  %}
+                    {% if server.status == null %}
+                        <div class="box box-danger collapsed-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">{{ server.jsonapi.ip }} | Eteint</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer</button></a>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    {% else %}
+                        <div class="box box-success collapsed-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">{{ server.jsonapi.ip }}     |  {{ server.status.players|length }} / {{ server.status.maxPlayers }}</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer</button></a>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
 
             <div class="col-md-4">
@@ -67,52 +73,39 @@
                         <h3 class="box-title">Modifier informations JSONAPI</h3>
                     </div>
 
-                    {% for type, flash_messages in app.session.flashBag.all %}
-                        {% for flash_message in flash_messages %}
-                            <div class="flash-{{ type }}container">
-                                {{ flash_message|raw }}
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-
                     {{ form_start(form) }}
                     <div class="box-body">
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-server"></i></span>
-                            {{ form_widget(form.jsonapi_ip) }}
+                            {{ form_widget(form.ip) }}
                         </div>
                         <br>
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-server"></i></span>
-                            {{ form_widget(form.jsonapi_port) }}
+                            {{ form_widget(form.port) }}
                         </div>
                         <br>
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
-                            {{ form_widget(form.jsonapi_username) }}
+                            {{ form_widget(form.username) }}
                         </div>
                         <br>
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            {{ form_widget(form.jsonapi_password) }}
+                            {{ form_widget(form.password) }}
                         </div>
                         <br>
-
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                            {{ form_widget(form.jsonapi_salt) }}
-                        </div>
                         <br>
 
 
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        {{ form_widget(form.jsonapi_save) }}
+                        {{ form_widget(form.submit) }}
                     </div>
                     {{ form_end(form) }}
 

@@ -1,5 +1,10 @@
 parameters:
-    jsonapi: { jsonapi_ip: vps02.spaceblock.fr, jsonapi_port: '20059', jsonapi_username: admin, jsonapi_password: changeme, jsonapi_salt: null }
+    jsonapi: {
+        jsonapi_ip: vps02.spaceblock.fr,
+        jsonapi_port: '20059',
+        jsonapi_username: admin,
+        jsonapi_password: changeme,
+        jsonapi_salt: null }
     server_name: test
     server_ip: 123.fr
     server_port: 2645

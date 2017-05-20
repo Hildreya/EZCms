@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Legal
  *
- * @ORM\Table(name="Extaz_legal")
+ * @ORM\Table(name="extaz_legal")
  * @ORM\Entity(repositoryClass="EZ\CoreBundle\Repository\LegalRepository")
  */
 class Legal
