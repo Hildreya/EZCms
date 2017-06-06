@@ -5,10 +5,10 @@ admin:
     display : true
     0:
         name: Créer
-        path: "#"
+        path: ez_article_admin_create
     1:
         name: Liste
-        path: "admin/article"
+        path: ez_article_admin_list
 
 default:
     display: true

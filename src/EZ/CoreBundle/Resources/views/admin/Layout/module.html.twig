@@ -10,12 +10,12 @@
                 </a>
                 <ul class="treeview-menu">
                 {% for i in 0..bundle['admin']|length - 5  %}
-                    <li><a href="{{ bundle['admin'][i]['path'] }}">{{ bundle['admin'][i]['name'] }}</a></li>
+                    <li {% if app.request.attributes.get('_route') ==  bundle['admin'][i]['path'] %} class="active" {% endif %}><a href="{{ path(bundle['admin'][i]['path']) }}">{{ bundle['admin'][i]['name'] }}</a></li>
                 {% endfor %}
                 </ul>
             </li>
         {% else %}
-            <li><a href="{{ bundle['admin']['path'] }}"><i class="{{ bundle['admin']['icon'] }}"></i> <span>{{ bundle['admin']['name'] }}</span></a></li>
+            <li><a href="{{ path(bundle['admin']['path'])}}"><i class="{{ bundle['admin']['icon'] }}"></i> <span>{{ bundle['admin']['name'] }}</span></a></li>
         {% endif %}
     {% endif %}
 

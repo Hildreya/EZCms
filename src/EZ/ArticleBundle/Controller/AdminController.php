@@ -14,4 +14,8 @@ class AdminController extends DataController
             'articles' => $articles
         ));
     }
+
+    public function createAction() {
+        return 'nothing';
+    }
 }
