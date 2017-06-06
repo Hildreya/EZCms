@@ -32,7 +32,7 @@ class HomeController extends DataController
 
         //Get Article
         $article = $this->getArticleAction($id);
-        $comments = $this->getCommentAction();
+        $comments = $this->getCommentAction($id);
 
         return $this->render('EZArticleBundle:office:select.html.twig', array(
             'selectedTemplate' => "EZCoreBundle:office/Layout:". $template .".html.twig",

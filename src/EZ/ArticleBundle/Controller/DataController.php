@@ -20,8 +20,11 @@ abstract class DataController extends Controller
         return $article;
     }
 
-    public function getCommentAction() {
+    public function getCommentAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $comments = $em->getRepository('EZArticleBundle:Comment');
+        $article = $em->getRepository('EZArticleBundle:Article')->find($id);
+        $comments = $article->getComment();
+
+        return $comments;
     }
 }
