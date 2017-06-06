@@ -1,0 +1,73 @@
+{% extends "EZCoreBundle:office/Layout:red.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="bande-stats">
+        <div class="container">
+            <div class="rows">
+                <div class="col-md-4">
+                    <div class="section-stats">
+                        <i class="fa fa-user red-color"></i>
+                        <div class="left group-text-stats">
+                            <div class="little-write">Nombre d'inscrits</div>
+                            <div class="number-stats">{{ users }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="section-stats">
+                        <i class="fa fa-flag red-color"></i>
+                        <div class="left group-text-stats">
+                            <div class="little-write">Nombre de visites</div>
+                            <div class="number-stats">+100</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="section-stats">
+                        <i class="fa fa-trophy red-color"></i>
+                        <div class="left group-text-stats">
+                            <div class="little-write">Record de connecté(s)</div>
+                            <div class="number-stats">128</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="back-white">
+        <div class="container-site">
+            <div class="rows">
+                <div class="col-md-12">
+                    <div class="title-red pady">Page de présentation</div>
+                    <p>Blablabla</p>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content-stats">
+        <div class="container-site">
+            <div class="rows">
+                <div class="col-md-12">
+                    <div class="title-red text-center fbig">Nos partenaires</div>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2000px-Oracle_logo.svg.png" class="part img-responsive">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_(2012).svg/2000px-Microsoft_logo_(2012).svg.png" class="part img-responsive">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://www.ovh.com/fr/news/logos/with-baseline/logo-ovh-avec-150DPI.png" class="part img-responsive">
+                </div>
+                <div class="col-md-12">
+                    <div class="text-center style-part"><a href="">Et pourquoi pas vous ?</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

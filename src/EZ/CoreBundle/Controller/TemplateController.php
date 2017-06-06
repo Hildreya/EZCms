@@ -4,6 +4,7 @@ namespace EZ\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use EZ\CoreBundle\Form\TemplateType;
 use ZipArchive;
@@ -12,10 +13,9 @@ class TemplateController extends Controller
 {
     public function templateAction(Request $request){
 
-        $template_used = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $template_used = $template_used['template'];
+        $template_used = $this->getParameter('template');
 
-        $templates_dir = __DIR__.'/../Resources/views/layout/office';
+        $templates_dir = __DIR__.'/../Resources/views/office/Layout';
         $templates_dir = array_diff(scandir($templates_dir), array('..', '.'));
 
         foreach ($templates_dir as $template){
@@ -36,25 +36,25 @@ class TemplateController extends Controller
             {
 
                 $file_name = $file->getClientOriginalName();
-                $file->move(__DIR__.'/../Resources/views/Layout/office',$file_name);
+                $file->move(__DIR__.'/../Resources/views/office/Layout',$file_name);
 
                 $zip = new ZipArchive();
-                if($zip->open(__DIR__.'/../Resources/views/Layout/office/'.$file_name) === TRUE )
+                if($zip->open(__DIR__.'/../Resources/views/office/Layout/'.$file_name) === TRUE )
                 {
-                    $zip->extractTo( __DIR__.'/../Resources/views/Layout/office');
+                    $zip->extractTo( __DIR__.'/../Resources/views/office/Layout');
                     $zip->close();
-                    unlink(__DIR__.'/../Resources/views/Layout/office/'.$file_name);
+                    unlink(__DIR__.'/../Resources/views/office/Layout/'.$file_name);
 
                     if(is_dir(__DIR__.'/../../../../web/img/template'))
                     {
                         $template_img = str_replace('.zip', '.png', $file_name);
-                        rename(__DIR__.'/../Resources/views/Layout/office/'.$template_img ,__DIR__.'/../../../../web/img/template/'.$template_img);
+                        rename(__DIR__.'/../Resources/views/office/Layout/'.$template_img ,__DIR__.'/../../../../web/img/template/'.$template_img);
                     }
                     else
                     {
                         mkdir(__DIR__.'/../../../../web/img/template');
                         $template_img = str_replace('.zip', '.png', $file_name);
-                        rename(__DIR__.'/../Resources/views/Layout/office/'.$template_img,__DIR__.'/../../../../web/img/template/'.$template_img);
+                        rename(__DIR__.'/../Resources/views/office/Layout/'.$template_img,__DIR__.'/../../../../web/img/template/'.$template_img);
 
                     }
 
@@ -65,14 +65,15 @@ class TemplateController extends Controller
             }
             else
             {
-                die('It must be a zip file');
+                $this->get('session')->getFlashBag()->set('error', 'Le fichier doit être un zip !');
+                return $this->redirect($this->generateUrl('ez_core_template'));
             }
 
 
 
         }
 
-        return $this->render('EZCoreBundle:template:index.html.twig', array(
+        return $this->render('EZCoreBundle:admin/pages:template.html.twig', array(
             'template_used' => $template_used,
             'templates' => $templates,
             'form' => $form->createView()
@@ -81,11 +82,12 @@ class TemplateController extends Controller
 
     public function SelectAction($name){
 
-        $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml'));
-        $parameters['template'] = $name;
-        $parameters_yml = Yaml::dump($parameters);
+        $value = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
 
-        file_put_contents(__DIR__ . '/../../CoreBundle/Resources/config/parameters.yml', $parameters_yml);
+        $value['parameters']['template'] = $name;
+
+        $yaml = YAML::dump($value);
+        file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
 
         $this->get('session')->getFlashBag()->set('success', 'Theme actuel modifie pourr le theme : '. $name.' !');
 

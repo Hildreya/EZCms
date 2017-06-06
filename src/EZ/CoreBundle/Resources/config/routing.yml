@@ -3,13 +3,27 @@ ez_core_homepage:
     defaults: { _controller: EZCoreBundle:Main:index }
 
 ez_core_admin:
-    path:     /admin
+    path:     /admin/
     defaults: { _controller: EZCoreBundle:Admin:index }
 
 ez_core_template:
-    path:     /template
-    defaults: { _controller: EZCoreBundle:Template:template}
+    path:     /admin/template
+    defaults: { _controller: EZCoreBundle:Template:template }
 
 ez_core_template_select:
-    path:     /template/{name}
-    defaults: { _controller: EZCoreBundle:Template:select}
+    path:     /admin/template/{name}
+    defaults: { _controller: EZCoreBundle:Template:select }
+
+ez_core_jsonapi:
+    path:     /admin/jsonapi
+    defaults: { _controller: EZCoreBundle:Jsonapi:index }
+
+ez_core_jsonapi_delete:
+    path:     /admin/jsonapi/delete/{id}
+    requirements:
+        id : \d
+    defaults: { _controller: EZCoreBundle:Jsonapi:delete }
+
+ez_core_configuration:
+    path:     /admin/configuration
+    defaults: { _controller: EZCoreBundle:Configuration:index }
