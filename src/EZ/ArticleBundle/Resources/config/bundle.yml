@@ -5,7 +5,7 @@ admin:
     display : true
     0:
         name: Créer
-        path: ez_article_admin_list
+        path: ez_article_admin_create
     1:
         name: Liste
         path: ez_article_admin_list

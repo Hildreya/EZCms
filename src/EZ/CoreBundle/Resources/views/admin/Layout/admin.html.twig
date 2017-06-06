@@ -235,8 +235,8 @@
             <ul class="sidebar-menu">
                 <li class="header">GENERAL</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-                <li><a href="{{ path('ez_core_template') }}"><i class="fa fa-link"></i> <span>Themes</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_admin' %} class="active" {% endif %}><a href="{{ path('ez_core_admin') }}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_template' %} class="active" {% endif %}><a href="{{ path('ez_core_template') }}"><i class="fa fa-link"></i> <span>Themes</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Configuration</span>
                         <span class="pull-right-container">

@@ -7,5 +7,9 @@ ez_article_select:
     defaults: { _controller: EZArticleBundle:Home:select }
 
 ez_article_admin_list:
-    path:     /admin/article
+    path:     /admin/articles
     defaults: { _controller: EZArticleBundle:Admin:list }
+
+ez_article_admin_create:
+    path:     /admin/articles/create
+    defaults: { _controller: EZArticleBundle:Admin:create }
