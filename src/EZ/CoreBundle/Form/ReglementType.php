@@ -7,8 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class JsonapiType extends AbstractType
+class ReglementType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,25 +17,21 @@ class JsonapiType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('position', null, array(
-                'label' => 'Position'
-            ))
-            ->add('ip', null, array(
-                'label' => 'Adresse IP'
-            ))
-            ->add('port', null, array(
-                'label' => 'Port'
-            ))
-            ->add('username', null, array(
-                'label' => 'Nom d\'utilisateur'
-            ))
-            ->add('password', null, array(
-                'label' => 'Mot de pass'
-            ))
+            ->add('activate', CheckboxType::class, array(
+                    'label' => 'Activer le réglement',
+                    'required' => false
+                )
+            )
+            ->add('content', null, array(
+                'label' => 'Réglement',
+                'attr' => array(
+                    'class' => 'ckeditor'
+                )))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Sauvegarder',
-                'attr' => array('class' => 'button-green')
-            ));
+                'attr' => array(
+                    'class' => 'button-green'
+                )));
     }
     
     /**
@@ -43,7 +40,7 @@ class JsonapiType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi'
+            'data_class' => 'EZ\CoreBundle\Entity\Reglement'
         ));
     }
 
@@ -52,7 +49,7 @@ class JsonapiType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'ez_corebundle_jsonapi';
+        return 'ez_corebundle_reglement';
     }
 
 

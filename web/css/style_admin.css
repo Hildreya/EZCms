@@ -1,0 +1,31 @@
+
+
+
+.button-green {
+    background:#2ecc71;
+    border-bottom:3px solid #27ae60;
+    padding:7px 0;
+    border-radius:3px;
+    text-align:center;
+    color:#fff;
+    font-weight:600;
+    padding:10px;
+}
+.button-green:hover {
+    color:#fff;
+    background: #27ae60;
+}
+.button-blue {
+    background:#00c0ef;
+    border-bottom:3px solid #00a7d0;
+    padding:7px 0;
+    border-radius:3px;
+    text-align:center;
+    color:#fff;
+    font-weight:600;
+    padding:10px;
+}
+.button-blue:hover {
+    color:#fff;
+    background: #00a7d0;
+}

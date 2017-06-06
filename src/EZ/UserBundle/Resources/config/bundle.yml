@@ -1,17 +1,8 @@
 admin:
     name: Utilisateurs
-    path: "#"
+    path: ez_article_admin_list
     icon: fa fa-user-o
     display : true
-    0:
-        name: Créer
-        path: "#"
-    1:
-        name: Supprimer
-        path: "#"
-    2:
-        name: Modifier
-        path: "#"
 
 default:
     display: false

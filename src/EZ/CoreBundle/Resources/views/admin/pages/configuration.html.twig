@@ -1,0 +1,98 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block admin_body %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                JSONAPI
+                <small>liaison du site avec le serveur minecraft</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for type, flash_messages in app.session.flashBag.all %}
+                        {% for flash_message in flash_messages %}
+                            <div class="alert alert-{{ type }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> {{ type }}</h4>
+                                {{ flash_message|raw }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#general" data-toggle="tab" aria-expanded="true">General</a></li>
+                            <li class=""><a href="#reglement" data-toggle="tab" aria-expanded="false">Réglement</a></li>
+                            <li class=""><a href="#legal" data-toggle="tab" aria-expanded="false">Légal</a></li>
+                            <li class=""><a href="#option" data-toggle="tab" aria-expanded="false">Options</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="general">
+                                {{ form_start(general_form) }}
+                                {{ form_end(general_form) }}
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="reglement">
+                                {{ form_start(reglement_form) }}
+                                {{ form_end(reglement_form) }}
+                                <center><h5>Si vous activez le réglement, le lien vers celui-ci sera visible dans le footer (en bas du site, côté utilisateur)</h5></center>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="legal">
+                                {{ form_start(legal_form) }}
+                                {{ form_widget(legal_form.activate_cc) }}
+                                {{ form_widget(legal_form.activate_lm) }}
+                                <div class="nav-tabs-custom">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#cgv_cgu" data-toggle="tab" aria-expanded="false">CGV / CGU</a></li>
+                                        <li class=""><a href="#mentions_legales" data-toggle="tab" aria-expanded="false">Mention légales</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane" id="cgv_cgu">
+                                            {{ form_widget(legal_form.cgvCgu) }}
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="mentions_legales">
+                                            {{ form_widget(legal_form.legalMention) }}
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                {{ form_end(legal_form) }}
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane active" id="option">
+                                {{ form_start(general_form) }}
+                                {{ form_end(general_form) }}
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+    </script>
+{% endblock %}

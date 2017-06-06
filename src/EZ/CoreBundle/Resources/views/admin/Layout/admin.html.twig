@@ -18,9 +18,10 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="{{ asset('css/skins/skin-blue.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/skins/skin-red.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}">
 
-    {% block css %}{% endblock %}
+    {% block head_admin %}{% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,27 +30,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -254,8 +235,8 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">GENERAL</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-                <li><a href="{{ path('ez_core_template') }}"><i class="fa fa-link"></i> <span>Themes</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_admin' %} class="active" {% endif %}><a href="{{ path('ez_core_admin') }}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_template' %} class="active" {% endif %}><a href="{{ path('ez_core_template') }}"><i class="fa fa-link"></i> <span>Themes</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Configuration</span>
                         <span class="pull-right-container">
@@ -263,8 +244,7 @@ desired effect
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Serveur</a></li>
-                        <li><a href="#">Informations</a></li>
+                        <li><a href="{{ path('ez_core_configuration') }}">Informations</a></li>
                         <li><a href="{{ path('ez_core_jsonapi') }}">JSONAPI</a></li>
                     </ul>
                 </li>
