@@ -1,12 +1,7 @@
 parameters:
-    jsonapi: {
-        jsonapi_ip: vps02.spaceblock.fr,
-        jsonapi_port: '20059',
-        jsonapi_username: admin,
-        jsonapi_password: changeme,
-        jsonapi_salt: null }
-    server_name: test
-    server_ip: 123.fr
+    jsonapi: { jsonapi_ip: vps02.spaceblock.fr, jsonapi_port: '20059', jsonapi_username: admin, jsonapi_password: changeme, jsonapi_salt: null }
+    server_name: ExtazCMS
+    server_ip: vps02.spaceblock.fr
     server_port: 2645
-    info_site_url: www.test.com
+    info_site_url: www.extaz-cms.fr
     template: red
