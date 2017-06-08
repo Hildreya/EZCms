@@ -21,7 +21,7 @@ ez_core_jsonapi:
 ez_core_jsonapi_delete:
     path:     /admin/jsonapi/delete/{id}
     requirements:
-        id : \d
+        id : \d{1,}
     defaults: { _controller: EZCoreBundle:Jsonapi:delete }
 
 ez_core_configuration:

@@ -12,20 +12,57 @@ use Symfony\Component\Yaml\Yaml;
 
 class JsonapiController extends Controller
 {
+
     public function indexAction(Request $request)
     {
+        /*
+        $jss = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')->findAll();
+        $order = array('0' => 0);
+        if(count($jss) > 1) {
+            for ($i = 0; $i < count($jss)+1; $i++) {
+                $order[$i] = $i;
+            }
+        }
+         die(var_dump($order));
+        */
 
-        $form = $this->createForm(JsonapiType::class);
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('EZCoreBundle:Jsonapi');
+
+        $new_jsonapi = new Jsonapi();
+        $form = $this->createForm(JsonapiType::class, $new_jsonapi);
         $form->handleRequest($request);
 
+
         if($form->isSubmitted() && $form->isValid()){
-            $this->getDoctrine()->getManager()->flush();
+
+
+            $position = $form->getData()->getPosition();
+
+            $query = $repo->createQueryBuilder('j')
+                ->where('j.position >= :position')
+                ->setParameter('position', $position)
+                ->getQuery();
+            $jsonapis = $query->getResult();
+
+            for($i = 0; $i< count($jsonapis); $i++){
+                $new_position = $jsonapis[$i]->getPosition() + 1;
+                $jsonapis[$i]->setPosition($new_position);
+                $em->persist($jsonapis[$i]);
+            }
+
+            $em->persist($form->getData());
+            $em->flush();
 
             return $this->redirect($this->generateUrl('ez_core_jsonapi'));
         }
 
         $jsonapi_servers = $this->getDoctrine()->getRepository('EZCoreBundle:Jsonapi')
             ->findBy(array(), array('position' => 'ASC'));
+
         $api = $this->get('ez_core.jsonapi');
 
         for($i = 0; $i< count($jsonapi_servers); $i++){
@@ -54,8 +91,23 @@ class JsonapiController extends Controller
         if($jsonapi_server = $this->getDoctrine()->getRepository('EZCoreBundle:Jsonapi')
             ->findOneById($id)) {
 
+
+            $position = $jsonapi_server->getPosition();
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($jsonapi_server);
+            $query = $em->getRepository('EZCoreBundle:Jsonapi')->createQueryBuilder('j')
+                ->where('j.position > :position')
+                ->setParameter('position', $position)
+                ->getQuery();
+            $jsonapis = $query->getResult();
+
+            for($i = 0; $i< count($jsonapis); $i++){
+                $new_position = $jsonapis[$i]->getPosition() -1 ;
+                $jsonapis[$i]->setPosition($new_position);
+                $em->persist($jsonapis[$i]);
+            }
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->set('success', 'Suppression réussie !');
@@ -63,6 +115,7 @@ class JsonapiController extends Controller
         else{
             $this->get('session')->getFlashBag()->set('warning', 'Une erreur est survenue !');
         }
+
         return $this->redirect($this->generateUrl('ez_core_jsonapi'));
 
     }
