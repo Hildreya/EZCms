@@ -15,30 +15,21 @@ class JsonapiController extends Controller
 
     public function indexAction(Request $request)
     {
-        /*
-        $jss = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')->findAll();
-        $order = array('0' => 0);
-        if(count($jss) > 1) {
-            for ($i = 0; $i < count($jss)+1; $i++) {
-                $order[$i] = $i;
-            }
-        }
-         die(var_dump($order));
-        */
-
-
-
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('EZCoreBundle:Jsonapi');
+        $jss = $repo->findAll();
+        $order = array();
+        for($pos = 0;$pos<=sizeof($jss); $pos++){
+            array_push($order, $pos);
+        }
 
         $new_jsonapi = new Jsonapi();
-        $form = $this->createForm(JsonapiType::class, $new_jsonapi);
+        $form = $this->createForm(JsonapiType::class, $new_jsonapi, array('position'=>$order));
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
-
 
             $position = $form->getData()->getPosition();
 
@@ -78,10 +69,7 @@ class JsonapiController extends Controller
             $jsonapi_servers[$i]['status'] = $api->call("server")[0]['success'];
             $jsonapi_servers[$i]['player_connected'] = $api->call("players.online.count")[0]['success'];
         }
-
-        //die(var_dump($jsonapi_servers));
-
-
+        die(var_dump($jsonapi_servers));
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi_servers' => $jsonapi_servers,
             'form' => $form->createView()));

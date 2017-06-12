@@ -36,11 +36,9 @@ class JsonapiType extends AbstractType
             ->add('position', ChoiceType::class, array(
                 'label' => 'Position',
                 'placeholder' => 'Position',
-                'choices' => array(
-                    '0' => 0,
-                    '1' => 1,
+                'choices' => $options['position']
                 )
-            ))
+            )
             ->add('submit', SubmitType::class, array(
                 'label' => 'Sauvegarder',
                 'attr' => array('class' => 'button-green')
@@ -53,7 +51,8 @@ class JsonapiType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi'
+            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi',
+            'position' => array()
         ));
     }
 
