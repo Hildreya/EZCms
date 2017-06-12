@@ -27,3 +27,7 @@ ez_core_jsonapi_delete:
 ez_core_configuration:
     path:     /admin/configuration
     defaults: { _controller: EZCoreBundle:Configuration:index }
+
+ez_core_social_network:
+    path:     /admin/social
+    defaults: { _controller: EZCoreBundle:SocialNetwork:index }

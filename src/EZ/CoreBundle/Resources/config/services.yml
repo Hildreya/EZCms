@@ -1,4 +1,4 @@
 services:
     ez_core.jsonapi:
         class: EZ\CoreBundle\JSONAPI\JSONAPI
-        arguments: [ "@=container.getParameter('jsonapi')['jsonapi_ip']", "@=container.getParameter('jsonapi')['jsonapi_port']", "@=container.getParameter('jsonapi')['jsonapi_username']", "@=container.getParameter('jsonapi')['jsonapi_password']", "" ]
+        arguments: [ "null", "1", "null", "null", "null" ]
