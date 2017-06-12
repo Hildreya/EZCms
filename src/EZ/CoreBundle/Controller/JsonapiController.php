@@ -69,11 +69,7 @@ class JsonapiController extends Controller
             $jsonapi_servers[$i]['status'] = $api->call("server")[0]['success'];
             $jsonapi_servers[$i]['player_connected'] = $api->call("players.online.count")[0]['success'];
         }
-<<<<<<< HEAD
-
-=======
-        die(var_dump($jsonapi_servers));
->>>>>>> CoreBundle
+        
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi_servers' => $jsonapi_servers,
             'form' => $form->createView()));
