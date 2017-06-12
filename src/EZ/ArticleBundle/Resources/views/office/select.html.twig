@@ -1,4 +1,4 @@
-{% extends selectedTemplate %}
+{% extends "EZCoreBundle:office/Layout:"~ template ~".html.twig" %}
 
 {% block title %}
     {{ article.title }} - {{ parent() }}
