@@ -1,0 +1,3 @@
+faq_homepage:
+    path:     /
+    defaults: { _controller: FAQBundle:Default:index }

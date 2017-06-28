@@ -1,3 +1,7 @@
+faq:
+    resource: "@FAQBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ez_article:
     resource: "@EZArticleBundle/Resources/config/routing.yml"
     prefix:   /
