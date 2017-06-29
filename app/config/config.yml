@@ -41,9 +41,9 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
     globals:
-        servename: %server_name%
-        serveip: %server_ip%
-        template: %template%
+        servename: '%server_name%'
+        serveip: '%server_ip%'
+        template: '%template%'
 
 # Doctrine Configuration
 doctrine:

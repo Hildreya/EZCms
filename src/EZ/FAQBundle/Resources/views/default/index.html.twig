@@ -1,0 +1,41 @@
+{% extends "EZCoreBundle:office/Layout:"~ template ~".html.twig" %}
+
+{% block title %}
+    FAQ - {{ parent() }}
+{% endblock %}
+
+{% set collapse = 'collapse' %}
+
+{% block extaz_body %}
+    <div class="container">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title-red">Foire aux questions</div>
+                    <br/><br/>
+                    <div class="panel-group" id="accordion">
+                    {% if questions is empty %}
+                        <h3>La FAQ est vide pour le moment.</h3>
+                    {% else %}
+                        {% for question in questions %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse~question.id }}">
+                                        {{ question.question }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="{{ collapse~question.id }}" class="panel-collapse collapse">
+                                <div class="panel-body">{{ question.answer }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt10"></div>
+{% endblock %}
