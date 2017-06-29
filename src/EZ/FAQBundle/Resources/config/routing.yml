@@ -1,0 +1,19 @@
+ez_faq_homepage:
+    path:     /faq
+    defaults: { _controller:   EZFAQBundle:Default:index }
+
+ez_faq_admin_list:
+    path:     /admin/faq
+    defaults: { _controller:   EZFAQBundle:Admin:list }
+
+ez_faq_admin_create:
+    path:     /admin/faq/create
+    defaults: { _controller:   EZFAQBundle:Admin:create }
+
+ez_faq_admin_show:
+    path:     /admin/update/{id}
+    defaults: { _controller:   EZFAQBundle:}
+
+ez_faq_admin_update:
+    path:     /admin/update/{id}
+    defaults: { _controller:   EZFAQBundle:}
