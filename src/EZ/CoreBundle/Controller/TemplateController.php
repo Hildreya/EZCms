@@ -15,7 +15,7 @@ class TemplateController extends Controller
 
         $template_used = $this->getParameter('template');
 
-        $templates_dir = __DIR__.'/../Resources/views/office/Layout';
+        $templates_dir = __DIR__ . '/../Resources/views/default/Layout';
         $templates_dir = array_diff(scandir($templates_dir), array('..', '.'));
 
         foreach ($templates_dir as $template){
@@ -36,25 +36,25 @@ class TemplateController extends Controller
             {
 
                 $file_name = $file->getClientOriginalName();
-                $file->move(__DIR__.'/../Resources/views/office/Layout',$file_name);
+                $file->move(__DIR__ . '/../Resources/views/default/Layout',$file_name);
 
                 $zip = new ZipArchive();
-                if($zip->open(__DIR__.'/../Resources/views/office/Layout/'.$file_name) === TRUE )
+                if($zip->open(__DIR__ . '/../Resources/views/default/Layout/' .$file_name) === TRUE )
                 {
-                    $zip->extractTo( __DIR__.'/../Resources/views/office/Layout');
+                    $zip->extractTo(__DIR__ . '/../Resources/views/default/Layout');
                     $zip->close();
-                    unlink(__DIR__.'/../Resources/views/office/Layout/'.$file_name);
+                    unlink(__DIR__ . '/../Resources/views/default/Layout/' .$file_name);
 
                     if(is_dir(__DIR__.'/../../../../web/img/template'))
                     {
                         $template_img = str_replace('.zip', '.png', $file_name);
-                        rename(__DIR__.'/../Resources/views/office/Layout/'.$template_img ,__DIR__.'/../../../../web/img/template/'.$template_img);
+                        rename(__DIR__ . '/../Resources/views/default/Layout/' .$template_img ,__DIR__.'/../../../../web/img/template/'.$template_img);
                     }
                     else
                     {
                         mkdir(__DIR__.'/../../../../web/img/template');
                         $template_img = str_replace('.zip', '.png', $file_name);
-                        rename(__DIR__.'/../Resources/views/office/Layout/'.$template_img,__DIR__.'/../../../../web/img/template/'.$template_img);
+                        rename(__DIR__ . '/../Resources/views/default/Layout/' .$template_img,__DIR__.'/../../../../web/img/template/'.$template_img);
 
                     }
 

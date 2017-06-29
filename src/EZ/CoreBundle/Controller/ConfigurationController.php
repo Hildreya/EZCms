@@ -4,10 +4,13 @@ namespace EZ\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Yaml\Yaml;
+
 use EZ\CoreBundle\Form\LegalType;
 use EZ\CoreBundle\Form\GeneralType;
+use EZ\CoreBundle\Form\SocialNetworkType;
 use EZ\CoreBundle\Form\ReglementType;
-use Symfony\Component\Yaml\Yaml;
+
 
 class ConfigurationController extends Controller
 {
@@ -22,13 +25,23 @@ class ConfigurationController extends Controller
         $legal_form->handleRequest($request);
 
         //Setting up general form
-        $general_form = $this->createForm(GeneralType::class, $parameters);
+        $general_form = $this->createForm(GeneralType::class, null, array('parameters' => $parameters['parameters']));
         $general_form->handleRequest($request);
 
         //Setting up reglement form
         $reglement= $this->getDoctrine()->getRepository('EZCoreBundle:Reglement')->find(1);
         $reglement_form = $this->createForm(ReglementType::class, $reglement);
         $reglement_form->handleRequest($request);
+
+        //Setting up social network form
+        $sn_form = $this->createForm(SocialNetworkType::class, $parameters);
+        $sn_form->handleRequest($request);
+
+        // social network treatment
+        if($sn_form->isValid() && $sn_form->isSubmitted())
+        {
+
+        }
 
         // legal_form treatment
         if($legal_form->isSubmitted() && $legal_form->isValid()){
@@ -97,6 +110,7 @@ class ConfigurationController extends Controller
 
         return $this->render('EZCoreBundle:admin/pages:configuration.html.twig', array(
             'parameters' => $parameters['parameters'],
+            'sn_form' => $sn_form->createView(),
             'legal_form' => $legal_form->createView(),
             'general_form' => $general_form->createView(),
             'reglement_form' => $reglement_form->createView()

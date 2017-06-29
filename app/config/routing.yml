@@ -1,3 +1,7 @@
+faq:
+    resource: "@EZFAQBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ez_article:
     resource: "@EZArticleBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,3 +14,5 @@ ez_core:
     resource: "@EZCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
