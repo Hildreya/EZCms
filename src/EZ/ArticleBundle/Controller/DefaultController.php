@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 use EZ\ArticleBundle\Controller\DataController;
 
-class HomeController extends DataController
+class DefaultController extends DataController
 {
 
     public function indexAction() {
@@ -14,7 +14,7 @@ class HomeController extends DataController
         //Get Articles
         $articles = $this->getArticlesAction();
 
-        return $this->render('EZArticleBundle:office:home.html.twig', array(
+        return $this->render('EZArticleBundle:default:home.html.twig', array(
             'articles' => $articles
         ));
     }
@@ -25,7 +25,7 @@ class HomeController extends DataController
         $article = $this->getArticleAction($id);
         $comments = $this->getCommentAction($id);
 
-        return $this->render('EZArticleBundle:office:select.html.twig', array(
+        return $this->render('EZArticleBundle:default:select.html.twig', array(
             'article' => $article,
             'comments' => $comments
         ));
