@@ -1,0 +1,15 @@
+admin:
+  display:  true
+  name:     FAQ
+  icon:     fa fa-question-circle-o
+  0:
+      name: Liste
+      path: ez_faq_admin_list
+  1:
+      name: Créer
+      path: ez_faq_admin_create
+
+default:
+  display:  true
+  path:     ez_faq_homepage
+  name:     FAQ
