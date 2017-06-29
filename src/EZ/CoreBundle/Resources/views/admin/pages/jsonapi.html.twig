@@ -68,9 +68,9 @@
             </div>
 
             <div class="col-md-4">
-                <div class="box box-info">
+                <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Modifier informations JSONAPI</h3>
+                        <h3 class="box-title">Enregistrer un nouveau serveur</h3>
                     </div>
 
                     {{ form_start(form) }}
@@ -99,6 +99,13 @@
                             {{ form_widget(form.password) }}
                         </div>
                         <br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+                            {{ form_widget(form.position) }}
+                        </div>
+                        <p>Organisation par ordre décroisant.</p>
+                        <p>(Position 0: serveur principal (ex: Hub...))</p>
                         <br>
 
 

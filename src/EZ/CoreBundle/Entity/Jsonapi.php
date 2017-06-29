@@ -25,7 +25,7 @@ class Jsonapi
     /**
      * @var int
      *
-     * @ORM\Column(name="position", type="integer", unique=true)
+     * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
@@ -38,17 +38,17 @@ class Jsonapi
 
     /**
      * @var int
-     *
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 5
+     * )
      * @ORM\Column(name="port", type="integer")
      */
     private $port;
 
     /**
      * @var string
-     *@Assert\Length(
-     *      min = 5,
-     *      max = 5
-     * )
+     *
      *
      * @ORM\Column(name="username", type="string", length=255)
      */

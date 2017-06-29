@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new EZ\UserBundle\EZUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new EZ\ArticleBundle\EZArticleBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new EZ\FAQBundle\EZFAQBundle(),
         ];
 

@@ -18,7 +18,10 @@ class LegalType extends AbstractType
         $builder
             ->add('activate_cc', CheckboxType::class, array(
                     'label' => 'Activer les CGV / CGU',
-                    'required' => false
+                    'required' => false,
+                    'attr' => array(
+                        'class' => 'minimal'
+                    )
                 )
             )
             ->add('cgvCgu', null , array(
