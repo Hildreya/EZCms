@@ -5,20 +5,22 @@ namespace EZ\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use EZ\CoreBundle\Entity\Jsonapi;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class JsonapiType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('position', null, array(
-                'label' => 'Position'
-            ))
             ->add('ip', null, array(
                 'label' => 'Adresse IP'
             ))
@@ -28,9 +30,15 @@ class JsonapiType extends AbstractType
             ->add('username', null, array(
                 'label' => 'Nom d\'utilisateur'
             ))
-            ->add('password', null, array(
+            ->add('password', PasswordType::class, array(
                 'label' => 'Mot de pass'
             ))
+            ->add('position', ChoiceType::class, array(
+                'label' => 'Position',
+                'placeholder' => 'Position',
+                'choices' => $options['position']
+                )
+            )
             ->add('submit', SubmitType::class, array(
                 'label' => 'Sauvegarder',
                 'attr' => array('class' => 'button-green')
@@ -43,7 +51,8 @@ class JsonapiType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi'
+            'data_class' => 'EZ\CoreBundle\Entity\Jsonapi',
+            'position' => array()
         ));
     }
 

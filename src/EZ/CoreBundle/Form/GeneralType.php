@@ -18,34 +18,43 @@ class GeneralType extends AbstractType
             ->add('server_name', null, array(
                 'label' => 'Nom du serveur',
                 'attr' => array(
-                    'value' => $options['data']['parameters']['server_name']
+                    'value' => $options['parameters']['server_name']
                 )))
             ->add('info_site_url', null, array(
                 'label' => 'URL/Adresse du site (www.monsite.fr)',
                 'attr' => array(
-                    'value' => $options['data']['parameters']['info_site_url']
+                    'value' => $options['parameters']['info_site_url']
                 )))
             ->add('info_logo', FileType::class, array(
                 'label' => 'Upload logo du serveur',
-                'required' => false
+                'required' => false,
+                'attr' => array(
+                    //'class' => 'dropzone'
+                )
             ))
             ->add('info_favicon', FileType::class, array(
                 'label' => 'Upload favicon (logo de l\'onglet)',
-                'required' => false
+                'required' => false,
+                'attr' => array(
+                    //'class' => 'dropzone'
+                )
             ))
             ->add('info_banner', FileType::class, array(
                 'label' => 'Upload bannière',
-                'required' => false
+                'required' => false,
+                'attr' => array(
+                    //'class' => 'dropzone'
+                )
             ))
             ->add('server_ip', null, array(
                 'label' => 'IP du serveur',
                 'attr' => array(
-                    'value' => $options['data']['parameters']['server_ip']
+                    'value' => $options['parameters']['server_ip']
                 )))
             ->add('server_port', NumberType::class, array(
                 'label' => 'Port du serveur',
                 'attr' => array(
-                    'value' => $options['data']['parameters']['server_port']
+                    'value' => $options['parameters']['server_port']
                 )))
             ->add('email_contact', EmailType::class, array(
                 'label' => 'email de contact'
@@ -60,5 +69,8 @@ class GeneralType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setDefaults(array(
+            'parameters' => array()
+        ));
     }
 }

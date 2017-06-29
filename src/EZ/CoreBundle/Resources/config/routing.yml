@@ -21,9 +21,13 @@ ez_core_jsonapi:
 ez_core_jsonapi_delete:
     path:     /admin/jsonapi/delete/{id}
     requirements:
-        id : \d
+        id : \d{1,}
     defaults: { _controller: EZCoreBundle:Jsonapi:delete }
 
 ez_core_configuration:
     path:     /admin/configuration
     defaults: { _controller: EZCoreBundle:Configuration:index }
+
+ez_core_social_network:
+    path:     /admin/social
+    defaults: { _controller: EZCoreBundle:SocialNetwork:index }
