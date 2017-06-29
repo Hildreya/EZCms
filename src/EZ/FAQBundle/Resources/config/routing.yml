@@ -1,3 +1,19 @@
-faq_homepage:
-    path:     /
+ez_faq_homepage:
+    path:     /faq
     defaults: { _controller: FAQBundle:Default:index }
+
+ez_faq_admin_list:
+    path:     /admin/faq
+    defaults: { _controller:  FAQBundle:Admin:list }
+
+ez_faq_admin_create:
+    path:     /admin/faq/create
+    defaults: { _controller:  FAQBundle:Admin:create }
+
+ez_faq_admin_show:
+    path:     /admin/update/{id}
+    defaults: { _controller: FAQBundle:}
+
+ez_faq_admin_update:
+    path:     /admin/update/{id}
+    defaults: { _controller: FAQBundle:}

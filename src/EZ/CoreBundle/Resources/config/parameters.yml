@@ -9,4 +9,4 @@ parameters:
     server_ip: 123.fr
     server_port: 2645
     info_site_url: www.test.com
-    template: red
+    template: 'red'

@@ -3,11 +3,16 @@
 namespace EZ\FAQBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EZ\FAQBundle\Controller\DataController;
 
-class DefaultController extends Controller
+class DefaultController extends DataController
 {
     public function indexAction()
     {
-        return $this->render('FAQBundle:Default:index.html.twig');
+        $questions = $this->getQuestionsAction();
+
+        return $this->render('FAQBundle:default:index.html.twig', array(
+            'questions' => $questions
+        ));
     }
 }
