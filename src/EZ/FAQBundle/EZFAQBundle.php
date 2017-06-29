@@ -4,6 +4,6 @@ namespace EZ\FAQBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class FAQBundle extends Bundle
+class EZFAQBundle extends Bundle
 {
 }

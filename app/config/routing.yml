@@ -1,5 +1,5 @@
 faq:
-    resource: "@FAQBundle/Resources/config/routing.yml"
+    resource: "@EZFAQBundle/Resources/config/routing.yml"
     prefix:   /
 
 ez_article:
