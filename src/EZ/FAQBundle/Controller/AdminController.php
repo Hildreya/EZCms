@@ -11,7 +11,7 @@ use EZ\FAQBundle\Controller\DataController;
  * Faq controller.
  *
  */
-class FAQController extends Controller
+class AdminController extends DataController
 {
     /**
      * Lists all fAQ entities.
@@ -19,12 +19,10 @@ class FAQController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $faq = $this->getQuestionsAction();
 
-        $fAQs = $em->getRepository('FAQBundle:FAQ')->findAll();
-
-        return $this->render('faq/index.html.twig', array(
-            'fAQs' => $fAQs,
+        return $this->render('EZFAQBundle:admin:index.html.twig', array(
+            'faq' => $faq,
         ));
     }
 
@@ -89,22 +87,15 @@ class FAQController extends Controller
         ));
     }
 
-    /**
-     * Deletes a fAQ entity.
-     *
-     */
-    public function deleteAction(Request $request, faq $fAQ)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($fAQ);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($fAQ);
-            $em->flush();
+        if($this->deleteQuestionAction($id)){
+            $this->get('session')->getFlashBag()->set('success', 'Suppression réussie !');
+        }else{
+            $this->get('session')->getFlashBag()->set('error', 'Une erreur est survenue !');
         }
 
-        return $this->redirectToRoute('faq_index');
+        return $this->redirectToRoute('ez_faq_admin_list');
     }
 
     /**

@@ -1,6 +1,7 @@
 admin:
   display:  true
   name:     FAQ
+  path:     '#'
   icon:     fa fa-question-circle-o
   0:
       name: Liste

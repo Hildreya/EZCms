@@ -9,8 +9,31 @@ abstract class DataController extends Controller
     public function getQuestionsAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $questions = $em->getRepository('FAQBundle:Faq')->findAll();
+        $questions = $em->getRepository('EZFAQBundle:Faq')->findAll();
 
         return $questions;
+    }
+
+    public function getQuestionAction($id) {
+
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('EZFAQBundle:Faq')->find($id);
+
+        return $question;
+    }
+
+    public function deleteQuestionAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('EZFAQBundle:Faq')->find($id);
+
+        if($question){
+            $em->remove($question);
+            $em->flush();
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }
