@@ -19,10 +19,10 @@ class AdminController extends DataController
      */
     public function indexAction()
     {
-        $faq = $this->getQuestionsAction();
+        $questions = $this->getQuestionsAction();
 
         return $this->render('EZFAQBundle:admin:index.html.twig', array(
-            'faq' => $faq,
+            'questions' => $questions,
         ));
     }
 

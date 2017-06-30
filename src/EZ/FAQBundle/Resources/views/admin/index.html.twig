@@ -4,13 +4,16 @@
     <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
 {% endblock %}
 
+
+{% set collapse = 'collapse' %}
+
 {% block admin_body %}    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                JSONAPI
-                <small>liaison du site avec le serveur minecraft</small>
+                FAQ
+                <small>Gestion de la foire aux questions</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -21,17 +24,40 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
-                    {% for type, flash_messages in app.session.flashBag.all %}
-                        {% for flash_message in flash_messages %}
-                            <div class="alert alert-{{ type }} alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h4><i class="icon fa fa-check"></i> {{ type }}</h4>
-                                {{ flash_message|raw }}
+                <div class="col-md-10">
+                    <div class="box box-default" data-vivaldi-spatnav-clickable="1">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-question-circle-o"></i>Questions / Réponses</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="panel-group" id="accordion">
+                                {% if questions is empty %}
+                                    <h3>La FAQ est vide pour le moment.</h3>
+                                {% else %}
+                                    {% for question in questions %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse~question.id }}">
+                                                        {{ question.question }}
+                                                    </a>
+                                                    <a class="bt pull-right" href="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="bt pull-right">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="{{ collapse~question.id }}" class="panel-collapse collapse">
+                                                <div class="panel-body">{{ question.answer }}</div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
-                        {% endfor %}
-                    {% endfor %}
-                    Bonjour
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
