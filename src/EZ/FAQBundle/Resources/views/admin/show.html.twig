@@ -1,0 +1,40 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block head_admin %}
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+{% endblock %}
+{% block admin_body %}    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                FAQ
+                <small>Gestion de la foire aux questions</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-10">
+        {{ question.id }}
+        {{ question.question }}
+        {{ question.answer }}
+
+        {{ form_start(delete_form) }}
+            <button type="submit" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i> Supprimer
+            </button>
+        {{ form_end(delete_form) }}
+            <a class="btn btn-danger" href="{{ path('ez_faq_admin_edit', {id: question:id}) }}" role="button">
+                <i class="fa fa-trash-o"></i> Modifier
+            </a>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -2,13 +2,13 @@
 
 namespace EZ\FAQBundle\Controller;
 
-use EZ\FAQBundle\Entity\faq;
+use EZ\FAQBundle\Entity\Faq;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use EZ\FAQBundle\Controller\DataController;
 
 /**
- * Faq controller.
+ * Admin controller.
  *
  */
 class AdminController extends DataController
@@ -17,11 +17,24 @@ class AdminController extends DataController
      * Lists all fAQ entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $questions = $this->getQuestionsAction();
 
+        $question = new faq();
+        $form = $this->createForm('EZ\FAQBundle\Form\FAQType', $question);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            $em->flush();
+
+            return $this->redirectToRoute('ez_faq_admin_list');
+        }
+
+
         return $this->render('EZFAQBundle:admin:index.html.twig', array(
+            'form_new' => $form->createView(),
             'questions' => $questions,
         ));
     }
@@ -54,12 +67,13 @@ class AdminController extends DataController
      * Finds and displays a fAQ entity.
      *
      */
-    public function showAction(faq $fAQ)
+    public function showAction(Faq $question)
     {
-        $deleteForm = $this->createDeleteForm($fAQ);
 
-        return $this->render('faq/show.html.twig', array(
-            'fAQ' => $fAQ,
+        $deleteForm = $this->createDeleteForm($question);
+
+        return $this->render('EZFAQBundle:admin:show.html.twig', array(
+            'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -68,8 +82,9 @@ class AdminController extends DataController
      * Displays a form to edit an existing fAQ entity.
      *
      */
-    public function editAction(Request $request, faq $fAQ)
+    public function editAction(Request $request, Faq $fAQ)
     {
+        die('coucou');
         $deleteForm = $this->createDeleteForm($fAQ);
         $editForm = $this->createForm('EZ\FAQBundle\Form\FAQType', $fAQ);
         $editForm->handleRequest($request);
@@ -87,12 +102,13 @@ class AdminController extends DataController
         ));
     }
 
-    public function deleteAction($id)
+    public function deleteAction(request $request, Faq $faq)
     {
-        if($this->deleteQuestionAction($id)){
-            $this->get('session')->getFlashBag()->set('success', 'Suppression réussie !');
-        }else{
-            $this->get('session')->getFlashBag()->set('error', 'Une erreur est survenue !');
+        $form = $this->createDeleteForm($faq);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->deleteQuestionAction($faq);
         }
 
         return $this->redirectToRoute('ez_faq_admin_list');
@@ -108,7 +124,7 @@ class AdminController extends DataController
     private function createDeleteForm(faq $fAQ)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('faq_delete', array('id' => $fAQ->getId())))
+            ->setAction($this->generateUrl('ez_faq_admin_delete', array('id' => $fAQ->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

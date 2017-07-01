@@ -29,10 +29,12 @@ abstract class DataController extends Controller
         if($question){
             $em->remove($question);
             $em->flush();
-            return true;
+            $this->get('session')->getFlashBag()->set('success', 'Suppression réussie !');
+            return null;
         }
         else{
-            return false;
+            $this->get('session')->getFlashBag()->set('error', 'Une erreur est survenue !');
+            return null;
         }
 
     }

@@ -21,3 +21,4 @@ ez_faq_admin_edit:
 ez_faq_admin_delete:
     path:     /admin/delete/{id}
     defaults: { _controller:   EZFAQBundle:Admin:delete}
+    methods:  DELETE
