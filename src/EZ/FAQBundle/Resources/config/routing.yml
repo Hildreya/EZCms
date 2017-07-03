@@ -8,7 +8,7 @@ ez_faq_admin_list:
 
 ez_faq_admin_create:
     path:     /admin/faq/create
-    defaults: { _controller:   EZFAQBundle:Admin:create }
+    defaults: { _controller:   EZFAQBundle:Admin:new }
 
 ez_faq_admin_show:
     path:     /admin/show/{id}
@@ -16,7 +16,7 @@ ez_faq_admin_show:
 
 ez_faq_admin_edit:
     path:     /admin/edit/{id}
-    defaults: { _controller:   EZFAQBundle:Admin:edit}
+    defaults: { _controller:   EZFAQBundle:Admin:edit }
 
 ez_faq_admin_delete:
     path:     /admin/delete/{id}

@@ -3,9 +3,17 @@
 namespace EZ\FAQBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EZ\FAQBundle\Entity\Faq;
 
 abstract class DataController extends Controller
 {
+    public function createQuestionAction(Faq $new_question){
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($new_question);
+        $em->flush();
+    }
+
     public function getQuestionsAction() {
 
         $em = $this->getDoctrine()->getManager();

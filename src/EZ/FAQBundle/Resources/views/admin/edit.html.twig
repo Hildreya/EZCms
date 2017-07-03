@@ -20,21 +20,27 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <div class="box box-default" data-vivaldi-spatnav-clickable="1">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-question-circle-o"></i> Gérer les Questions / Réponses</h3>
+                            <h3 class="box-title"></i> Modifier une question </h3>
                         </div>
                         <div class="box-body">
-                            {{ question.id }}
-                            {{ question.question }}
-                            {{ question.answer }}
 
+                            {{ form_start(edit_form) }}
+                            {{ form_widget(edit_form) }}
+                            {{ form_end(edit_form) }}
 
-                            {{ form_start(delete_form) }}
-                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i>Supprimer</button>
-                            {{ form_end(delete_form) }}
-                            <a class="btn btn-warning" href="{{ path('ez_faq_admin_edit', {id : question.id}) }}" role="button"><i class="fa fa-edit" aria-hidden="true"></i>Modifier</a>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('ez_faq_admin_list') }}">Back to the list</a>
+                                </li>
+                                <li>
+                                    {{ form_start(delete_form) }}
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i>Supprimer</button>
+                                    {{ form_end(delete_form) }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

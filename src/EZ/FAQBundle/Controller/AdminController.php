@@ -45,21 +45,20 @@ class AdminController extends DataController
      */
     public function newAction(Request $request)
     {
-        $fAQ = new faq();
-        $form = $this->createForm('EZ\FAQBundle\Form\FAQType', $fAQ);
-        $form->handleRequest($request);
+        $new_question = new Faq();
+        $form_new = $this->createForm('EZ\FAQBundle\Form\FAQType', $new_question);
+        $form_new->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($fAQ);
-            $em->flush();
+        if ($form_new->isSubmitted() && $form_new->isValid()) {
 
-            return $this->redirectToRoute('faq_show', array('id' => $fAQ->getId()));
+            $this->createQuestionAction($new_question);
+
+            return $this->redirectToRoute('ez_faq_admin_show', array('id' => $new_question->getId()));
         }
 
-        return $this->render('faq/new.html.twig', array(
-            'fAQ' => $fAQ,
-            'form' => $form->createView(),
+        return $this->render('EZFAQBundle:admin:new.html.twig', array(
+            'new_question' => $new_question,
+            'form_new' => $form_new->createView(),
         ));
     }
 
@@ -82,21 +81,20 @@ class AdminController extends DataController
      * Displays a form to edit an existing fAQ entity.
      *
      */
-    public function editAction(Request $request, Faq $fAQ)
+    public function editAction(Request $request, Faq $question)
     {
-        die('coucou');
-        $deleteForm = $this->createDeleteForm($fAQ);
-        $editForm = $this->createForm('EZ\FAQBundle\Form\FAQType', $fAQ);
+        $deleteForm = $this->createDeleteForm($question);
+        $editForm = $this->createForm('EZ\FAQBundle\Form\FAQType', $question);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_edit', array('id' => $fAQ->getId()));
+            return $this->redirectToRoute('faq_edit', array('id' => $question->getId()));
         }
 
-        return $this->render('faq/edit.html.twig', array(
-            'fAQ' => $fAQ,
+        return $this->render('EZFAQBundle:admin:edit.html.twig', array(
+            'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
