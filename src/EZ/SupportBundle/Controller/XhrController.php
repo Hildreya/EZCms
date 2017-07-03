@@ -10,7 +10,6 @@ class XhrController extends DataController
 {
     public function getPlayersAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         $pseudo = $request->get('term');
         $callback = $request->get('callback');
 
