@@ -1,0 +1,108 @@
+{% extends "EZCoreBundle:default/Layout:"~ template ~".html.twig" %}
+
+{% block title %}
+    Support - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+
+    <div class="container">
+        <h1> ticket</h1>
+
+        {% for message in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        {{ form_start(form, {'attr': {'id': 'form_support'}}) }}
+        {{ form_label(form.categorie) }}
+        {{ form_widget(form.categorie) }} <br>
+
+        {{ form_label(form.priority) }}
+        {{ form_widget(form.priority) }} {{ form_widget(form.Priority) }}
+        <div class="trainee-name-busy"></div>
+        <div class="selected-trainee-result"></div>
+        <br>
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message) }} <br>
+
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript">
+            $(function () {
+                $('#ez_supportbundle_support_categorie').change(function () {
+                    var type = $('#ez_supportbundle_support_categorie').val();
+                    if (type == '3') {
+                        $('#ez_supportbundle_support_priority').hide();
+                        $('#ez_supportbundle_support_Priority').show();
+                        $('#ez_supportbundle_support_message').attr('placeholder', 'Raison du signalement');
+                    }
+                    else {
+                        $('#ez_supportbundle_support_priority').show();
+                        $('#ez_supportbundle_support_Priority').hide();
+                        $('#ez_supportbundle_support_message').attr('placeholder', 'Votre question/message');
+                    }
+                });
+            });
+            $("#ez_supportbundle_support_button").click(function () {
+                $('#form_support').submit();
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                // Hide selected person result div
+                $(".selected-trainee-result").hide();
+
+                    // Handle autocompletion
+                    $("#ez_supportbundle_support_Priority").autocomplete({
+                        minLength: 3,
+                        delay: 100,
+                        source: function (input, add) {
+                            $(".trainee-name-busy").empty().html('<i class="fa fa-spinner fa-pulse"></i>');
+                            $(".selected-trainee-result").empty();
+
+                            $.getJSON("{{ path('ez_support_ajax_joueur') }}" + "?callback=?", input, function (data) {
+                                $(".trainee-name-busy").empty();
+
+                                //create array for response objects
+                                var suggestions = [];
+
+                                //process response
+                                $.each(data, function (i, val) {
+                                    suggestions.push({
+                                        value: val.name,
+                                        label: val.name
+                                    });
+                                });
+                                //pass array to callback
+                                add(suggestions);
+                            })
+                                .fail(function (jqxhr, textStatus, error) {
+                                    var err = textStatus + ', ' + error;
+                                    console.log("Request Failed: " + err);
+                                });
+                        },
+                    });
+
+                    $("#ez_supportbundle_support_Priority").keypress(function (event) {
+                    $(".selected-trainee-result").hide();
+                });
+
+            });
+        </script>
+
+
+    {% endblock %}
+
+
+

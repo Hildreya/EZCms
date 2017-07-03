@@ -1,0 +1,15 @@
+admin:
+    name: Support
+    path: ez_support_admin
+    icon: fa fa-life-ring
+    display : true
+default:
+    display: true
+    0:
+        name: Rediger un ticket
+        path: 'support/new'
+    1:
+        name: Consulter mes tickets
+        path: 'support'
+    name: Support
+    path: '#'

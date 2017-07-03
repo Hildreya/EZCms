@@ -41,9 +41,9 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
     globals:
-        servename: Test
-        serveip: 127.0.0.1
-        template: red
+        servename: '%server_name%'
+        serveip: '%server_ip%'
+        template: '%template%'
 
 # Doctrine Configuration
 doctrine:
@@ -84,8 +84,8 @@ fos_user:
         confirmation:
             enabled:  true
     from_email:
-        address: test
-        sender_name: test
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
 
 #AsseticBundle Configuration
 assetic:
