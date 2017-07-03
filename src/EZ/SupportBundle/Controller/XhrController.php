@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class XhrController extends Controller
+class XhrController extends DataController
 {
     public function getPlayersAction(Request $request)
     {
@@ -14,7 +14,7 @@ class XhrController extends Controller
         $pseudo = $request->get('term');
         $callback = $request->get('callback');
 
-        $list_account = $em->getRepository('EZUserBundle:User')->searchPlayer($pseudo);
+        $list_account = $this->searchPlayer($pseudo);
 
         $resultat = array();
         foreach ($list_account as $account) {

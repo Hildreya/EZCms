@@ -1,13 +1,13 @@
 ez_support_new:
     path:     /support/new
-    defaults: { _controller: EZSupportBundle:Home:new }
+    defaults: { _controller: EZSupportBundle:Default:new }
 ez_support_admin:
     path:    /admin/support
     defaults: {_controller: EZSupportBundle:Admin:index}
 ez_support_list:
     path:    /ticket/{id}
     defaults:
-             _controller: EZSupportBundle:Home:list
+             _controller: EZSupportBundle:Default:list
              id: 0
 #Recupération pseudo
 ez_support_ajax_joueur:
