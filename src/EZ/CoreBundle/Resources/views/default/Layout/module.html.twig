@@ -11,7 +11,7 @@
                     <li>
                         {% for i in 0..bundle['default']|length - 4 %}
 
-                        <a href="{{ bundle['default'][i]['path'] }}">{{ bundle['default'][i]['name'] }}</a>
+                        <a href="{{ path(bundle['default'][i]['path']) }} ">{{ bundle['default'][i]['name'] }}</a>
 
                         {% endfor %}
                     </li>
