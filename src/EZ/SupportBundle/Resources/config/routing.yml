@@ -1,0 +1,3 @@
+ez_support_homepage:
+    path:     /
+    defaults: { _controller: EZSupportBundle:Default:index }
