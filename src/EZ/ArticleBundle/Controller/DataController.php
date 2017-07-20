@@ -2,6 +2,7 @@
 
 namespace EZ\ArticleBundle\Controller;
 
+use EZ\ArticleBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 abstract class DataController extends Controller
@@ -26,5 +27,11 @@ abstract class DataController extends Controller
         $comments = $article->getComment();
 
         return $comments;
+    }
+
+    public function addCommentAction($com) {
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+
     }
 }

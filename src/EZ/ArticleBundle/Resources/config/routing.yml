@@ -1,10 +1,10 @@
 ez_article_homepage:
     path:     /articles
-    defaults: { _controller: EZArticleBundle:Home:index }
+    defaults: { _controller: EZArticleBundle:Default:index }
 
 ez_article_select:
     path:     /articles/{id}
-    defaults: { _controller: EZArticleBundle:Home:select }
+    defaults: { _controller: EZArticleBundle:Default:select }
 
 ez_article_admin_list:
     path:     /admin/articles
