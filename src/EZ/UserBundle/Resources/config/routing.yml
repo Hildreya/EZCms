@@ -17,3 +17,11 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+ez_user_admin_list:
+    path:   /admin/users
+    defaults: { _controller: EZUserBundle:User:index}
+
+ez_user_admin_edit:
+    path:   /admin/user/{id}
+    defaults: { _controller: EZUserBundle:User:edit }
+
