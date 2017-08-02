@@ -23,18 +23,22 @@
                 <div class="col-md-10">
                     <div class="box box-default" data-vivaldi-spatnav-clickable="1">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-question-circle-o"></i> Gérer les Questions / Réponses</h3>
+                            <h3 class="box-title"><a href="{{ path('ez_faq_admin_list') }}"><i class="fa fa-chevron-left"></i></a> |  Gérer une question/réponse</h3><p class="pull-right"><b>ID: </b>{{ question.id }}</p>
                         </div>
                         <div class="box-body">
-                            {{ question.id }}
-                            {{ question.question }}
-                            {{ question.answer }}
+                            <h5><b>Question: </b></h5>
+                                <p style="text-indent: 20px;">{{ question.question }}</p>
+
+                            <h5><b>Réponse: </b></h5>
+                                <p style="text-indent: 20px;">{{ question.answer }}</p>
 
 
                             {{ form_start(delete_form) }}
-                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i>Supprimer</button>
+                            <br>
+                            <br>
+                            <button class="btn btn-danger inline" type="submit"><i class="fa fa-trash-o"></i> Supprimer</button>
+                            <a class="btn btn-warning inline" href="{{ path('ez_faq_admin_edit', {id : question.id}) }}" role="button"><i class="fa fa-edit" aria-hidden="true"></i>Modifier</a>
                             {{ form_end(delete_form) }}
-                            <a class="btn btn-warning" href="{{ path('ez_faq_admin_edit', {id : question.id}) }}" role="button"><i class="fa fa-edit" aria-hidden="true"></i>Modifier</a>
                         </div>
                     </div>
                 </div>

@@ -90,7 +90,7 @@ class AdminController extends DataController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faq_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('ez_faq_admin_edit', array('id' => $question->getId()));
         }
 
         return $this->render('EZFAQBundle:admin:edit.html.twig', array(
