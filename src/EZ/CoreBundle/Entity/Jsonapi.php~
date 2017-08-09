@@ -198,28 +198,5 @@ class Jsonapi
     {
         return $this->password;
     }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Jsonapi
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 }
+

@@ -29,3 +29,12 @@
     color:#fff;
     background: #00a7d0;
 }
+
+.jsonapi_header {
+    margin: 0px 25px;
+    float: right;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+}

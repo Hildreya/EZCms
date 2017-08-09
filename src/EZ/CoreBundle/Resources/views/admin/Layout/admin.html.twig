@@ -234,16 +234,26 @@
             <ul class="sidebar-menu">
                 <li class="header">GENERAL</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li {% if app.request.attributes.get('_route') == 'ez_core_admin' %} class="active" {% endif %}><a href="{{ path('ez_core_admin') }}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-                <li {% if app.request.attributes.get('_route') == 'ez_core_template' %} class="active" {% endif %}><a href="{{ path('ez_core_template') }}"><i class="fa fa-link"></i> <span>Themes</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_admin' %} class="active" {% endif %}><a href="{{ path('ez_core_admin') }}"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+                <li {% if app.request.attributes.get('_route') == 'ez_core_template' %} class="active" {% endif %}><a href="{{ path('ez_core_template') }}"><i class="fa fa-picture-o"></i> <span>Themes</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Configuration</span>
+                    <a href="#"><i class="fa fa-cogs"></i> <span>Configuration</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ path('ez_core_configuration') }}">Informations</a></li>
+                        <li><a href="{{ path('ez_core_jsonapi') }}">Pages</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-wifi"></i> <span>Connectivité</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
                         <li><a href="{{ path('ez_core_jsonapi') }}">JSONAPI</a></li>
                     </ul>
                 </li>
@@ -354,7 +364,11 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/app.min.js') }}"></script>
+<!-- JSRouting -->
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
+<script src="{{ asset('js/main.js') }}"></script>
 
 {% block javascript %}{% endblock %}
 

@@ -18,6 +18,8 @@ class ConfigurationController extends Controller
 
         //Get current parameters
         $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
+        $current_mail = $this->getParameter('mailer_user');
+        $parameters['parameters']['email_contact'] = $current_mail;
 
         //Setting up legal form
         $legal = $this->getDoctrine()->getRepository('EZCoreBundle:Legal')->find(1);
@@ -38,7 +40,7 @@ class ConfigurationController extends Controller
         $sn_form->handleRequest($request);
 
         // social network treatment
-        if($sn_form->isValid() && $sn_form->isSubmitted())
+        if($sn_form->isSubmitted() && $sn_form->isValid())
         {
 
         }
@@ -67,6 +69,10 @@ class ConfigurationController extends Controller
             //Transform array into yaml, then set new parameters back in parameters.yml
             $yaml = YAML::dump($value);
             file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
+
+            if($form_data['email_contact'] != $current_mail){
+
+            }
 
             //Moving logo/banner/favicon into web/img/
             $logo = $form_data['info_logo'];
