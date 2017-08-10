@@ -21,17 +21,35 @@ class JsonapiType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name', null, array(
+                'label' => 'Nom',
+                'attr' => array(
+                    'placeholder' => 'Nom (peu important)'
+                )
+            ))
             ->add('ip', null, array(
-                'label' => 'Adresse IP'
+                'label' => 'Adresse IP',
+                'attr' => array(
+                    'placeholder' => 'Adresse IP du serveur'
+                )
             ))
             ->add('port', null, array(
-                'label' => 'Port'
+                'label' => 'Port',
+                'attr' => array(
+                    'placeholder' => 'Port du serveur'
+                )
             ))
             ->add('username', null, array(
-                'label' => 'Nom d\'utilisateur'
+                'label' => 'Nom d\'utilisateur',
+                'attr' => array(
+                    'placeholder' => 'Nom d\'utilisateurs JSONAPI'
+                )
             ))
             ->add('password', PasswordType::class, array(
-                'label' => 'Mot de pass'
+                'label' => 'Mot de passe',
+                'attr' => array(
+                    'placeholder' => 'Mot de passe JSONAPI'
+                )
             ))
             ->add('position', ChoiceType::class, array(
                 'label' => 'Position',

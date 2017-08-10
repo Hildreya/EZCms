@@ -10,4 +10,5 @@ namespace EZ\UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

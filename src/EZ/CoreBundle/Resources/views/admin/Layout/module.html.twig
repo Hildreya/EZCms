@@ -12,6 +12,7 @@
                 {% for i in 0..bundle['admin']|length - 5  %}
                     <li {% if app.request.attributes.get('_route') ==  bundle['admin'][i]['path'] %} class="active" {% endif %}><a href="{{ path(bundle['admin'][i]['path']) }}">{{ bundle['admin'][i]['name'] }}</a></li>
                 {% endfor %}
+                    <li><a href="#">Gestion</a></li>
                 </ul>
             </li>
         {% else %}

@@ -42,6 +42,11 @@ class Comment
      */
     private $author;
 
+    public function __construct()
+    {
+        $this->creationDate = new \Datetime();
+    }
+
     /**
      * Get id
      *

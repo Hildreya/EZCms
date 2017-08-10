@@ -1,0 +1,163 @@
+<?php
+
+namespace EZ\SupportBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+/**
+ * Support_reponse
+ *
+ * @ORM\Table(name="support_reponse")
+ * @ORM\Entity(repositoryClass="EZ\SupportBundle\Repository\Support_reponseRepository")
+ */
+class Support_reponse
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string", length=2000)
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EZ\SupportBundle\Entity\Support", inversedBy="reponse")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $ticketId;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var \EZ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="EZ\UserBundle\Entity\User")
+     */
+    private $userId;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     *
+     * @return Support_reponse
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set ticketId
+     *
+     * @param \EZ\SupportBundle\Entity\Support $ticketId
+     *
+     * @return Support_reponse
+     */
+    public function setTicketId(\EZ\SupportBundle\Entity\Support $ticketId)
+    {
+        $this->ticketId = $ticketId;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketId
+     *
+     * @return \EZ\SupportBundle\Entity\Support
+     */
+    public function getTicketId()
+    {
+        return $this->ticketId;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Support_reponse
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param \EZ\UserBundle\Entity\User $userId
+     *
+     * @return Support_reponse
+     */
+    public function setUserId(\EZ\UserBundle\Entity\User $userId = null)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return \EZ\UserBundle\Entity\User
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+}
