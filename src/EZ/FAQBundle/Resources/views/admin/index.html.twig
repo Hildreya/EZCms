@@ -1,0 +1,80 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block head_admin %}
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+{% endblock %}
+
+
+{% set collapse = 'collapse' %}
+
+{% block admin_body %}    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                FAQ
+                <small>Gestion de la foire aux questions</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="box box-default" data-vivaldi-spatnav-clickable="1">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-question-circle-o"></i> Gérer les Questions / Réponses</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="panel-group" id="accordion">
+                                {% if questions is empty %}
+                                    <h3>La FAQ est vide pour le moment.</h3>
+                                {% else %}
+                                    {% for question in questions %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse~question.id }}">
+                                                        {{ question.question }}
+                                                    </a>
+                                                    <a class="bt pull-right" role="button" href="{{ path('ez_faq_admin_edit', { id : question.id}) }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="bt pull-right" role="button" href="{{ path('ez_faq_admin_show', { id : question.id}) }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="{{ collapse~question.id }}" class="panel-collapse collapse">
+                                                <div class="panel-body">{{ question.answer }}</div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-default" data-vivaldi-spatnav-clickable="1">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> Ajouter une nouvelle entrée :</h3>
+                        </div>
+                        <div class="box-body">
+                            {{ form_start(form_new) }}
+                            {{ form_end(form_new) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

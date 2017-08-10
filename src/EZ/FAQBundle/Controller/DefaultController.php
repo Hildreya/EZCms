@@ -10,8 +10,7 @@ class DefaultController extends DataController
     public function indexAction()
     {
         $questions = $this->getQuestionsAction();
-
-        return $this->render('FAQBundle:default:index.html.twig', array(
+        return $this->render('EZFAQBundle:default:index.html.twig', array(
             'questions' => $questions
         ));
     }

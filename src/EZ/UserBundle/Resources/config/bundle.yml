@@ -1,6 +1,6 @@
 admin:
     name: Utilisateurs
-    path: ez_article_admin_list
+    path: ez_user_admin_list
     icon: fa fa-user-o
     display : true
 

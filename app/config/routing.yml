@@ -2,7 +2,7 @@ ez_support:
     resource: "@EZSupportBundle/Resources/config/routing.yml"
     prefix:   /
 
-faq:
+ez_faq:
     resource: "@EZFAQBundle/Resources/config/routing.yml"
     prefix:   /
 

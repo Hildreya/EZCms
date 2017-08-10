@@ -1,7 +1,7 @@
 {% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
 
 {% block title %}
-    Dashboard - {{ parent() }}
+    Gestion des utilisateurs - {{ parent() }}
 {% endblock %}
 
 {% block admin_body %}
@@ -10,8 +10,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Bienvenue sur la dashboard
-                <small>Optional description</small>
+                Editer l'utilisateur
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,6 +22,12 @@
         <section class="content">
 
             <!-- Your Page Content Here -->
+
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input class="button-green" type="submit" value="Editer" />
+            <a class="button-blue" href="{{ path('ez_user_admin_list') }}">Revenir à la liste</a>
+            {{ form_end(edit_form) }}
 
         </section>
         <!-- /.content -->
