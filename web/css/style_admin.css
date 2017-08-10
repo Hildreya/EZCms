@@ -38,3 +38,10 @@
     font-size: 18px;
     line-height: 1;
 }
+.loading{
+    background: url('../img/loading.gif')
+                center
+                no-repeat;
+    height: 160px;
+    display: block
+}

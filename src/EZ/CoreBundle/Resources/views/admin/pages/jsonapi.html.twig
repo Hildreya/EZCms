@@ -32,7 +32,7 @@
                     {% if server.info.0.is_success %}
                         <div class="box box-success collapsed-box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{{ server.jsonapi.name }}</h3><h3 class="jsonapi_header">{{ server.info.0.success.players|length }}/{{ server.info.0.success.maxPlayers }} </h3>
+                                <h3 class="box-title">{{ server.jsonapi.name }}</h3><h3 class="jsonapi_header"><span class="online_players">{{ server.info.0.success }}</span>/{{ server.info.1.success }} </h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
@@ -46,13 +46,18 @@
                                     <div class="col-sm-6"><small>IP : {{ server.jsonapi.ip }}</small></div>
                                     <div class="col-sm-6 text-right"><small class="pull-right position">{{ server.jsonapi.position }}</small></div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4 text-center"><input type="text" value="10" class="knob"></div>
-                                    <div class="col-md-4 text-center"><input type="text" value="10" class="knob"></div>
-                                    <div class="col-md-4 text-center"><input type="text" value="10" class="knob"></div>
-                                </div>
+                                <div class="row position_{{ server.jsonapi.position }}" style="margin: 25px 0px;"></div>
 
-                                <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer</button></a>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>Supprimer</button></a>
+                                    </div>
+                                    <div class="col-md-1 col-md-offset-9">
+                                       <button type="button" class="btn btn-default pull-right refresh"><i class="fa fa-refresh"></i></button>
+                                    </div>
+
+
+                                </div>
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -151,16 +156,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('js/jquery.knob.js') }}"></script>
-    <script>
-        $('.knob').knob(
-            {
-                'readOnly' : true,
-                'width': 75,
-                'height': 75,
-                'fgColor': "#00A65A"
 
-            }
-        );
-    </script>
 {% endblock %}

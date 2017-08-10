@@ -35,6 +35,7 @@ ez_core_social_network:
 ajax_server_info:
     path:     /admin/jsonapi/info/{server_position}
     defaults: { _controller: EZCoreBundle:Jsonapi:serverInfo }
+    schemes:  [http]
     options:
         expose: true
 

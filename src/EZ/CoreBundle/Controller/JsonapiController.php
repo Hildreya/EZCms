@@ -66,7 +66,7 @@ class JsonapiController extends Controller
             $js = $jsonapi_servers[$i];
             $jsonapi_servers[$i] = null;
             $jsonapi_servers[$i]['jsonapi']= $js;
-            $jsonapi_servers[$i]['info'] = $api->call('server');
+            $jsonapi_servers[$i]['info'] = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
         }
         //die(var_dump($jsonapi_servers));
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
@@ -107,37 +107,52 @@ class JsonapiController extends Controller
 
     }
 
-    public function serverInfoAction($server_position)
+    public function serverInfoAction(Request $request, $server_position)
     {
-        $server = $this->getDoctrine()->getRepository('EZCoreBundle:Jsonapi')
-            ->findOneByPosition($server_position);
-        $api = $this->get('ez_core.jsonapi');
-        $api->setHost($server->getIp());
-        $api->setPort($server->getPort());
-        $api->setUsername($server->getUsername());
-        $api->setPassword($server->getPassword());
+        //if ($request->isXmlHttpRequest()) {
+            $server = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')
+                ->findOneByPosition($server_position);
+            $api = $this->get('ez_core.jsonapi');
+            $api->setHost($server->getIp());
+            $api->setPort($server->getPort());
+            $api->setUsername($server->getUsername());
+            $api->setPassword($server->getPassword());
 
-        $answer = $api->callMultiple(array('server','server.performance.disk.free','server.performance.disk.size','server.performance.memory.used','server.performance.memory.total'),
-            array(
-                array(),
-                array(),
-                array(),
-                array(),
-                array()
-            ));
-        if($answer[0]['is_success'])
-        {
-            $disk   = ceil(100-(($answer[1]['success'] / $answer[2]['success'])*100));
-            $memory = ceil(($answer[3]['success'] / $answer[4]['success'])*100);
-            $server = $answer[0]['success'];
-        }
+            $answer = $api->callMultiple(array('server', 'server.performance.disk.free', 'server.performance.disk.size', 'server.performance.memory.used', 'server.performance.memory.total'),
+                array(
+                    array(),
+                    array(),
+                    array(),
+                    array(),
+                    array()
+                ));
+            if ($answer[0]['is_success']) {
+                $disk = ceil(100 - (($answer[1]['success'] / $answer[2]['success']) * 100));
+                $memory = ceil(($answer[3]['success'] / $answer[4]['success']) * 100);
+                $server = $answer[0]['success'];
 
-        $response = new JsonResponse();
-        return $response->setData(array(
-            'memory' =>$memory,
-            'disk' => $disk,
-            'server' => $server
-        ));
+
+                $response = new JsonResponse();
+                return $response->setData(array(
+                    'error' => false,
+                    'memory' => $memory,
+                    'disk' => $disk,
+                    'server' => $server
+                ));
+            }else{
+                $response = new JsonResponse();
+                return $response->setData(array(
+                    'error' => true
+                ));
+
+            }
+
+
+
+
+
+    //}else {
+    //        throw new \Exception('Erreur');
+    //   }
     }
-
 }
