@@ -1,0 +1,59 @@
+<?php
+
+namespace EZ\SupportBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+/**
+ * Support_reponse
+ *
+ * @ORM\Table(name="support_reponse")
+ * @ORM\Entity(repositoryClass="EZ\SupportBundle\Repository\Support_reponseRepository")
+ */
+class Response
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string", length=2000)
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EZ\SupportBundle\Entity\Support", inversedBy="reponse")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $ticket;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var \EZ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="EZ\UserBundle\Entity\User")
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+
+}

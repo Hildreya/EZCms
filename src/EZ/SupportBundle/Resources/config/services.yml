@@ -1,4 +1,8 @@
 services:
-#    ez_support.example:
-#        class: EZ\SupportBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    ez_support.form:
+        class: EZ\SupportBundle\Utils\Form
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@form.factory"
+            - '@request_stack'
+            - '@router'

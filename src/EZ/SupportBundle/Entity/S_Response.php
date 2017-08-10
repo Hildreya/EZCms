@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="support_reponse")
  * @ORM\Entity(repositoryClass="EZ\SupportBundle\Repository\Support_reponseRepository")
  */
-class Support_reponse
+class S_Response
 {
     /**
      * @var int
@@ -34,7 +34,7 @@ class Support_reponse
      * @ORM\JoinColumn(nullable=false)
      */
 
-    private $ticketId;
+    private $ticket;
 
     /**
      * @var DateTime
@@ -48,7 +48,7 @@ class Support_reponse
      *
      * @ORM\ManyToOne(targetEntity="EZ\UserBundle\Entity\User")
      */
-    private $userId;
+    private $user;
 
     public function __construct()
     {
@@ -58,7 +58,7 @@ class Support_reponse
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class Support_reponse
      *
      * @param string $message
      *
-     * @return Support_reponse
+     * @return SResponse
      */
     public function setMessage($message)
     {
@@ -90,35 +90,11 @@ class Support_reponse
     }
 
     /**
-     * Set ticketId
-     *
-     * @param \EZ\SupportBundle\Entity\Support $ticketId
-     *
-     * @return Support_reponse
-     */
-    public function setTicketId(\EZ\SupportBundle\Entity\Support $ticketId)
-    {
-        $this->ticketId = $ticketId;
-
-        return $this;
-    }
-
-    /**
-     * Get ticketId
-     *
-     * @return \EZ\SupportBundle\Entity\Support
-     */
-    public function getTicketId()
-    {
-        return $this->ticketId;
-    }
-
-    /**
      * Set date
      *
      * @param \DateTime $date
      *
-     * @return Support_reponse
+     * @return SResponse
      */
     public function setDate($date)
     {
@@ -138,26 +114,50 @@ class Support_reponse
     }
 
     /**
-     * Set userId
+     * Set ticket
      *
-     * @param \EZ\UserBundle\Entity\User $userId
+     * @param \EZ\SupportBundle\Entity\Support $ticket
      *
-     * @return Support_reponse
+     * @return SResponse
      */
-    public function setUserId(\EZ\UserBundle\Entity\User $userId = null)
+    public function setTicket(\EZ\SupportBundle\Entity\Support $ticket)
     {
-        $this->userId = $userId;
+        $this->ticket = $ticket;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get ticket
+     *
+     * @return \EZ\SupportBundle\Entity\Support
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \EZ\UserBundle\Entity\User $user
+     *
+     * @return SResponse
+     */
+    public function setUser(\EZ\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
      *
      * @return \EZ\UserBundle\Entity\User
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 }
