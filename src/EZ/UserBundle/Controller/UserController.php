@@ -15,8 +15,7 @@ class UserController extends Controller
      * Lists all Users.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $userManager = $this->get('fos_user.user_manager');
         $users = $userManager->findUsers();
         return $this->render('@EZUser/admin/list.html.twig', array(
@@ -28,8 +27,7 @@ class UserController extends Controller
      * Displays a form to edit an existing Users.
      *
      */
-    public function editAction(Request $request, User $id)
-    {
+    public function editAction(Request $request, User $id) {
 
         $editForm = $this->createForm(UserType::class, $id);
         $editForm->handleRequest($request);
@@ -47,5 +45,9 @@ class UserController extends Controller
             'edit_form' => $editForm->createView(),
 
         ));
+    }
+
+    public function addAction() {
+        return $this->render('@EZUser/admin/add.html.twig');
     }
 }

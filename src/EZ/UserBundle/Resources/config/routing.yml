@@ -19,7 +19,11 @@ fos_user_change_password:
 
 ez_user_admin_list:
     path:   /admin/users
-    defaults: { _controller: EZUserBundle:User:index}
+    defaults: { _controller: EZUserBundle:User:index }
+
+ez_user_admin_add:
+    path:   /admin/adduser
+    defaults: { _controller: EZUserBundle:User:add }
 
 ez_user_admin_edit:
     path:   /admin/user/{id}
