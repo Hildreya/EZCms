@@ -2,10 +2,8 @@
 
 namespace EZ\ArticleBundle\Form;
 
-use Doctrine\DBAL\Types\DateType;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,23 +15,13 @@ class ArticleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array(
+        $builder->add('title', TextType::class, array(
             'label' => 'Titre'
         ))
-            ->add('content', TextareaType::class, array(
-                'label' => 'Contenu'
-            ))
-            ->add('creationDate', DateType::class, array(
-                'label' => 'Date de création'
-            ))
-            ->add('modificationDate', DateType::class, array(
-                'label' => 'Date de modification'
-            ))
-            ->add('author', TextType::class, array(
-                'label' => 'Auteur'
-            ))
-            ->add('comment', CommentType::class, array(
-                'label' => 'Commentaires'
+            ->add('content', null, array(
+                'label' => 'Contenu',
+                'attr' => array(
+                    'class' => 'ckeditor')
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Sauvegarder',
