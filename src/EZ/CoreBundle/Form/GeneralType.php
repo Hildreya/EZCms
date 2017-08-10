@@ -57,8 +57,10 @@ class GeneralType extends AbstractType
                     'value' => $options['parameters']['server_port']
                 )))
             ->add('email_contact', EmailType::class, array(
-                'label' => 'email de contact'
-            ))
+                'label' => 'email de contact',
+                'attr' => array(
+                    'value' => $options['parameters']['email_contact']
+                )))
             ->add('Submit', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'button-green'

@@ -1,17 +1,9 @@
 parameters:
     server_name: ExtazCMS
-    server_ip:  vps02.spaceblock.fr
-    server_port: 2645
+    server_ip: 5.196.182.62
+    server_port: 24812
     info_site_url: www.extaz-cms.fr
-    template:   red
-    twitter:
-        link:   null
-        icon:   fa fa-twitter
-    facebook:
-        link:   null
-        icon:   fa fa-facebook
-    youtube:
-        link:   null
-        icon:   fa fa-youtube-play
-
-
+    template: red
+    twitter: { link: null, icon: 'fa fa-twitter' }
+    facebook: { link: null, icon: 'fa fa-facebook' }
+    youtube: { link: null, icon: 'fa fa-youtube-play' }
