@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"ajax_server_info":{"tokens":[["variable","\/","[^\/]++","server_position"],["text","\/admin\/jsonapi\/info"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":[],"schemes":[]}},"prefix":"","host":"localhost","scheme":"http"});

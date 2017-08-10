@@ -34,24 +34,20 @@
                                 <div class="clear"></div>
                                 <div class="com">{{ comment.content | raw }}</div>
                             </div>
+                            <div class="clear"></div>
                         {% endfor %}
                     {% else %}
                         Pas de commentaires ...
                     {% endif %}
-                    <div class="clear"></div>
+
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="content">
                     <div class="title-red article-title">Postez votre commentaire</div>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <form action="" method="post">
-                            <label class="style__label mt10">Pseudo :</label>
-                            <input type="text" class="input__com" name="pseudo" value="{{ app.user.username }}" disabled>
-                            <label class="style__label">Votre commentaire :</label>
-                            <textarea class="input__com" name="commentaire" rows="3"></textarea>
-                            <input type="submit" name="sucess" value="Publier" class="sub-article">
-                        </form>
+                        {{ form_start(comment_form) }}
+                        {{ form_end(comment_form) }}
                     {% else %}
                         Veuillez vous connecter pour poster un commentaire !
                     {% endif %}
