@@ -43,6 +43,22 @@
     display: block
 }
 
+.jsonapi_header {
+    margin: 0px 25px;
+    float: right;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+}
+.loading{
+    background: url('../img/loading.gif')
+                center
+                no-repeat;
+    height: 160px;
+    display: block
+}
+
 .button-red {
     background:#d9534f;
     border-bottom:3px solid #c9302c;
