@@ -2,9 +2,10 @@
 
 namespace EZ\ArticleBundle\Controller;
 
+use EZ\ArticleBundle\Entity\Article;
 use EZ\ArticleBundle\Form\ArticleType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AdminController extends DataController
 {
@@ -18,17 +19,22 @@ class AdminController extends DataController
     }
 
     public function createAction(Request $request) {
-        $form = $this->createForm(ArticleType::class);
-        $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $this->getDoctrine()->getManager()->flush();
+        $article = new Article();
+        $article->setAuthor($this->getUser());
+
+        $form = $this->createForm(ArticleType::class,$article);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('ez_article_admin_list'));
         }
 
         return $this->render('EZArticleBundle:admin:create.html.twig', array(
-            'form' => $form->createView()
+            'article_form' => $form->createView()
         ));
     }
 }

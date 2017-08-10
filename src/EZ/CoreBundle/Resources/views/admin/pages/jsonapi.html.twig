@@ -29,10 +29,10 @@
             {% endfor %}
             <div class="col-md-8">
                 {% for server in jsonapi_servers  %}
-                    {% if server.status == null %}
-                        <div class="box box-danger collapsed-box">
+                    {% if server.info.0.is_success %}
+                        <div class="box box-success collapsed-box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{{ server.jsonapi.ip }} | Eteint</h3>
+                                <h3 class="box-title">{{ server.jsonapi.name }}</h3><h3 class="jsonapi_header"><span class="online_players">{{ server.info.0.success }}</span>/{{ server.info.1.success }} </h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
@@ -42,14 +42,29 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer</button></a>
+                                <div class="row">
+                                    <div class="col-sm-6"><small>IP : {{ server.jsonapi.ip }}</small></div>
+                                    <div class="col-sm-6 text-right"><small class="pull-right position">{{ server.jsonapi.position }}</small></div>
+                                </div>
+                                <div class="row position_{{ server.jsonapi.position }}" style="margin: 25px 0px;"></div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>Supprimer</button></a>
+                                    </div>
+                                    <div class="col-md-1 col-md-offset-9">
+                                       <button type="button" class="btn btn-default pull-right refresh"><i class="fa fa-refresh"></i></button>
+                                    </div>
+
+
+                                </div>
                             </div>
                             <!-- /.box-body -->
                         </div>
                     {% else %}
-                        <div class="box box-success collapsed-box">
+                        <div class="box box-danger collapsed-box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{{ server.jsonapi.ip }}     |  {{ server.status.players|length }} / {{ server.status.maxPlayers }}</h3>
+                                <h3 class="box-title">{{ server.jsonapi.name }}</h3><h3 class="jsonapi_header">Erreur</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
@@ -59,6 +74,15 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-6"><small>IP : {{ server.jsonapi.ip }}</small></div>
+                                    <div class="col-sm-6 text-right"><small class="pull-right position">{{ server.jsonapi.position }}</small></div>
+                                </div>
+
+                                <p class="text-center">Une erreur est survenue :</p>
+                                <br>
+                                <p><b>Code de l'erreur : {{ server.info.0.error.code }}</b></p>
+                                <p class="text-center">{{ server.info.0.error.message }}</p>
                                 <a href="{{ path('ez_core_jsonapi_delete', {'id': server.jsonapi.id }) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Supprimer</button></a>
                             </div>
                             <!-- /.box-body -->
@@ -75,6 +99,12 @@
 
                     {{ form_start(form) }}
                     <div class="box-body">
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                            {{ form_widget(form.name) }}
+                        </div>
+                        <br>
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-server"></i></span>
@@ -123,4 +153,8 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+{% endblock %}
+
+{% block javascript %}
+
 {% endblock %}

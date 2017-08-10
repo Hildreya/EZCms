@@ -1,0 +1,79 @@
+{% extends "EZCoreBundle:default/Layout:"~ template ~".html.twig" %}
+
+{% block title %}
+    Support - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+
+    <div class="container">
+        <h1>Ticket n°{{ ticket.id }}</h1>
+
+        {% for message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                <i class="fa fa-chevron-right " aria-hidden="true"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <ul class="cbp_tmtimeline">
+
+            <li>
+                <time class="cbp_tmtime" datetime="{{ ticket.updateDate|date('d/m/Y H:i') }}">
+                    <span>{{ ticket.updateDate|date('d/m/Y') }}</span>
+                    <span>{{ ticket.updateDate|date('H:i') }}</span></time>
+                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                <div class="cbp_tmlabel">
+                    <h2>
+                        Ticket de {{ ticket.userId }} <a href="#" class="btn btn-default btn-sm pull-right">
+                            <i class="fa fa-lock"></i>Fermer mon ticket
+                        </a>
+                    </h2>
+                    <p>
+                        {{ ticket.message }} </p>
+                </div>
+            </li>
+
+            {% if list_reponse is empty %}
+                <li>
+                    <time class="cbp_tmtime"></time>
+                    <div class="cbp_tmlabel">
+                        <small>Aucune réponse pour le moment</small>
+                    </div>
+                </li>
+            {% endif %}
+
+            {% for reponse in list_reponse %}
+                <li>
+                    <time class="cbp_tmtime" datetime="{{ ticket.updateDate|date('d/m/Y H:i') }}">
+                        <span>{{ reponse.date|date('d/m/Y') }}</span>
+                        <span>{{ reponse.date|date('H:i') }}</span></time>
+                    <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                    <div class="cbp_tmlabel">
+                        <h2>Reponse de A complété</h2>
+
+                        <p>{{ ticket.message|slice(0,365) }}</p>
+                    </div>
+                </li>
+
+
+
+            {% endfor %}
+            <li>
+
+                <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                <div class="cbp_tmlabel">
+
+
+                    <p>        {{ form_start(form) }}
+                        {{ form_widget(form.message) }}
+                        {{ form_end(form) }}</p>
+                </div>
+            </li>
+
+
+        </ul>
+
+    </div>
+
+{% endblock %}

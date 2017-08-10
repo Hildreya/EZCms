@@ -2,9 +2,9 @@
 
 namespace EZ\ArticleBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Yaml\Yaml;
-use EZ\ArticleBundle\Controller\DataController;
+use EZ\ArticleBundle\Form\CommentType;
+use EZ\ArticleBundle\Entity\Comment;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends DataController
 {
@@ -19,15 +19,29 @@ class DefaultController extends DataController
         ));
     }
 
-    public function selectAction($id) {
+    public function selectAction($id, Request $request) {
 
         //Get Article
         $article = $this->getArticleAction($id);
         $comments = $this->getCommentAction($id);
 
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $article->addComment($comment);
+            $em->flush();
+        }
+
         return $this->render('EZArticleBundle:default:select.html.twig', array(
             'article' => $article,
-            'comments' => $comments
+            'comments' => $comments,
+            'comment_form' => $form->createView()
         ));
     }
+
+
 }

@@ -1,0 +1,45 @@
+{% extends "EZCoreBundle:default/Layout:"~ template ~".html.twig" %}
+
+
+{% block title %}
+    Support - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+
+    <div class="container">
+        <h1>List de de vos tickets</h1>
+
+        {% for message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                <i class="fa fa-chevron-right " aria-hidden="true"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+        <ul class="cbp_tmtimeline">
+
+            {% for ticket in list_ticket %}
+                <li>
+                    <time class="cbp_tmtime" datetime="{{ ticket.updateDate|date('d/m/Y H:i') }}">
+                        <span>{{ ticket.updateDate|date('d/m/Y') }}</span>
+                        <span>{{ ticket.updateDate|date('H:i') }}</span></time>
+                    <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                    <div class="cbp_tmlabel">
+                        <h2>{{ ticket.priorityToString }} | {% if ticket.resolved %}Ticket fermé{% else %}Ticket ouvert{% endif %} <a href="{{ path('ez_support_list', {'id': ticket.id}) }}"
+                                                             class="btn btn-default btn-sm pull-right">
+                                <i class="fa fa-list"></i> Consulter les réponses</a></h2>
+
+                        <p>{{ ticket.message|slice(0,365) }}</p>
+                    </div>
+                </li>
+
+
+
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+
+{% endblock %}

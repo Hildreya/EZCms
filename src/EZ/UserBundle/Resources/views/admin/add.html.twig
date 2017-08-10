@@ -1,0 +1,39 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block title %}
+    Gestion des utilisateurs - {{ parent() }}
+{% endblock %}
+
+{% block admin_body %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Ajouter un utilisateur
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Your Page Content Here -->
+
+            {% trans_default_domain 'FOSUserBundle' %}
+
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" class="button-green right" value="{{ 'registration.submit'|trans }}" />
+            </div>
+            {{ form_end(form) }}
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}

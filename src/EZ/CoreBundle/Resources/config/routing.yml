@@ -31,3 +31,11 @@ ez_core_configuration:
 ez_core_social_network:
     path:     /admin/social
     defaults: { _controller: EZCoreBundle:SocialNetwork:index }
+
+ajax_server_info:
+    path:     /admin/jsonapi/info/{server_position}
+    defaults: { _controller: EZCoreBundle:Jsonapi:serverInfo }
+    schemes:  [http]
+    options:
+        expose: true
+
