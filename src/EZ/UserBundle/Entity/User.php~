@@ -36,28 +36,5 @@ class User extends BaseUser
     {
         return $this->id;
     }
-
-    /**
-     * Set minecraftUsername
-     *
-     * @param string $minecraftUsername
-     *
-     * @return User
-     */
-    public function setMinecraftUsername($minecraftUsername)
-    {
-        $this->minecraftUsername = $minecraftUsername;
-
-        return $this;
-    }
-
-    /**
-     * Get minecraftUsername
-     *
-     * @return string
-     */
-    public function getMinecraftUsername()
-    {
-        return $this->minecraftUsername;
-    }
 }
+

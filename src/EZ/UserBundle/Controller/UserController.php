@@ -2,6 +2,8 @@
 
 namespace EZ\UserBundle\Controller;
 
+use EZ\UserBundle\Form\ChangePasswordType;
+use EZ\UserBundle\Form\ProfileType;
 use EZ\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,13 +43,48 @@ class UserController extends Controller
         }
 
         return $this->render('@EZUser/admin/edit.html.twig', array(
-            'article' => $id,
+            'user' => $id,
             'edit_form' => $editForm->createView(),
 
         ));
     }
 
+    public function showAction(Request $request, User $id) {
+
+    }
+
     public function addAction() {
         return $this->render('@EZUser/admin/add.html.twig');
+    }
+
+    public function userEditAction(Request $request) {
+        $id = $this->getUser();
+
+        $userEditForm = $this->createForm(ProfileType::class, $id);
+        $userEditForm->handleRequest($request);
+
+        $form = $this->createForm(ChangePasswordType::class, $id);
+        $form->handleRequest($request);
+
+        if ($userEditForm->isSubmitted() && $userEditForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($id);
+            $em->flush();
+
+            return $this->redirectToRoute('ez_user_edit');
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($id);
+
+            return $this->redirectToRoute('ez_user_edit');
+        }
+
+        return $this->render('@EZUser/Profile/show.html.twig', array(
+            'user' => $id,
+            'edit_form' => $userEditForm->createView(),
+            'form' => $form->createView()
+        ));
     }
 }
