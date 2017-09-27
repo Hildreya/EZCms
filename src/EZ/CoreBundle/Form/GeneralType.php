@@ -2,6 +2,7 @@
 namespace EZ\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,6 +26,14 @@ class GeneralType extends AbstractType
                 'attr' => array(
                     'value' => $options['parameters']['info_site_url']
                 )))
+            ->add('presentation', TextareaType::class, array(
+                'label' => 'Présentation du serveur (recommandé)',
+                'required' => false,
+                'data' => $options['parameters']['presentation'],
+                'attr' => array(
+
+                )
+            ))
             ->add('info_logo', FileType::class, array(
                 'label' => 'Upload logo du serveur',
                 'required' => false,

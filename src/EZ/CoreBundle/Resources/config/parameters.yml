@@ -7,3 +7,4 @@ parameters:
     twitter: { link: null, icon: 'fa fa-twitter' }
     facebook: { link: null, icon: 'fa fa-facebook' }
     youtube: { link: null, icon: 'fa fa-youtube-play' }
+    presentation:

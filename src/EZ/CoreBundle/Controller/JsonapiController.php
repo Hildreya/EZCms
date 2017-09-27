@@ -55,7 +55,7 @@ class JsonapiController extends Controller
         $jsonapi_servers = $this->getDoctrine()->getRepository('EZCoreBundle:Jsonapi')
             ->findBy(array(), array('position' => 'ASC'));
 
-        $api = $this->get('ez_core.jsonapi');
+        $api = $this->container->get('jsonapi');
 
         for($i = 0; $i< count($jsonapi_servers); $i++){
             $api->setHost($jsonapi_servers[$i]->getIp());
@@ -109,10 +109,11 @@ class JsonapiController extends Controller
 
     public function serverInfoAction(Request $request, $server_position)
     {
-        //if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
+
             $server = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')
                 ->findOneByPosition($server_position);
-            $api = $this->get('ez_core.jsonapi');
+            $api = $this->container->get('jsonapi');
             $api->setHost($server->getIp());
             $api->setPort($server->getPort());
             $api->setUsername($server->getUsername());
@@ -146,13 +147,8 @@ class JsonapiController extends Controller
                 ));
 
             }
-
-
-
-
-
-    //}else {
-    //        throw new \Exception('Erreur');
-    //   }
+        }else {
+           throw new \Exception('Erreur');
+        }
     }
 }

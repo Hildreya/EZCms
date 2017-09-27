@@ -21,6 +21,7 @@ class ConfigurationController extends Controller
         $current_mail = $this->getParameter('mailer_user');
         $parameters['parameters']['email_contact'] = $current_mail;
 
+
         //Setting up legal form
         $legal = $this->getDoctrine()->getRepository('EZCoreBundle:Legal')->find(1);
         $legal_form = $this->createForm(LegalType::class, $legal);
@@ -65,6 +66,7 @@ class ConfigurationController extends Controller
             $value['parameters']['server_ip'] = $form_data['server_ip'];
             $value['parameters']['server_port'] = intval($form_data['server_port']);
             $value['parameters']['info_site_url'] = $form_data['info_site_url'];
+            $value['parameters']['presentation'] = $form_data['presentation'];
 
             //Transform array into yaml, then set new parameters back in parameters.yml
             $yaml = YAML::dump($value);
