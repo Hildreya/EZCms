@@ -23,7 +23,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="minecraft_username", type="string")
+     * @ORM\Column(name="minecraft_username", type="string", nullable=true)
      */
     protected $minecraftUsername;
 

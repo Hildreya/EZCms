@@ -51,6 +51,26 @@ class UserController extends Controller
         ));
     }
 
+    public function addAction(Request $request) {
+        $userManager = $this->get('fos_user.user_manager');
+        $newUser = $userManager->createUser();
+        $registerForm = $this->createForm(RegistrationType::class, $newUser);
+
+        $registerForm->handleRequest($request);
+
+        if($registerForm->isSubmitted() && $registerForm->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newUser);
+            $em->flush();
+
+            return $this->redirectToRoute('ez_user_admin_list');
+        }
+
+        return $this->render('@EZUser/admin/add.html.twig',array(
+            'registerForm'=> $registerForm->createView()
+        ));
+    }
+
     public function deleteAction(User $user){
         $userManager = $this->get('fos_user.user_manager');
         $userManager->deleteUser($user);
@@ -58,14 +78,7 @@ class UserController extends Controller
         return $this->redirectToRoute('ez_user_admin_list');
     }
 
-    public function addAction() {
-        $registerForm = $this->createForm(RegistrationType::class);
 
-
-        return $this->render('@EZUser/admin/add.html.twig',array(
-            'registerForm'=> $registerForm->createView()
-        ));
-    }
 
     /*User interface*/
 

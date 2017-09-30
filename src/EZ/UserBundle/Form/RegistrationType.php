@@ -38,6 +38,6 @@ class RegistrationType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ezuser_bundle_registration_type';
+        return 'ez_user_admin_registration_type';
     }
 }
