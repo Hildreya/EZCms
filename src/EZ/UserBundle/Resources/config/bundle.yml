@@ -1,6 +1,12 @@
 admin:
     name: Utilisateurs
-    path: ez_user_admin_list
+    path:
+    0:
+          name: Ajouter
+          path: ez_user_admin_add
+    1:
+          name: Liste
+          path: ez_user_admin_list
     icon: fa fa-user-o
     display : true
 

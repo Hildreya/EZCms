@@ -2,6 +2,9 @@
 
 namespace EZ\UserBundle\Controller;
 
+use EZ\UserBundle\Form\ChangePasswordType;
+use EZ\UserBundle\Form\ProfileType;
+use EZ\UserBundle\Form\RegistrationType;
 use EZ\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,6 +51,11 @@ class UserController extends Controller
     }
 
     public function addAction() {
-        return $this->render('@EZUser/admin/add.html.twig');
+        $registerForm = $this->createForm(RegistrationType::class);
+
+
+        return $this->render('@EZUser/admin/add.html.twig',array(
+            'registerForm'=> $registerForm->createView()
+        ));
     }
 }
