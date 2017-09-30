@@ -12,6 +12,7 @@ use EZ\UserBundle\Entity\User;
 
 class UserController extends Controller
 {
+    //Admin interface
 
     /**
      * Lists all Users.
@@ -29,46 +30,51 @@ class UserController extends Controller
      * Displays a form to edit an existing Users.
      *
      */
-    public function editAction(Request $request, User $id) {
+    public function editAction(Request $request, User $userId) {
 
-        $editForm = $this->createForm(UserType::class, $id);
+        $editForm = $this->createForm(UserType::class, $userId);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($id);
+            $em->persist($userId);
             $em->flush();
 
             return $this->redirectToRoute('ez_user_admin_list');
         }
 
         return $this->render('@EZUser/admin/edit.html.twig', array(
-            'user' => $id,
+            'user' => $userId,
             'edit_form' => $editForm->createView(),
 
         ));
     }
 
-    public function showAction(Request $request, User $id) {
+    public function deleteAction(User $user){
+        $userManager = $this->get('fos_user.user_manager');
+        $userManager->deleteUser($user);
 
+        return $this->redirectToRoute('ez_user_admin_list');
     }
 
     public function addAction() {
         return $this->render('@EZUser/admin/add.html.twig');
     }
 
-    public function userEditAction(Request $request) {
-        $id = $this->getUser();
+    /*User interface*/
 
-        $userEditForm = $this->createForm(ProfileType::class, $id);
+    public function userEditAction(Request $request) {
+        $userId = $this->getUser();
+
+        $userEditForm = $this->createForm(ProfileType::class, $userId);
         $userEditForm->handleRequest($request);
 
-        $form = $this->createForm(ChangePasswordType::class, $id);
+        $form = $this->createForm(ChangePasswordType::class, $userId);
         $form->handleRequest($request);
 
         if ($userEditForm->isSubmitted() && $userEditForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($id);
+            $em->persist($userId);
             $em->flush();
 
             return $this->redirectToRoute('ez_user_edit');
@@ -76,13 +82,13 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($id);
+            $userManager->updateUser($userId);
 
             return $this->redirectToRoute('ez_user_edit');
         }
 
         return $this->render('@EZUser/Profile/show.html.twig', array(
-            'user' => $id,
+            'user' => $userId,
             'edit_form' => $userEditForm->createView(),
             'form' => $form->createView()
         ));
