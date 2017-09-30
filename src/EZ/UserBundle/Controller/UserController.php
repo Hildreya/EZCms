@@ -58,4 +58,10 @@ class UserController extends Controller
             'registerForm'=> $registerForm->createView()
         ));
     }
+
+
+        return $this->render('@EZUser/admin/add.html.twig',array(
+            'registerForm'=> $registerForm->createView()
+        ));
+    }
 }
