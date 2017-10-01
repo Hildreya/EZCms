@@ -92,23 +92,23 @@ $('document').ready(function(){
        if(jQuery.inArray(name, arr) === -1){
            $.ajax({
                type: 'get',
-               url: Routing.generate(link, { user: user_id}),
-               beforeSend: function() {
-                   $($.find('#'+link)).empty();
+               url: Routing.generate(link, {user: user_id}),
+               beforeSend: function () {
+                   $($.find('#' + link)).empty();
 
-                   $($.find('#'+link)).append('<div class="col-md-6 col-md-offset-3 text-center loading"></div>');
+                   $($.find('#' + link)).append('<div class="col-md-6 col-md-offset-3 text-center loading"></div>');
                },
-               success: function(data) {
+               success: function (response) {
                    $($.find('.loading')).remove();
-                   if (data.error) {
+                   template = response;
+                   $('#' + name).append(template.html);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   $($.find('.loading')).remove();
+                   $('#' + name).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
 
-
-                   }
-                   else {
-
-                   }
                }
-               });
+           })
        }
    })
 

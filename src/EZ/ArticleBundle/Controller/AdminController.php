@@ -39,9 +39,5 @@ class AdminController extends DataController
         ));
     }
 
-    public function ajax_profileAction(Request $request, User $user){
-        return $this->render('EZArticleBundle:admin:ajax.html.twig', array(
-            'user' => $user
-        ));
-    }
+
 }

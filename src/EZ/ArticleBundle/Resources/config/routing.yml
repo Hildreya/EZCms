@@ -16,8 +16,7 @@ ez_article_admin_create:
 
 ez_article_admin_ajax_profile:
     path:     /admin/article/profile/{user}
-    defaults: { _controller: EZArticleBundle:Admin:ajax_profile }
+    defaults: { _controller: EZArticleBundle:AjaxUser:ajax_profile }
     schemes:  [http]
     options:
-
         expose: true
