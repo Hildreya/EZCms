@@ -9,6 +9,8 @@ use Symfony\Component\Yaml\Yaml;
 use EZ\CoreBundle\Form\LegalType;
 use EZ\CoreBundle\Form\GeneralType;
 use EZ\CoreBundle\Form\SocialNetworkType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use EZ\CoreBundle\Form\ReglementType;
 
 
@@ -38,12 +40,33 @@ class ConfigurationController extends Controller
 
         //Setting up social network form
         $sn_form = $this->createForm(SocialNetworkType::class, $parameters);
+        foreach($parameters['parameters']['icons'] as $icon){
+            $sn_form->add($icon['name'], TextType::class, array(
+                'label' => $icon['name'],
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => 'Entrez un URL',
+                    'value' => $icon['link']
+                )));
+        }
+
         $sn_form->handleRequest($request);
 
         // social network treatment
         if($sn_form->isSubmitted() && $sn_form->isValid())
         {
+            $sn_datas= $sn_form->getData();
 
+            if($sn_datas['name'] && $sn_datas['icon'] && $sn_datas['link']){
+                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['name'] = $sn_datas['name'];
+                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['icon'] = $sn_datas['icon'];
+                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['link'] = $sn_datas['link'];
+
+            }
+
+            //Transform array into yaml, then set new parameters back in parameters.yml
+            $yaml = YAML::dump($parameters);
+            file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
         }
 
         // legal_form treatment
@@ -61,15 +84,14 @@ class ConfigurationController extends Controller
             $form_data = $general_form->getData();
 
             //Change parameters array with new parameters from form
-            $value = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
-            $value['parameters']['server_name'] = $form_data['server_name'];
-            $value['parameters']['server_ip'] = $form_data['server_ip'];
-            $value['parameters']['server_port'] = intval($form_data['server_port']);
-            $value['parameters']['info_site_url'] = $form_data['info_site_url'];
-            $value['parameters']['presentation'] = $form_data['presentation'];
+            $parameters['parameters']['server_name'] = $form_data['server_name'];
+            $parameters['parameters']['server_ip'] = $form_data['server_ip'];
+            $parameters['parameters']['server_port'] = intval($form_data['server_port']);
+            $parameters['parameters']['info_site_url'] = $form_data['info_site_url'];
+            $parameters['parameters']['presentation'] = $form_data['presentation'];
 
             //Transform array into yaml, then set new parameters back in parameters.yml
-            $yaml = YAML::dump($value);
+            $yaml = YAML::dump( $parameters);
             file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
 
             if($form_data['email_contact'] != $current_mail){
@@ -115,6 +137,7 @@ class ConfigurationController extends Controller
             $this->getDoctrine()->getManager()->flush();
             return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
+
 
         return $this->render('EZCoreBundle:admin/pages:configuration.html.twig', array(
             'parameters' => $parameters['parameters'],

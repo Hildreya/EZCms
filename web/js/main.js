@@ -1,3 +1,8 @@
+jQuery(document).ready(function($) {
+
+    $('.icon_selector').fontIconPicker();
+
+});
 function ajax(position){
     $.ajax({
         type: 'get',

@@ -117,9 +117,11 @@
                 <div class="title__footer">
                     Nous suivre
                 </div>
-                <a class="a__none" href="https://twitter.com"><div class="round"><i class="fa fa-twitter"></i> Suivez nous sur Twitter</div></a>
-                <a class="a__none" href="https://facebook.com"><div class="round"><i class="fa fa-facebook"></i> Suivez nous sur Facebook</div></a>
-                <a class="a__none" href="https://youtube.com"><div class="round yt"><i class="fa fa-youtube"></i> Suivez notre chaîne</div></a>
+                {% for social_network in core.social_network  %}
+                    {%  if social_network.link is not empty %}
+                        <a class="a__none" href="{{ social_network.link }}"><div class="round"><i class="{{ social_network.icon }}"></i> Suivez nous sur {{ social_network.name }}</div></a>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="col-md-2">
                 <div class="border__blue"></div>

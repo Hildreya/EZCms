@@ -66,9 +66,10 @@ class JsonapiController extends Controller
             $js = $jsonapi_servers[$i];
             $jsonapi_servers[$i] = null;
             $jsonapi_servers[$i]['jsonapi']= $js;
-            $jsonapi_servers[$i]['info'] = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
+            $server_info = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
+            $jsonapi_servers[$i]['info'] = empty($server_info) ? array('is_success' => false, 'error' => array('code' => 3, 'message' =>' Impossible de se connecter à ce serveur')): $server_info;
         }
-        //die(var_dump($jsonapi_servers));
+
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi_servers' => $jsonapi_servers,
             'form' => $form->createView()));
