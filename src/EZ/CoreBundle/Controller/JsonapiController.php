@@ -109,7 +109,7 @@ class JsonapiController extends Controller
 
     public function serverInfoAction(Request $request, $server_position)
     {
-        //if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $server = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')
                 ->findOneByPosition($server_position);
             $api = $this->get('ez_core.jsonapi');
@@ -151,8 +151,8 @@ class JsonapiController extends Controller
 
 
 
-    //}else {
-    //        throw new \Exception('Erreur');
-    //   }
+    }else {
+            throw new \Exception('Erreur');
+       }
     }
 }

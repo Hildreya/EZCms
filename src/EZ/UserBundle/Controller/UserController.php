@@ -8,6 +8,7 @@ use EZ\UserBundle\Form\RegistrationType;
 use EZ\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Yaml\Yaml;
 
 use EZ\UserBundle\Entity\User;
 
@@ -36,6 +37,8 @@ class UserController extends Controller
         $editForm = $this->createForm(UserType::class, $userId);
         $editForm->handleRequest($request);
 
+        $ajax_links = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/ajax-link.yml'));
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($userId);
@@ -45,6 +48,7 @@ class UserController extends Controller
         }
 
         return $this->render('@EZUser/admin/edit.html.twig', array(
+            'ajax_links' => $ajax_links,
             'user' => $userId,
             'edit_form' => $editForm->createView(),
 

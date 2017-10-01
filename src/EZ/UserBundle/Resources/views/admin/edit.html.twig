@@ -68,8 +68,9 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#edition" data-toggle="tab">Edition</a></li>
-                            <li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
-                            <li><a href="#tab3" data-toggle="tab">Tab3</a></li>
+                            {% for ajax_link in ajax_links %}
+                                <li><a href="#{{ ajax_link.link }}" class="ajax-link" data-toggle="tab">{{ ajax_link.name }}</a></li>
+                            {% endfor %}
                         </ul>
                         <div class="tab-content">
 
@@ -83,16 +84,11 @@
                                 {{ form_end(edit_form) }}
                             </div>
 
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab2">
-                               <h3>Tab 2</h3>
-                            </div>
+                            {% for ajax_link in ajax_links %}
+                                <div class="tab-pane" id="{{ ajax_link.link }}">
 
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab3">
-                                <h3>Tab 3</h3>
-                            </div>
-                            <!-- /.tab-pane -->
+                                </div>
+                            {% endfor %}
 
                         </div>
                         <!-- /.tab-content -->

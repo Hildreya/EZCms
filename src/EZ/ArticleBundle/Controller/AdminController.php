@@ -4,6 +4,7 @@ namespace EZ\ArticleBundle\Controller;
 
 use EZ\ArticleBundle\Entity\Article;
 use EZ\ArticleBundle\Form\ArticleType;
+use EZ\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -35,6 +36,12 @@ class AdminController extends DataController
 
         return $this->render('EZArticleBundle:admin:create.html.twig', array(
             'article_form' => $form->createView()
+        ));
+    }
+
+    public function ajax_profileAction(Request $request, User $user){
+        return $this->render('EZArticleBundle:admin:ajax.html.twig', array(
+            'user' => $user
         ));
     }
 }

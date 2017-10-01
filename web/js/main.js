@@ -79,11 +79,38 @@ $('document').ready(function(){
       }
 
    });
-    $('.refresh').click(function(){
-        var position = $(this).parent().parent().parent().parent().find(".position").text();
-        ajax(position);
+   $('.refresh').click(function(){
+       var position = $(this).parent().parent().parent().parent().find(".position").text();
+       ajax(position);
 
 
-    });
+   });
+   $('.ajax-link').click(function(){
+       var name = $(this).html();
+       var link = $(this).attr('href').replace('#','');
+       var user_id = $(location).attr('pathname').substr($(location).attr('pathname').length - 1);
+       if(jQuery.inArray(name, arr) === -1){
+           $.ajax({
+               type: 'get',
+               url: Routing.generate(link, { user: user_id}),
+               beforeSend: function() {
+                   $($.find('#'+link)).empty();
+
+                   $($.find('#'+link)).append('<div class="col-md-6 col-md-offset-3 text-center loading"></div>');
+               },
+               success: function(data) {
+                   $($.find('.loading')).remove();
+                   if (data.error) {
+
+
+                   }
+                   else {
+
+                   }
+               }
+               });
+       }
+   })
+
 
 });

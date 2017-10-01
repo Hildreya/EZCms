@@ -13,3 +13,11 @@ ez_article_admin_list:
 ez_article_admin_create:
     path:     /admin/articles/create
     defaults: { _controller: EZArticleBundle:Admin:create }
+
+ez_article_admin_ajax_profile:
+    path:     /admin/article/profile/{user}
+    defaults: { _controller: EZArticleBundle:Admin:ajax_profile }
+    schemes:  [http]
+    options:
+
+        expose: true
