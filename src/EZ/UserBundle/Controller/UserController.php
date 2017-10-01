@@ -54,6 +54,7 @@ class UserController extends Controller
     public function addAction(Request $request) {
         $userManager = $this->get('fos_user.user_manager');
         $newUser = $userManager->createUser();
+        $newUser->setEnabled(1);
         $registerForm = $this->createForm(RegistrationType::class, $newUser);
 
         $registerForm->handleRequest($request);
