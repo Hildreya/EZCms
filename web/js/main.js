@@ -96,16 +96,18 @@ $('document').ready(function(){
                beforeSend: function () {
                    $($.find('#' + link)).empty();
 
-                   $($.find('#' + link)).append('<div class="col-md-6 col-md-offset-3 text-center loading"></div>');
+                   $($.find('#' + link)).append('<div class="text-center loading"></div>');
                },
                success: function (response) {
+                   console.log('#'+link );
+                   console.log(response);
                    $($.find('.loading')).remove();
-                   template = response;
-                   $('#' + name).append(template.html);
+                   var template = response;
+                   $($.find('#'+link)).append(template);
                },
                error: function (jqXHR, textStatus, errorThrown) {
                    $($.find('.loading')).remove();
-                   $('#' + name).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
+                   $($.find('#'+link)).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
 
                }
            })
