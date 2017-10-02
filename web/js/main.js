@@ -99,8 +99,6 @@ $('document').ready(function(){
                    $($.find('#' + link)).append('<div class="text-center loading"></div>');
                },
                success: function (response) {
-                   console.log('#'+link );
-                   console.log(response);
                    $($.find('.loading')).remove();
                    var template = response;
                    $($.find('#'+link)).append(template);
@@ -111,6 +109,7 @@ $('document').ready(function(){
 
                }
            })
+           arr.push(name);
        }
    })
 
