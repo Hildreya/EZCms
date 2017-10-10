@@ -24,56 +24,9 @@ class ConfigurationController extends Controller
         $parameters['parameters']['email_contact'] = $current_mail;
 
 
-        //Setting up legal form
-        $legal = $this->getDoctrine()->getRepository('EZCoreBundle:Legal')->find(1);
-        $legal_form = $this->createForm(LegalType::class, $legal);
-        $legal_form->handleRequest($request);
-
         //Setting up general form
         $general_form = $this->createForm(GeneralType::class, null, array('parameters' => $parameters['parameters']));
         $general_form->handleRequest($request);
-
-        //Setting up reglement form
-        $reglement= $this->getDoctrine()->getRepository('EZCoreBundle:Reglement')->find(1);
-        $reglement_form = $this->createForm(ReglementType::class, $reglement);
-        $reglement_form->handleRequest($request);
-
-        //Setting up social network form
-        $sn_form = $this->createForm(SocialNetworkType::class, $parameters);
-        foreach($parameters['parameters']['icons'] as $icon){
-            $sn_form->add($icon['name'], TextType::class, array(
-                'label' => $icon['name'],
-                'required' => false,
-                'attr' => array(
-                    'placeholder' => 'Entrez un URL',
-                    'value' => $icon['link']
-                )));
-        }
-        $sn_form->handleRequest($request);
-
-        // social network treatment
-        if($sn_form->isSubmitted() && $sn_form->isValid())
-        {
-            $sn_datas= $sn_form->getData();
-
-            if($sn_datas['name'] && $sn_datas['icon'] && $sn_datas['link']){
-                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['name'] = $sn_datas['name'];
-                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['icon'] = $sn_datas['icon'];
-                $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['link'] = $sn_datas['link'];
-
-            }
-
-            //Transform array into yaml, then set new parameters back in parameters.yml
-            $yaml = YAML::dump($parameters);
-            file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
-        }
-
-        // legal_form treatment
-        if($legal_form->isSubmitted() && $legal_form->isValid()){
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirect($this->generateUrl('ez_core_configuration'));
-        }
 
 
         // general_form treatment
@@ -131,19 +84,89 @@ class ConfigurationController extends Controller
             return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
 
-        // reglement_form treatment
-        if($reglement_form->isSubmitted() && $reglement_form->isValid()){
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirect($this->generateUrl('ez_core_configuration'));
-        }
 
 
         return $this->render('EZCoreBundle:admin/pages:configuration.html.twig', array(
             'parameters' => $parameters['parameters'],
-            'sn_form' => $sn_form->createView(),
-            'legal_form' => $legal_form->createView(),
             'general_form' => $general_form->createView(),
-            'reglement_form' => $reglement_form->createView()
         ));
     }
+
+    public function reglement_ajaxformAction(Request $request){
+        if($request->isXmlHttpRequest()) {
+
+            //Setting up reglement form
+            $reglement = $this->getDoctrine()->getRepository('EZCoreBundle:Reglement')->find(1);
+            $reglement_form = $this->createForm(ReglementType::class, $reglement);
+            $reglement_form->handleRequest($request);
+
+            // reglement treatment
+            if($reglement_form->isSubmitted() && $reglement_form->isValid()){
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirect($this->generateUrl('ez_core_configuration'));
+            }
+        }
+
+    }
+
+    public function socialnetwork_ajaxformAction(Request $request){
+        if($request->isXmlHttpRequest()) {
+
+            //Get current parameters
+            $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
+
+            //Setting up social network form
+            $sn_form = $this->createForm(SocialNetworkType::class, $parameters);
+            foreach ($parameters['parameters']['icons'] as $icon) {
+                $sn_form->add($icon['name'], TextType::class, array(
+                    'label' => $icon['name'],
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Entrez un URL',
+                        'value' => $icon['link']
+                    )));
+            }
+            $sn_form->handleRequest($request);
+
+            // social network treatment
+            if ($sn_form->isSubmitted() && $sn_form->isValid()) {
+                $sn_datas = $sn_form->getData();
+
+                if ($sn_datas['name'] && $sn_datas['icon'] && $sn_datas['link']) {
+                    $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['name'] = $sn_datas['name'];
+                    $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['icon'] = $sn_datas['icon'];
+                    $parameters['parameters']['icons'][mb_strtolower($sn_datas['name'])]['link'] = $sn_datas['link'];
+
+                }
+
+                //Transform array into yaml, then set new parameters back in parameters.yml
+                $yaml = YAML::dump($parameters);
+                file_put_contents(__DIR__ . '/../Resources/config/parameters.yml', $yaml);
+            }
+        }
+    }
+
+    public function legal_ajaxformAction(Request $request){
+        if($request->isXmlHttpRequest()) {
+
+            //Setting up legal form
+            $legal = $this->getDoctrine()->getRepository('EZCoreBundle:Legal')->find(1);
+            $legal_form = $this->createForm(LegalType::class, $legal);
+            $legal_form->handleRequest($request);
+
+            // legal_form treatment
+            if ($legal_form->isSubmitted() && $legal_form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirect($this->generateUrl('ez_core_configuration'));
+            }
+        }
+
+    }
+
+    public function template_generationAction($form){
+        
+
+    }
+
 }
