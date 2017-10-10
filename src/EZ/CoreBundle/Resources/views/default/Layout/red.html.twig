@@ -119,7 +119,7 @@
                 </div>
                 {% for social_network in core.social_network  %}
                     {%  if social_network.link is not empty %}
-                        <a class="a__none" href="{{ social_network.link }}"><div class="round"><i class="{{ social_network.icon }}"></i> Suivez nous sur {{ social_network.name }}</div></a>
+                        <a class="a__none" href="{{ social_network.link }}"><div class="round"><img class="svg" src="{{ asset('img/svg/'~social_network.icon) }}"/> Suivez nous sur {{ social_network.name }}</div></a>
                     {% endif %}
                 {% endfor %}
             </div>

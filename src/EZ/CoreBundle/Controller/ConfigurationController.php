@@ -49,7 +49,6 @@ class ConfigurationController extends Controller
                     'value' => $icon['link']
                 )));
         }
-
         $sn_form->handleRequest($request);
 
         // social network treatment
