@@ -1,15 +1,20 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Matthieu
- * Date: 09/10/2017
- * Time: 23:25
- */
 
 namespace EZ\UserBundle\Entity;
 
+use FOS\UserBundle\Model\Group as BaseGroup;
+use Doctrine\ORM\Mapping as ORM;
 
-class Group
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="extaz_group")
+ */
+class Group extends BaseGroup
 {
-
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 }

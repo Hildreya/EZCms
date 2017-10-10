@@ -7,6 +7,9 @@ admin:
     1:
           name: Liste
           path: ez_user_admin_list
+    2:
+          name: Gestion
+          path: ez_user_admin_list
     icon: fa fa-user-o
     display : true
 

@@ -9,6 +9,10 @@ fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
 
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+
 ez_user_admin_delete:
     path:   /admin/delete/user/{id}
     defaults: { _controller: EZUserBundle:User:delete }

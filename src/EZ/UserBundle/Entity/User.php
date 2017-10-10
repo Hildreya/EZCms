@@ -28,6 +28,15 @@ class User extends BaseUser
     protected $minecraftUsername;
 
     /**
+     * @ORM\ManyToMany(targetEntity="EZ\UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="extaz_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * Get id
      *
      * @return int
