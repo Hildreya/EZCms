@@ -2,11 +2,11 @@ admin:
     name: Utilisateurs
     path:
     0:
-          name: Ajouter
-          path: ez_user_admin_add
-    1:
           name: Liste
           path: ez_user_admin_list
+    1:
+          name: Rangs
+          path: ez_group_admin_list
     2:
           name: Gestion
           path: ez_user_admin_list

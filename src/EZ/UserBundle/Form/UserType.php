@@ -3,6 +3,7 @@
 namespace EZ\UserBundle\Form;
 
 use function Sodium\add;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('roles', ChoiceType::class, array(
+            /*->add('roles', ChoiceType::class, array(
                 'attr'  =>  array('class' => 'form-control select2',
                     'style' => 'margin:5px 0;'),
                 'choices' =>
@@ -26,6 +27,12 @@ class UserType extends AbstractType
                     ) ,
                 'multiple' => true,
                 'required' => true,
+            ));*/
+            ->add('groups', EntityType::class, array(
+                'label' => "Groupe",
+                'class' => 'EZ\UserBundle\Entity\Group',
+                'choice_label' => 'name',
+                'multiple' => true,
             ));
         $builder->remove('plainPassword');
     }

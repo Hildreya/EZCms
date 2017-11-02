@@ -30,7 +30,7 @@
 
                             <h3 class="profile-username text-center">{{ user.username }}</h3>
 
-                            <p class="text-muted text-center">{{ user.roles[0] }}</p>
+                            <p class="text-muted text-center">{% if user.getGroups() is not empty %} {{ user.getGroupNames()[0]}}{% endif %}</p>
 
                             <ul class="list-group list-group-unbordered">
                                 {% if user.lastLogin != null %}

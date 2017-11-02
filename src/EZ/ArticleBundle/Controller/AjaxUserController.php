@@ -13,7 +13,8 @@ class AjaxUserController extends Controller
 {
     public function ajax_profileAction(Request $request, User $user){
         if ($request->isXmlHttpRequest()) {
-            $template = $this->forward('EZArticleBundle:AjaxUser:template', array('user' => $user))->getContent();
+
+            $template = $this->renderView('EZArticleBundle:admin:ajax.html.twig', array('user' => $user));
 
             $json = json_encode($template);
             $response = new Response($json, 200);
@@ -22,10 +23,6 @@ class AjaxUserController extends Controller
         }else{
             throw new \Exception('Erreur');
         }
-
-    }
-    public function templateAction(User $user){
-        return $this->render('EZArticleBundle:admin:ajax.html.twig', array('user' => $user));
 
     }
 }

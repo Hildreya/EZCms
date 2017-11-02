@@ -51,7 +51,6 @@ class UserController extends Controller
             'ajax_links' => $ajax_links,
             'user' => $userId,
             'edit_form' => $editForm->createView(),
-
         ));
     }
 
