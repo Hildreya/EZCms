@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    	<script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+    	
+	</head>
+	<body>
+		
+		<form>
+			<select id="demo">
+		        <option value="0" data-imagesrc="facebook.svg"></option>
+		        <option value="1" data-imagesrc="discord.svg"></option>
+		        <option value="2" data-imagesrc="github.svg"></option>
+		        <option value="3" data-imagesrc="twitter.svg"></option>
+		        <option value="4" data-imagesrc="skype.svg"></option>
+		        <option value="5" data-imagesrc="googleplus.svg"></option>
+		        <option value="6" data-imagesrc="ts3.svg"></option>
+	    	</select>
+    	</form>
+
+<script>
+    		$('#demo').ddslick({
+    			defaultSelectedIndex:1,
+    			width: 50,
+    			onSelected: function(selectedData){
+
+        
+    			}   
+			});
+    	</script>
+	</body>
+</html>

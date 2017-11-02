@@ -7,8 +7,10 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('libs/VerticalTimeline/css/component.css') }}">
     {% endblock %}
 
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
 </head>
@@ -19,6 +21,7 @@
             {{ serveip }}
         </div>
         <div class="pull-right nav-desc online">
+            {{ core.online_players }}
         </div>
         <div class="server-name nav-desc">
             {{ servename }}
@@ -60,7 +63,7 @@
                                     <a href="{{ path('ez_core_admin') }}">Administration</a>
                                 {% endif %}
 
-                                <a href="{{ path('fos_user_profile_show') }}">
+                                <a href="{{ path('ez_user_edit') }}">
                                     Mon profil
                                 </a>
 
@@ -95,21 +98,31 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="border__blue"></div>
-                <div class="title__footer">
-                    Présentation
-                </div>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum omnis porro dicta aut nihil optio, culpa reiciendis consequatur neque velit et suscipit incidunt minus earum excepturi provident eveniet atque nam.
-                </p>
+                {% if footer_presentation is not empty %}
+                    <div class="title__footer">
+                        Présentation
+                    </div>
+                    <p>
+                        {{ footer_presentation }}
+                    </p>
+                {% else %}
+                    <div class="title__footer">
+
+                    </div>
+                    <h4 class="text-center">N'hésitez plus</h4>
+                    <h3 class="text-center"><b>REJOIGNEZ-NOUS AU <a>{{ serveip }} </a>!</b></h3>
+                {%  endif %}
             </div>
             <div class="col-md-2">
                 <div class="border__blue"></div>
                 <div class="title__footer">
                     Nous suivre
                 </div>
-                <a class="a__none" href="https://twitter.com"><div class="round"><i class="fa fa-twitter"></i> Suivez nous sur Twitter</div></a>
-                <a class="a__none" href="https://facebook.com"><div class="round"><i class="fa fa-facebook"></i> Suivez nous sur Facebook</div></a>
-                <a class="a__none" href="https://youtube.com"><div class="round yt"><i class="fa fa-youtube"></i> Suivez notre chaîne</div></a>
+                {% for social_network in core.social_network  %}
+                    {%  if social_network.link is not empty %}
+                        <a class="a__none" href="{{ social_network.link }}"><div class="round"><img class="svg" src="{{ asset('img/svg/'~social_network.icon) }}"/> Suivez nous sur {{ social_network.name }}</div></a>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="col-md-2">
                 <div class="border__blue"></div>
@@ -123,9 +136,11 @@
                     <a href="" class="list__util"><li> Staff </li></a>
                 </ul>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <div class="border__blue"></div>
-                <b>ExtazCMS</b> &copy; Astralt 2015-2017 - Tout droits réservés, thème réalisé par <a href="">ExtazCMS</a>
+                <b>{{ servename }}</b> &copy; {{ "now"|date("Y") }}-{{ "now"|date("Y")+1 }} | Tout droits réservés, thème réalisé par ExtazCMS
+                 <br>
+                <b>Site propulsé par</b> <a href="https://extaz-cms.fr/">ExtazCMS</a>
             </div>
         </div>
     </div>
@@ -136,6 +151,7 @@
 <script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 {% block javascripts %}
+    <script src="{{ asset('libs/VerticalTimeline/js/modernizr.custom.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/narty.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/npm.js') }}" type="text/javascript"></script>
