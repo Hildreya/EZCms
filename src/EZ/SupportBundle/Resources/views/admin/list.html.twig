@@ -44,9 +44,21 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                <tr>
-
-                </tr>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.message|slice(0,20) }}...</td>
+                        <td>{{ ticket.userId }}</td>
+                        <td>{{ ticket.createdDate | date('d/m/Y') }}</td>
+                        <td>
+                            {% if ticket.resolved %}
+                                Réouvrir
+                            {% else %}
+                                <a href="#">Edité</a> | Cloturé
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
 
@@ -57,6 +69,7 @@
 {% endblock %}
 
 {% block javascript %}
+
     <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 

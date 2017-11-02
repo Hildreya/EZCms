@@ -1,6 +1,6 @@
 admin:
   display:  true
-  name:     FAQ
+  name:     F.A.Q
   path:     '#'
   icon:     fa fa-question-circle-o
   0:
