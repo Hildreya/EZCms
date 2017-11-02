@@ -1,0 +1,48 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+{% block admin_body %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Themes
+                <small>templates utilisateurs</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="flash-info">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="row">
+            {% for template in templates %}
+                {% if template == template_used %}
+                    <div class="col-sm-2">
+                        <img src="{{ asset('img/template/' ~ template) }}"/></br>
+                        <p><b>{{ template }}</b></p>
+                    </div>
+                {% else %}
+                    <div class="col-sm-2">
+                        <img src="{{ asset('img/template/' ~ template) }}"/></br>
+                        <p><a href="{{ path('ez_core_template_select', { 'name' : template }) }}">{{ template }}</a></p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}

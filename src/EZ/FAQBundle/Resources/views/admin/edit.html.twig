@@ -1,0 +1,46 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block head_admin %}
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+{% endblock %}
+{% block admin_body %}    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                F.A.Q
+                <small>Gestion de la foire aux questions</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-default" data-vivaldi-spatnav-clickable="1">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><a href="{{ path('ez_faq_admin_list') }}"><i class="fa fa-chevron-left"></i></a> | Modifier une question/réponse </h3><p class="pull-right"><b>ID: </b>{{ question.id }}</p>
+                        </div>
+                        <div class="box-body">
+
+                            {{ form_start(edit_form) }}
+                            {{ form_widget(edit_form) }}
+
+                            {{ form_end(edit_form) }}
+
+                            {{ form_start(delete_form) }}
+                                <button class="btn button-red" type="submit"><i class="fa fa-trash-o"></i> Supprimer</button>
+                            {{ form_end(delete_form) }}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

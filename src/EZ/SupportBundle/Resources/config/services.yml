@@ -1,0 +1,8 @@
+services:
+    ez_support.form:
+        class: EZ\SupportBundle\Utils\Form
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@form.factory"
+            - '@request_stack'
+            - '@router'

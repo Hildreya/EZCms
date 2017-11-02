@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <title>{% block title %}{{ servename }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('libs/VerticalTimeline/css/component.css') }}">
+    {% endblock %}
+
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top nav-top">
+    <div class="container">
+        <div class="pull-left nav-desc">
+            {{ serveip }}
+        </div>
+        <div class="pull-right nav-desc online">
+            {{ core.online_players }}
+        </div>
+        <div class="server-name nav-desc">
+            {{ servename }}
+        </div>
+    </div>
+</div>
+<div class="header-content">
+    <div class="title f-s-80"><a href="index.php">{{ servename }}</a></div>
+</div>
+<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-static-top menu" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-servername"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-servername nav-menu">
+            <ul class="nav navbar-nav navbar-left">
+                <li {% if app.request.get('_route') == 'ez_core_homepage' %} class="active"{% endif %}>
+                    <a href="{{ path('ez_core_homepage') }}">Accueil</a>
+                </li>
+                {{ render(controller("EZCoreBundle:Main:bundle")) }}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}#}
+                            {{ app.user.username }}
+                        {% else %}
+                            Espace membre
+                        {% endif %}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('ez_core_admin') }}">Administration</a>
+                                {% endif %}
+
+                                <a href="{{ path('ez_user_edit') }}">
+                                    Mon profil
+                                </a>
+
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% block extaz_body %}
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash flash-{{ type }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+<div class="clear"></div>
+<footer>
+    <div class="container-site">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="border__blue"></div>
+                {% if footer_presentation is not empty %}
+                    <div class="title__footer">
+                        Présentation
+                    </div>
+                    <p>
+                        {{ footer_presentation }}
+                    </p>
+                {% else %}
+                    <div class="title__footer">
+
+                    </div>
+                    <h4 class="text-center">N'hésitez plus</h4>
+                    <h3 class="text-center"><b>REJOIGNEZ-NOUS AU <a>{{ serveip }} </a>!</b></h3>
+                {%  endif %}
+            </div>
+            <div class="col-md-2">
+                <div class="border__blue"></div>
+                <div class="title__footer">
+                    Nous suivre
+                </div>
+                {% for social_network in core.social_network  %}
+                    {%  if social_network.link is not empty %}
+                        <a class="a__none" href="{{ social_network.link }}"><div class="round"><img class="svg" src="{{ asset('img/svg/'~social_network.icon) }}"/> Suivez nous sur {{ social_network.name }}</div></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-2">
+                <div class="border__blue"></div>
+                <div class="title__footer">
+                    Liens utile
+                </div>
+                <ul class="footer-list">
+                    <a href="" class="list__util"><li> Conditions générales </li></a>
+                    <a href="" class="list__util"><li> Partenaire </li></a>
+                    <a href="" class="list__util"><li> Contact & support </li></a>
+                    <a href="" class="list__util"><li> Staff </li></a>
+                </ul>
+            </div>
+            <div class="col-md-12 text-center">
+                <div class="border__blue"></div>
+                <b>{{ servename }}</b> &copy; {{ "now"|date("Y") }}-{{ "now"|date("Y")+1 }} | Tout droits réservés, thème réalisé par ExtazCMS
+                 <br>
+                <b>Site propulsé par</b> <a href="https://extaz-cms.fr/">ExtazCMS</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+{% block javascripts %}
+    <script src="{{ asset('libs/VerticalTimeline/js/modernizr.custom.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/narty.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/npm.js') }}" type="text/javascript"></script>
+
+    <!-- FOSjsrouting -->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <!------------------>
+{% endblock %}
+</body>
+</html>

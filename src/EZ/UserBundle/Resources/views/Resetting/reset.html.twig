@@ -1,0 +1,27 @@
+{% extends "EZCoreBundle:default/Layout:"~ template ~".html.twig" %}
+
+{% block title %}
+    Réinitialiser mon mot de passe - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title-log">Réinitialiser mon mot de passe</div>
+
+                    {% trans_default_domain 'FOSUserBundle' %}
+
+                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                    {{ form_widget(form) }}
+                    <div>
+                        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+                    </div>
+                    {{ form_end(form) }}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

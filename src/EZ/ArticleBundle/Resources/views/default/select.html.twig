@@ -1,0 +1,59 @@
+{% extends "EZCoreBundle:default/Layout:"~ template ~".html.twig" %}
+
+{% block title %}
+    {{ article.title }} - {{ parent() }}
+{% endblock %}
+
+{% block extaz_body %}
+    <div class="container-site">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="content article">
+                    <div class="title-red article-title">{{ article.title }}</div>
+                    <div class="left group-desc"><i class="fa fa-user"></i> {{ article.author }} <i class="fa fa-calendar pl"></i> {{ article.creationDate | date('d/m/Y') }}</div>
+                    <div class="clear"></div>
+                    <p class="content-news">
+                        {{ article.content | raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="col-md-7">
+                <div class="content">
+                    <div class="title-red article-title">Les commentaires</div>
+                    <div class="mt10"></div>
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="left">
+                                <img class="avatar-com" src="https://cravatar.eu/helmavatar/Usery/100.png"/>
+                            </div>
+                            <div class="com_user">
+                                <div class="com_pseudo left">{{ comment.author }}</div>
+                                <div class="com_date right"><i class="fa fa-calendar"></i>{{ comment.creationDate | date('d/m/Y') }} </div>
+                                <div class="clear"></div>
+                                <div class="com">{{ comment.content | raw }}</div>
+                            </div>
+                            <div class="clear"></div>
+                        {% endfor %}
+                    {% else %}
+                        Pas de commentaires ...
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="content">
+                    <div class="title-red article-title">Postez votre commentaire</div>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ form_start(comment_form) }}
+                        {{ form_end(comment_form) }}
+                    {% else %}
+                        Veuillez vous connecter pour poster un commentaire !
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

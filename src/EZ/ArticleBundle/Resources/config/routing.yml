@@ -1,0 +1,22 @@
+ez_article_homepage:
+    path:     /articles
+    defaults: { _controller: EZArticleBundle:Default:index }
+
+ez_article_select:
+    path:     /articles/{id}
+    defaults: { _controller: EZArticleBundle:Default:select }
+
+ez_article_admin_list:
+    path:     /admin/articles
+    defaults: { _controller: EZArticleBundle:Admin:list }
+
+ez_article_admin_create:
+    path:     /admin/articles/create
+    defaults: { _controller: EZArticleBundle:Admin:create }
+
+ez_article_admin_ajax_profile:
+    path:     /admin/article/profile/{user}
+    defaults: { _controller: EZArticleBundle:AjaxUser:ajax_profile }
+    schemes:  [http]
+    options:
+        expose: true

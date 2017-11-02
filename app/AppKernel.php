@@ -13,10 +13,16 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new EZ\CoreBundle\EZCoreBundle(),
             new EZ\UserBundle\EZUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new EZ\ArticleBundle\EZArticleBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new EZ\FAQBundle\EZFAQBundle(),
+            new EZ\SupportBundle\EZSupportBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

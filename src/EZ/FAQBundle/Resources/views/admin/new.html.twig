@@ -1,0 +1,45 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block head_admin %}
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+{% endblock %}
+
+
+{% set collapse = 'collapse' %}
+
+{% block admin_body %}    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                F.A.Q
+                <small>Nouvelle question</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-default" data-vivaldi-spatnav-clickable="1">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> Ajouter une nouvelle entrée :</h3>
+                        </div>
+                        <div class="box-body">
+                            {{ form_start(form_new) }}
+                            {{ form_end(form_new) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

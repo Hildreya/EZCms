@@ -1,0 +1,24 @@
+ez_faq_homepage:
+    path:     /faq
+    defaults: { _controller:   EZFAQBundle:Default:index }
+
+ez_faq_admin_list:
+    path:     /admin/faq
+    defaults: { _controller:   EZFAQBundle:Admin:index }
+
+ez_faq_admin_create:
+    path:     /admin/faq/create
+    defaults: { _controller:   EZFAQBundle:Admin:new }
+
+ez_faq_admin_show:
+    path:     /admin/show/{id}
+    defaults: { _controller:   EZFAQBundle:Admin:show}
+
+ez_faq_admin_edit:
+    path:     /admin/edit/{id}
+    defaults: { _controller:   EZFAQBundle:Admin:edit }
+
+ez_faq_admin_delete:
+    path:     /admin/delete/{id}
+    defaults: { _controller:   EZFAQBundle:Admin:delete}
+    methods:  DELETE

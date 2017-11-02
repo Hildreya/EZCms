@@ -4,6 +4,10 @@ parameters:
     #parameter_name: value
 
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    core:
+        class: EZ\CoreBundle\Core\Core
+        arguments: ['@jsonapi']
+
+    jsonapi:
+        class: EZ\CoreBundle\JSONAPI\JSONAPI
+        arguments: ['@doctrine.orm.entity_manager']

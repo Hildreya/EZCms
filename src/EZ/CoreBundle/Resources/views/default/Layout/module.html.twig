@@ -1,0 +1,27 @@
+{% for bundle in bundles %}
+
+    {% if bundle['default']['display'] == true %}
+        {% if bundle['default']|length - 3 > 0 %}
+            <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{ bundle['default']['name'] }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        {% for i in 0..bundle['default']|length - 4 %}
+
+                        <a href="{{ path(bundle['default'][i]['path']) }}">{{ bundle['default'][i]['name'] }}</a>
+
+                        {% endfor %}
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li {% if app.request.get('_route') == bundle['default']['path'] %} class="active"{% endif %}>
+                <a href="{{ path(bundle['default']['path']) }}">{{ bundle['default']['name'] }}</a>
+            </li>
+        {% endif %}
+    {% endif %}
+
+{% endfor %}

@@ -1,3 +1,15 @@
+ez_support:
+    resource: "@EZSupportBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ez_faq:
+    resource: "@EZFAQBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ez_article:
+    resource: "@EZArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ez_user:
     resource: "@EZUserBundle/Resources/config/routing.yml"
     prefix:   /
@@ -6,6 +18,5 @@ ez_core:
     resource: "@EZCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
