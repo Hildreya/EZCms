@@ -1,6 +1,15 @@
 admin:
     name: Utilisateurs
-    path: ez_user_admin_list
+    path:
+    0:
+          name: Liste
+          path: ez_user_admin_list
+    1:
+          name: Rangs
+          path: ez_group_admin_list
+    2:
+          name: Gestion
+          path: ez_user_admin_list
     icon: fa fa-user-o
     display : true
 

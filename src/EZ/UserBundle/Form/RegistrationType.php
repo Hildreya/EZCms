@@ -2,16 +2,15 @@
 
 namespace EZ\UserBundle\Form;
 
-use function Sodium\add;
+use EZ\UserBundle\Entity\Group;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class UserType extends AbstractType
+class RegistrationType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -33,8 +32,12 @@ class UserType extends AbstractType
                 'class' => 'EZ\UserBundle\Entity\Group',
                 'choice_label' => 'name',
                 'multiple' => true,
-            ));
-        $builder->remove('plainPassword');
+        ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+
     }
 
     public function getParent()
@@ -44,13 +47,6 @@ class UserType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'ez_user_registration';
+        return 'ez_user_admin_registration_type';
     }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-
 }

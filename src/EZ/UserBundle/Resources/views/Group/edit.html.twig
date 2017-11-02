@@ -1,7 +1,7 @@
 {% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
 
 {% block title %}
-    Gestion des utilisateurs - {{ parent() }}
+    Gestion des groupes - {{ parent() }}
 {% endblock %}
 
 {% block admin_body %}
@@ -10,7 +10,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Ajouter un utilisateur
+                Modifier groupe
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,12 +23,12 @@
 
             <!-- Your Page Content Here -->
 
-            {{ form_start(registerForm) }}
-            {{ form_widget(registerForm) }}
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
             <div>
                 <input type="submit" class="button-green right" value="Ajouter" />
             </div>
-            {{ form_end(registerForm) }}
+            {{ form_end(edit_form) }}
 
         </section>
         <!-- /.content -->

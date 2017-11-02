@@ -10,7 +10,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Editer l'utilisateur
+                Paramètres utilisateur
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -18,16 +18,86 @@
             </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
 
-            <!-- Your Page Content Here -->
+            <div class="row">
+                <div class="col-md-3">
 
-            {{ form_start(edit_form) }}
-            {{ form_widget(edit_form) }}
-            <input class="button-green" type="submit" value="Editer" />
-            <a class="button-blue" href="{{ path('ez_user_admin_list') }}">Revenir à la liste</a>
-            {{ form_end(edit_form) }}
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="http://cravatar.eu/helmavatar/{{ user.username }}/32.png" alt="User profile picture">
+
+                            <h3 class="profile-username text-center">{{ user.username }}</h3>
+
+                            <p class="text-muted text-center">{% if user.getGroups() is not empty %} {{ user.getGroupNames()[0]}}{% endif %}</p>
+
+                            <ul class="list-group list-group-unbordered">
+                                {% if user.lastLogin != null %}
+                                    <li class="list-group-item">
+                                        <b>Dernière connexion</b> <br/><span>{{ user.lastLogin.format('d-m-Y H:i:s')}}</span>
+                                    </li>
+                                {% endif %}
+                                <li class="list-group-item">
+                                    <b>Compte lié</b> {% if user.minecraftUsername == null %}
+                                                          <span class="pull-right">Non</span>
+                                                      {% else %}
+                                                          <span class="pull-right">{{ user.minecraftUsername }}</span>
+                                                          {% endif %}
+
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Email</b> <a class="pull-right">{{ user.email }}</a>
+                                </li>
+
+                                   {% if user.enabled == 0 %}
+                                       <li class="list-group-item">
+                                           <span class="label label-danger">Compte non activé </span>
+                                       </li>
+                                   {% endif %}
+
+                            </ul>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#edition" data-toggle="tab">Edition</a></li>
+                            {% for ajax_link in ajax_links %}
+                                <li><a href="#{{ ajax_link.link }}" class="ajax-link" data-toggle="tab">{{ ajax_link.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="tab-content">
+
+                            <div class="active tab-pane" id="edition">
+                                {{ form_start(edit_form) }}
+                                {{ form_widget(edit_form) }}
+                                <div>
+                                    <input type="submit" class="button-green right" value="Modifier" />
+                                    <a href="{{ path('ez_user_admin_list') }}" class="button-blue right">Retour à la liste</a>
+                                </div>
+                                {{ form_end(edit_form) }}
+                            </div>
+
+                            {% for ajax_link in ajax_links %}
+                                <div class="tab-pane" id="{{ ajax_link.link }}">
+                                    <div class="text-center loading"></div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
 
         </section>
         <!-- /.content -->
