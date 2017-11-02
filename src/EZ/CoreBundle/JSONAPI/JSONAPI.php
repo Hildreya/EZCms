@@ -2,6 +2,9 @@
 namespace EZ\CoreBundle\JSONAPI;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Doctrine\ORM\EntityManager;
+
+
 /**
  * A PHP class for access Minecraft servers that have Bukkit with the {@link http://github.com/alecgorge/JSONAPI JSONAPI} plugin installed.
  * 
@@ -13,7 +16,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  * @package JSONAPI
  * @since Alpha 5
  */
-class JSONAPI {
+class JSONAPI{
+
+    private $em;
 	private $host;
 	private $port;
 	private $username;
@@ -24,13 +29,19 @@ class JSONAPI {
 	/**
 	 * Creates a new JSONAPI instance.
 	 */
-	public function __construct ($host, $port, $uname, $pword, $salt = '', $timeout = 10) {
-		$this->setHost($host);
-		$this->setPort(intval($port));
-		$this->setUsername($uname);
-		$this-> setPassword($pword);
-		$this->salt = $salt;
-		$this->setTimeout($timeout);
+	public function __construct (EntityManager $em, $salt = '', $timeout = 10) {
+
+        $this->em = $em;
+        $server = $this->em->getRepository('EZCoreBundle:Jsonapi')->findOneByPosition(0);
+        if($server){
+            $this->setHost($server->getIp());
+            $this->setPort($server->getPort());
+            $this->setUsername($server->getUsername());
+            $this-> setPassword($server->getPassword());
+            $this->salt = $salt;
+            $this->setTimeout($timeout);
+        }
+
 	}
 	
 	/**

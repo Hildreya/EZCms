@@ -8,6 +8,11 @@ class AdminController extends DataController
 {
     public function indexAction()
     {
-        return $this->render('@EZSupport/admin/list.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $tickets = $em->getRepository('EZSupportBundle:Support')->findAll();
+        return $this->render('@EZSupport/admin/list.html.twig', array(
+            'tickets' => $tickets
+        ));
     }
 }

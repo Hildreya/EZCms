@@ -17,23 +17,32 @@ class Support_reponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', TextareaType::class, array(
-                'attr' => array('placeholder' => 'Laisser une réponse')
-            ))
-        ->add('Envoyer', SubmitType::class, array(
-            'attr' => array('class' => 'btn btn-default btn-sm pull-right', 'style' => 'margin-top:5px;')
-        ))
-        ;
+            ->add(
+                'message',
+                TextareaType::class,
+                array(
+                    'attr' => array('placeholder' => 'Laisser une réponse'),
+                )
+            )
+            ->add(
+                'Envoyer',
+                SubmitType::class,
+                array(
+                    'attr' => array('class' => 'btn btn-default btn-sm pull-right', 'style' => 'margin-top:5px;'),
+                )
+            );
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'EZ\SupportBundle\Entity\Support_reponse'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'EZ\SupportBundle\Entity\S_Response',
+            )
+        );
     }
 
     /**
