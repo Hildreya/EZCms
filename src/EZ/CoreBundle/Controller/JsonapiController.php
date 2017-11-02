@@ -55,7 +55,7 @@ class JsonapiController extends Controller
         $jsonapi_servers = $this->getDoctrine()->getRepository('EZCoreBundle:Jsonapi')
             ->findBy(array(), array('position' => 'ASC'));
 
-        $api = $this->get('ez_core.jsonapi');
+        $api = $this->container->get('jsonapi');
 
         for($i = 0; $i< count($jsonapi_servers); $i++){
             $api->setHost($jsonapi_servers[$i]->getIp());
@@ -66,9 +66,10 @@ class JsonapiController extends Controller
             $js = $jsonapi_servers[$i];
             $jsonapi_servers[$i] = null;
             $jsonapi_servers[$i]['jsonapi']= $js;
-            $jsonapi_servers[$i]['info'] = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
+            $server_info = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
+            $jsonapi_servers[$i]['info'] = empty($server_info) ? array('is_success' => false, 'error' => array('code' => 3, 'message' =>' Impossible de se connecter à ce serveur')): $server_info;
         }
-        //die(var_dump($jsonapi_servers));
+
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi_servers' => $jsonapi_servers,
             'form' => $form->createView()));
@@ -110,9 +111,10 @@ class JsonapiController extends Controller
     public function serverInfoAction(Request $request, $server_position)
     {
         if ($request->isXmlHttpRequest()) {
+
             $server = $this->getDoctrine()->getManager()->getRepository('EZCoreBundle:Jsonapi')
                 ->findOneByPosition($server_position);
-            $api = $this->get('ez_core.jsonapi');
+            $api = $this->container->get('jsonapi');
             $api->setHost($server->getIp());
             $api->setPort($server->getPort());
             $api->setUsername($server->getUsername());
@@ -146,13 +148,8 @@ class JsonapiController extends Controller
                 ));
 
             }
-
-
-
-
-
-    }else {
-            throw new \Exception('Erreur');
-       }
+        }else {
+           throw new \Exception('Erreur');
+        }
     }
 }
