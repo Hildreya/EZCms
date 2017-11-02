@@ -4,6 +4,7 @@ namespace EZ\SupportBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use EZ\UserBundle\Entity\User;
 
 /**
  * Support
@@ -81,7 +82,7 @@ class Support
 
     /**
      * One Ticket has many response
-     * @ORM\OneToMany(targetEntity="EZ\SupportBundle\Entity\Support_reponse", mappedBy="ticketId")
+     * @ORM\OneToMany(targetEntity="EZ\SupportBundle\Entity\S_Response", mappedBy="ticket")
      */
     private $reponse;
 
@@ -254,7 +255,7 @@ class Support
      *
      * @return Support
      */
-    public function setUserId(\EZ\UserBundle\Entity\User $userId = null)
+    public function setUserId(User $userId = null)
     {
         $this->userId = $userId;
 
@@ -292,11 +293,11 @@ class Support
     /**
      * Add reponse
      *
-     * @param \EZ\SupportBundle\Entity\Support_reponse $reponse
+     * @param \EZ\SupportBundle\Entity\S_Response $reponse
      *
      * @return Support
      */
-    public function addReponse(\EZ\SupportBundle\Entity\Support_reponse $reponse)
+    public function addReponse(S_Response $reponse)
     {
         $this->reponse[] = $reponse;
 
@@ -306,9 +307,9 @@ class Support
     /**
      * Remove reponse
      *
-     * @param \EZ\SupportBundle\Entity\Support_reponse $reponse
+     * @param \EZ\SupportBundle\Entity\S_Response $reponse
      */
-    public function removeReponse(\EZ\SupportBundle\Entity\Support_reponse $reponse)
+    public function removeReponse(S_Response $reponse)
     {
         $this->reponse->removeElement($reponse);
     }
@@ -321,5 +322,11 @@ class Support
     public function getReponse()
     {
         return $this->reponse;
+    }
+
+    public function close()
+    {
+        $this->resolved = 1;
+        return $this;
     }
 }

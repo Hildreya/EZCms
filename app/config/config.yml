@@ -44,7 +44,9 @@ twig:
     globals:
         servename: '%server_name%'
         serveip: '%server_ip%'
+        footer_presentation: '%presentation%'
         template: '%template%'
+        core : '@core'
 
 # Doctrine Configuration
 doctrine:

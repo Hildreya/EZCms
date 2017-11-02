@@ -9,6 +9,8 @@
     <div class="container">
         <h1>Ticket n°{{ ticket.id }}</h1>
 
+        <a href="{{ path('ez_support_list') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Mes autres tickets</a>
+
         {% for message in app.session.flashbag.get('success') %}
             <div class="alert alert-success">
                 <i class="fa fa-chevron-right " aria-hidden="true"></i>
@@ -25,9 +27,16 @@
                 <i class="cbp_tmicon rounded-x hidden-xs"></i>
                 <div class="cbp_tmlabel">
                     <h2>
-                        Ticket de {{ ticket.userId }} <a href="#" class="btn btn-default btn-sm pull-right">
-                            <i class="fa fa-lock"></i>Fermer mon ticket
+                        {% if ticket.resolved %}
+                            Ticket de {{ ticket.userId }}
+                            <p class="pull-right">
+                                Résolut
+                            </p>
+                        {% else %}
+                            Ticket de {{ ticket.userId }} <a href="{{ path('ez_support_close', {'id': ticket.id}) }}" class="btn btn-default btn-sm pull-right">
+                            <i class="fa fa-lock"></i> Fermer mon ticket
                         </a>
+                        {% endif %}
                     </h2>
                     <p>
                         {{ ticket.message }} </p>
@@ -45,31 +54,32 @@
 
             {% for reponse in list_reponse %}
                 <li>
-                    <time class="cbp_tmtime" datetime="{{ ticket.updateDate|date('d/m/Y H:i') }}">
+                    <time class="cbp_tmtime" datetime="{{ reponse.date|date('d/m/Y H:i') }}">
                         <span>{{ reponse.date|date('d/m/Y') }}</span>
                         <span>{{ reponse.date|date('H:i') }}</span></time>
                     <i class="cbp_tmicon rounded-x hidden-xs"></i>
                     <div class="cbp_tmlabel">
-                        <h2>Reponse de A complété</h2>
+                        <h2>Reponse de {{ reponse.user }}</h2>
 
-                        <p>{{ ticket.message|slice(0,365) }}</p>
+                        <p>{{ reponse.message }}</p>
                     </div>
                 </li>
 
 
 
             {% endfor %}
-            <li>
-
-                <i class="cbp_tmicon rounded-x hidden-xs"></i>
-                <div class="cbp_tmlabel">
-
-
-                    <p>        {{ form_start(form) }}
-                        {{ form_widget(form.message) }}
-                        {{ form_end(form) }}</p>
-                </div>
-            </li>
+            {% if not ticket.resolved %}
+                <li>
+                    <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                    <div class="cbp_tmlabel">
+                        <p>
+                            {{ form_start(form) }}
+                            {{ form_widget(form.message) }}
+                            {{ form_end(form) }}
+                        </p>
+                    </div>
+                </li>
+            {% endif %}
 
 
         </ul>

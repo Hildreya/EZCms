@@ -4,6 +4,6 @@ parameters:
     server_port: 24812
     info_site_url: www.extaz-cms.fr
     template: red
-    twitter: { link: null, icon: 'fa fa-twitter' }
-    facebook: { link: null, icon: 'fa fa-facebook' }
-    youtube: { link: null, icon: 'fa fa-youtube-play' }
+    icons: { twitter: { name: Twitter, link: null, icon: 'fa fa-twitter' }, facebook: { name: Facebook, link: 'facebook', icon: 'fa fa-facebook' }, youtube: { name: Youtube, link: null, icon: 'fa fa-youtube-play' }, Discord: { name: Discord, icon: ICON, link: www.discord.fr } }
+    presentation: Bonjour
+    email_contact: venard.paul@gmail.com
