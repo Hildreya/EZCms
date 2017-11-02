@@ -9,6 +9,12 @@ ez_support_list:
     defaults:
              _controller: EZSupportBundle:Default:list
              id: 0
+ez_support_response:
+    path:    /ticket/{id}/edit
+    defaults: {_controller: EZSupportBundle:Default:newResponse}
+ez_support_close:
+    path:    /ticket/{id}/close
+    defaults: {_controller: EZSupportBundle:Default:close}
 #Recupération pseudo
 ez_support_ajax_joueur:
     path:    /ajax/getplayers

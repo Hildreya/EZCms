@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('libs/VerticalTimeline/css/component.css') }}">
     {% endblock %}
 
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
@@ -150,6 +151,7 @@
 <script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 {% block javascripts %}
+    <script src="{{ asset('libs/VerticalTimeline/js/modernizr.custom.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/narty.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/npm.js') }}" type="text/javascript"></script>
