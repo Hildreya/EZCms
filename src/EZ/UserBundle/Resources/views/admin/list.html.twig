@@ -28,16 +28,14 @@
                 <tr>
                     <th>Nom d'utilisateur</th>
                     <th>Email</th>
-                    <th>Roles</th>
+                    <th>Rang</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Nom d'utilisateur</th>
-                    <th>Email</th>
-                    <th>Roles</th>
-                    <th>Actions</th>
+                    <th>...</th>
+                    <th><a href="{{ path('ez_user_admin_add') }}"><i class="fa fa-plus-square" aria-hidden="true" style="color: green;"></i></a></th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -45,10 +43,8 @@
                     <tr>
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{% for role in user.roles %}
-                                {{ role }},
-                            {% endfor %}</td>
-                        <td><a href="{{ path('ez_user_admin_edit',{'id': user.id}) }}">Editer</a> | Supprimer | Gérer les commentaires</td>
+                        <td>{% if user.getGroups() is not empty %} {{ user.getGroupNames()[0]}}{% endif %}</td>
+                        <td><a type="button" class="btn btn-primary" href="{{ path('ez_user_admin_edit',{'id': user.id}) }}"><i class="fa fa-cogs" aria-hidden="true"></i></a> <a href="{{ path('ez_user_admin_delete', {'id': user.id}) }}" type="button" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer {{ user.username }} ?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -61,15 +57,19 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
     <script type="application/javascript">
         $(function () {
             $('#articleTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/French.json"
+                },
                 "paging": true,
-                "lengthChange": false,
-                "searching": false,
+                "lengthChange": true,
+                "searching": true,
                 "ordering": true,
                 "info": true,
                 "autoWidth": false

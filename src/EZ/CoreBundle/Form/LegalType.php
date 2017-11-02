@@ -26,7 +26,8 @@ class LegalType extends AbstractType
             )
             ->add('cgvCgu', null , array(
                     'label' => 'CGV / CGU',
-                    'attr' => array('class' => 'ckeditor')
+                    'attr' => array(
+                        'class' => 'ckeditor')
                 )
             )
             ->add('activate_lm', CheckboxType::class, array(
@@ -36,12 +37,14 @@ class LegalType extends AbstractType
             )
             ->add('legalMention', null , array(
                     'label' => 'Mentions Légales',
-                    'attr' => array('class' => 'ckeditor')
+                    'attr' => array(
+                        'class' => 'ckeditor')
                 )
             )
             ->add('submit', SubmitType::class, array(
                     'label' => 'Sauvegarder',
-                    'attr' => array('class' => 'button-green')
+                    'attr' => array(
+                        'class' => 'button-green')
                 )
             );
     }
