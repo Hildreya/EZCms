@@ -105,7 +105,7 @@
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                     <li>
-                        <a href="/" style="background-color:#d73925">
+                        <a href="{{ path('ez_core_homepage') }}" style="background-color:#d73925">
                             <span> <i class="fa fa-home" aria-hidden="true"></i> Revenir au site</span>
                         </a>
                     </li>
@@ -152,7 +152,6 @@
                 <li class="header">GENERAL</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li {% if app.request.attributes.get('_route') == 'ez_core_admin' %} class="active" {% endif %}><a href="{{ path('ez_core_admin') }}"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-                <li {% if app.request.attributes.get('_route') == 'ez_core_template' %} class="active" {% endif %}><a href="{{ path('ez_core_template') }}"><i class="fa fa-picture-o"></i> <span>Themes</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-cogs"></i> <span>Configuration</span>
                         <span class="pull-right-container">
@@ -165,13 +164,14 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-wifi"></i> <span>Connectivité</span>
+                    <a href="#"><i class="fa fa-wifi"></i> <span>Serveur</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ path('ez_core_jsonapi') }}">JSONAPI</a></li>
+                        <li><a href="{{ path('ez_core_jsonapi') }}">Connectivités</a></li>
+                        <li><a href="">Commandes</a></li>
                     </ul>
                 </li>
                 <li class="header">MODULES</li>
@@ -274,6 +274,9 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+
+
 
 <!-- jQuery 2.2.3 -->
 <script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
@@ -286,10 +289,11 @@
 <!-- JSRouting -->
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-
+<script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+{% block javascript %}{% endblock %}
 <script src="{{ asset('js/main.js') }}"></script>
 
-{% block javascript %}{% endblock %}
+
 
 </body>
 </html>

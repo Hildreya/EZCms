@@ -1,6 +1,7 @@
 {
-    "name": "matthieu/extazcmsv2",
+    "name": "extazCMS",
     "license": "proprietary",
+    "description": "extazcms version 2",
     "type": "project",
     "autoload": {
         "psr-4": {

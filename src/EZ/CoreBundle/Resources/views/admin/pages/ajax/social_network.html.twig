@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        {% if edit_form|length > 2 %}
+        <div class="col-md-8 ">
+           {{ form_start(edit_form, {'action': path('social_ajax_form')}) }}
+            {% for child in edit_form %}
+                {% if child.vars["id"] != "form_Enregistrer" and child.vars["id"] != "form__token" %}
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <img src="{{ asset('img/svg/'~ child.vars["name"]|lower ~'.svg') }}"/>
+                        </span>
+                        {{ form_widget(child) }}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            {{ form_end(edit_form) }}
+        </div>
+        <div class="col-md-4">
+            <div class="box box-primary" data-widget="box-widget">
+                <div class="box-header">
+                    <h3 class="box-title">Nouveau lien</h3>
+                </div>
+                <div class="box-body">
+                    {{ form_start(add_form, {'action': path('social_ajax_form')}) }}
+                    <div class="form-group">{{ form_widget(add_form.name) }}</div>
+                    <div class="form-group">{{ form_widget(add_form.link) }}</div>
+
+                    <div class="form-group">
+                        <div class="col-md-1">{{ form_widget(add_form.icons_selector) }}</div>
+                        <div class="col-md-3 col-md-offset-7">{{ form_widget(add_form.enregistrer) }}</div>
+                    </div>
+                    {{ form_end(add_form) }}
+                </div>
+
+            </div>
+        </div>
+        {% else %}
+            <div class="col-md-8">
+                <div class="box box-primary" data-widget="box-widget">
+                    <div class="box-header">
+                        <h3 class="box-title">Nouveau lien</h3>
+                    </div>
+                    <div class="box-body">
+                        {{ form_start(add_form, {'action': path('social_ajax_form')}) }}
+                        <div class="form-group">{{ form_widget(add_form.name) }}</div>
+                        <div class="form-group">{{ form_widget(add_form.link) }}</div>
+
+                        <div class="form-group">
+                            <div class="col-md-1">{{ form_widget(add_form.icons_selector) }}</div>
+                            <div class="col-md-3 col-md-offset-8">{{ form_widget(add_form.enregistrer) }}</div>
+                        </div>
+                        {{ form_end(add_form) }}
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<script>
+    $('.icons_selector').ddslick({
+        defaultSelectedIndex:1,
+        width: 60,
+        height: 200,
+        onSelected: function(selectedData){
+        }
+    });
+</script>

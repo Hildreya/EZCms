@@ -21,7 +21,8 @@ class JsonapiController extends Controller
         $repo = $em->getRepository('EZCoreBundle:Jsonapi');
         $jss = $repo->findAll();
         $order = array();
-        for($pos = 0;$pos<=sizeof($jss); $pos++){
+        $size = sizeof($jss);
+        for($pos = 0;$pos <= $size; $pos++){
             array_push($order, $pos);
         }
 
@@ -40,7 +41,8 @@ class JsonapiController extends Controller
                 ->getQuery();
             $jsonapis = $query->getResult();
 
-            for($i = 0; $i< count($jsonapis); $i++){
+            $count = count($jsonapis);
+            for($i = 0; $i < $count; $i++){
                 $new_position = $jsonapis[$i]->getPosition() + 1;
                 $jsonapis[$i]->setPosition($new_position);
                 $em->persist($jsonapis[$i]);
@@ -57,7 +59,8 @@ class JsonapiController extends Controller
 
         $api = $this->container->get('jsonapi');
 
-        for($i = 0; $i< count($jsonapi_servers); $i++){
+        $count = count($jsonapi_servers);
+        for($i = 0; $i < $count; $i++){
             $api->setHost($jsonapi_servers[$i]->getIp());
             $api->setPort($jsonapi_servers[$i]->getPort());
             $api->setUsername($jsonapi_servers[$i]->getUsername());
@@ -67,9 +70,9 @@ class JsonapiController extends Controller
             $jsonapi_servers[$i] = null;
             $jsonapi_servers[$i]['jsonapi']= $js;
             $server_info = $api->callMultiple(array('players.online.count', 'players.online.limit'), array(array(),array()));
-            $jsonapi_servers[$i]['info'] = empty($server_info) ? array('is_success' => false, 'error' => array('code' => 3, 'message' =>' Impossible de se connecter à ce serveur')): $server_info;
+            $jsonapi_servers[$i]['info'] = empty($server_info) ? array(0 => array('is_success' => false, 'error' => array('code' => 3, 'message' =>' Impossible de se connecter à ce serveur')), 1 => array('is_success' => false, 'error' => array('code' => 3, 'message' =>' Impossible de se connecter à ce serveur'))): $server_info;
         }
-
+        
         return $this->render('EZCoreBundle:admin/pages:jsonapi.html.twig', array(
             'jsonapi_servers' => $jsonapi_servers,
             'form' => $form->createView()));

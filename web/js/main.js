@@ -1,8 +1,3 @@
-jQuery(document).ready(function($) {
-
-    $('.icon_selector').fontIconPicker();
-
-});
 function ajax(position){
     $.ajax({
         type: 'get',
@@ -90,5 +85,31 @@ $('document').ready(function(){
 
 
     });
+    $('.ajax-form-link').click(function () {
+        var name = $(this).html();
+        var link = $(this).attr('href').replace('#', '');
+        if (jQuery.inArray(name, arr) === -1) {
+            $.ajax({
+                type: 'get',
+                url: Routing.generate(link),
+                beforeSend: function () {
+                    $($.find('#' + link)).empty();
+
+                    $($.find('#' + link)).append('<div class="text-center loading"></div>');
+                },
+                success: function (response) {
+                    $($.find('.loading')).remove();
+                    var template = response;
+                    $($.find('#' + link)).append(template);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $($.find('.loading')).remove();
+                    $($.find('#' + link)).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
+
+                }
+            })
+            arr.push(name);
+        }
+    })
 
 });

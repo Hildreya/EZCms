@@ -2,17 +2,14 @@ ez_core_homepage:
     path:     /
     defaults: { _controller: EZCoreBundle:Main:index }
 
+
 ez_core_admin:
     path:     /admin/
     defaults: { _controller: EZCoreBundle:Admin:index }
 
-ez_core_template:
-    path:     /admin/template
-    defaults: { _controller: EZCoreBundle:Template:template }
-
-ez_core_template_select:
-    path:     /admin/template/{name}
-    defaults: { _controller: EZCoreBundle:Template:select }
+ez_core_server:
+    path:     /admin/server
+    defaults: { _controller: EZCoreBundle:Server:index }
 
 ez_core_jsonapi:
     path:     /admin/jsonapi
@@ -38,4 +35,28 @@ ajax_server_info:
     schemes:  [http]
     options:
         expose: true
+
+
+reglement_ajax_form:
+    path:     /admin/configuration/form/reglement
+    defaults: { _controller: EZCoreBundle:Configuration:reglement_ajaxform }
+    schemes:  [http]
+    options:
+        expose: true
+
+social_ajax_form:
+    path:     /admin/configuration/form/social
+    defaults: { _controller: EZCoreBundle:Configuration:socialnetwork_ajaxform }
+    schemes:  [http]
+    options:
+        expose: true
+
+legal_ajax_form:
+    path:     /admin/configuration/form/local
+    defaults: { _controller: EZCoreBundle:Configuration:legal_ajaxform }
+    schemes:  [http]
+    options:
+        expose: true
+
+
 
