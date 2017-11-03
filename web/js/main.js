@@ -79,37 +79,39 @@ $('document').ready(function(){
       }
 
    });
-    $('.refresh').click(function(){
-        var position = $(this).parent().parent().parent().parent().find(".position").text();
-        ajax(position);
+   $('.refresh').click(function(){
+       var position = $(this).parent().parent().parent().parent().find(".position").text();
+       ajax(position);
 
 
-    });
-    $('.ajax-form-link').click(function () {
-        var name = $(this).html();
-        var link = $(this).attr('href').replace('#', '');
-        if (jQuery.inArray(name, arr) === -1) {
-            $.ajax({
-                type: 'get',
-                url: Routing.generate(link),
-                beforeSend: function () {
-                    $($.find('#' + link)).empty();
+   });
+   $('.ajax-link').click(function(){
+       var name = $(this).html();
+       var link = $(this).attr('href').replace('#','');
+       var user_id = $(location).attr('pathname').substr($(location).attr('pathname').length - 1);
+       if(jQuery.inArray(name, arr) === -1){
+           $.ajax({
+               type: 'get',
+               url: Routing.generate(link, {user: user_id}),
+               beforeSend: function () {
+                   $($.find('#' + link)).empty();
 
-                    $($.find('#' + link)).append('<div class="text-center loading"></div>');
-                },
-                success: function (response) {
-                    $($.find('.loading')).remove();
-                    var template = response;
-                    $($.find('#' + link)).append(template);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    $($.find('.loading')).remove();
-                    $($.find('#' + link)).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
+                   $($.find('#' + link)).append('<div class="text-center loading"></div>');
+               },
+               success: function (response) {
+                   $($.find('.loading')).remove();
+                   var template = response;
+                   $($.find('#'+link)).append(template);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   $($.find('.loading')).remove();
+                   $($.find('#'+link)).append('<h1>Une erreur est survenue ! (</h1><p> Error : ' + errorThrown + '</p>');
 
-                }
-            })
-            arr.push(name);
-        }
-    })
+               }
+           })
+           arr.push(name);
+       }
+   })
+
 
 });

@@ -4,6 +4,7 @@ namespace EZ\ArticleBundle\Controller;
 
 use EZ\ArticleBundle\Entity\Article;
 use EZ\ArticleBundle\Form\ArticleType;
+use EZ\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -37,4 +38,6 @@ class AdminController extends DataController
             'article_form' => $form->createView()
         ));
     }
+
+
 }

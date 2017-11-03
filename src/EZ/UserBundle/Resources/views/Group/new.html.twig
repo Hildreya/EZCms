@@ -1,0 +1,35 @@
+{% extends "EZCoreBundle:admin/Layout:admin.html.twig" %}
+
+{% block title %}
+    Gestion des groupes - {{ parent() }}
+{% endblock %}
+
+{% block admin_body %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Ajouter un groupe
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            {{ form_start(groupForm) }}
+            {{ form_widget(groupForm) }}
+            <div>
+                <input type="submit" class="button-green right" value="Ajouter" />
+            </div>
+            {{ form_end(groupForm) }}
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}
