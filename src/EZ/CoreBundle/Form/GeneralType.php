@@ -22,8 +22,9 @@ class GeneralType extends AbstractType
                     'value' => $options['parameters']['server_name']
                 )))
             ->add('info_site_url', null, array(
-                'label' => 'URL/Adresse du site (www.monsite.fr)',
+                'label' => 'Adresse du site (URLL)',
                 'attr' => array(
+                    'placeholder' => 'www.monsite.fr',
                     'value' => $options['parameters']['info_site_url']
                 )))
             ->add('presentation', TextareaType::class, array(
@@ -38,39 +39,38 @@ class GeneralType extends AbstractType
                 'label' => 'Upload logo du serveur',
                 'required' => false,
                 'attr' => array(
-                    //'class' => 'dropzone'
                 )
             ))
             ->add('info_favicon', FileType::class, array(
                 'label' => 'Upload favicon (logo de l\'onglet)',
                 'required' => false,
                 'attr' => array(
-                    //'class' => 'dropzone'
                 )
             ))
             ->add('info_banner', FileType::class, array(
                 'label' => 'Upload bannière',
                 'required' => false,
                 'attr' => array(
-                    //'class' => 'dropzone'
                 )
             ))
             ->add('server_ip', null, array(
                 'label' => 'IP du serveur',
                 'attr' => array(
+                    'placeholder' => '127.0.0.1',
                     'value' => $options['parameters']['server_ip']
                 )))
             ->add('server_port', NumberType::class, array(
                 'label' => 'Port du serveur',
                 'attr' => array(
-                    'value' => $options['parameters']['server_port']
+                    'placeholder' => '8000',
+                    'value' => $options['parameters']['server_port'],
                 )))
-            ->add('email_contact', EmailType::class, array(
+            ->add('mailer_user', EmailType::class, array(
                 'label' => 'email de contact',
                 'attr' => array(
-                    'value' => $options['parameters']['email_contact']
+                    'value' => $options['parameters']['mailer_user']
                 )))
-            ->add('Submit', SubmitType::class, array(
+            ->add('submit', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'button-green'
             )))
