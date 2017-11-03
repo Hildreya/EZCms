@@ -29,7 +29,7 @@
             {% endfor %}
             <div class="col-md-8">
                 {% for server in jsonapi_servers  %}
-                    {% if (server.info.0.is_success is defined )and server.info.0.is_success %}
+                    {% if server.info.0.is_success and server.info.1.is_success %}
                         <div class="box box-success collapsed-box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">{{ server.jsonapi.name }}</h3><h3 class="jsonapi_header"><span class="online_players">{{ server.info.0.success }}</span>/{{ server.info.1.success }} </h3>
