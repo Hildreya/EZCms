@@ -163,12 +163,32 @@ class ConfigurationController extends Controller
         }
         elseif($edit_form->isSubmitted() && $edit_form->isValid()) {
             $form_data = $edit_form->getData();
-            die(var_dump($form_data));
+            $s = count($form_data);
+            for($i=0;$i<$s;$i++){
+                $name = array_keys($form_data)[$i];
+                if(is_null($form_data[$name])){
+                    unset($parameters["parameters"]["icons"][$name]);
+                }
+                else {
+                    $parameters["parameters"]["icons"][$name]["link"] = $form_data[$name];
+                }
+            }
+            $yaml = YAML::dump( $parameters);
+            file_put_contents($rootdir.'/config/parameters.yml', $yaml);
+
             return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
         elseif($add_form->isSubmitted() && $add_form->isValid()){
             $form_data = $add_form->getData();
-            die(var_dump($form_data));
+
+            $name = $form_data["name"];
+            $link = $form_data["link"];
+            $icon = str_replace("/Symfony/EZCms/web/img/svg/","",$form_data['icons_selector']);
+
+            $parameters["parameters"]["icons"][$name] = array('name' => $name, "link" => $link, "icon" => $icon);
+            $yaml = YAML::dump( $parameters);
+            file_put_contents($rootdir.'/config/parameters.yml', $yaml);
+
             return $this->redirect($this->generateUrl('ez_core_configuration'));
         }
         else{

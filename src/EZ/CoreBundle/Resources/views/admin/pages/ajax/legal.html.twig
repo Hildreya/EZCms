@@ -22,7 +22,9 @@
     </div>
     {{ form_end(form) }}
 
+{% block javascript %}
     <script>
         CKEDITOR.replace( 'ez_corebundle_legal_cgvCgu' );
         CKEDITOR.replace( 'ez_corebundle_legal_legalMention' );
     </script>
+{% endblock %}
