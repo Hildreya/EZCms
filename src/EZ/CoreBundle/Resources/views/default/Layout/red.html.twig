@@ -21,7 +21,7 @@
             {{ serveip }}
         </div>
         <div class="pull-right nav-desc online">
-            {{ core.online_players }}
+            {{ core.onlinePlayers }}
         </div>
         <div class="server-name nav-desc">
             {{ servename }}
@@ -118,7 +118,7 @@
                 <div class="title__footer">
                     Nous suivre
                 </div>
-                {% for social_network in core.social_network  %}
+                {% for social_network in core.socialNetwork  %}
                     {%  if social_network.link is not empty %}
                         <a class="a__none" href="{{ social_network.link }}"><div class="round"><img class="svg" src="{{ asset('img/svg/'~social_network.icon) }}"/> Suivez nous sur {{ social_network.name }}</div></a>
                     {% endif %}

@@ -92,7 +92,7 @@ class ConfigurationController extends Controller
         ));
     }
 
-    public function reglement_ajaxformAction(Request $request){
+    public function reglementAjaxFormAction(Request $request){
 
         $reglement = $this->getDoctrine()->getRepository('EZCoreBundle:Reglement')->find(1);
         if (!$reglement){
@@ -126,7 +126,7 @@ class ConfigurationController extends Controller
 
     }
 
-    public function socialnetwork_ajaxformAction(Request $request){
+    public function socialNetworkAjaxFormAction(Request $request){
 
         $rootdir = $this->get('kernel')->getRootDir();
         $parameters = Yaml::parse(file_get_contents($rootdir.'/config/parameters.yml'));
@@ -178,7 +178,7 @@ class ConfigurationController extends Controller
 
     }
 
-    public function legal_ajaxformAction(Request $request){
+    public function legalAjaxFormAction(Request $request){
         //Setting up legal form
         $legal = $this->getDoctrine()->getRepository('EZCoreBundle:Legal')->find(1);
         if(!$legal){
