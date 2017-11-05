@@ -66,7 +66,7 @@ class ConfigurationController extends Controller
             }
             if ($favicon != NULL )
             {
-                if($favicon->move($rootdir.'/../web/img/', 'favicon.'.$favicon->guessExtension())){
+                if($favicon->move($rootdir.'/../web/', 'favicon.'.$favicon->guessExtension())){
                     $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
                 }else{
                     $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
