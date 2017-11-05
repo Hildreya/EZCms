@@ -37,7 +37,9 @@ class UserController extends Controller
         $editForm = $this->createForm(UserType::class, $userId);
         $editForm->handleRequest($request);
 
-        $ajax_links = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/ajax-link.yml'));
+        $ajax_file = $this->get('kernel')->LocateResource('@EZUserBundle/Resources/config/ajax-link/yml');
+
+        $ajax_links = Yaml::parse(file_get_contents($ajax_file));
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
