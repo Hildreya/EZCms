@@ -2,6 +2,8 @@
     <div class="row">
         {% if edit_form|length > 2 %}
         <div class="col-md-8 ">
+            <h3>Vos Réseaux sociaux :</h3>
+
            {{ form_start(edit_form, {'action': path('social_ajax_form')}) }}
             {% for child in edit_form %}
                 {% if child.vars["id"] != "form_Enregistrer" and child.vars["id"] != "form__token" %}
@@ -15,6 +17,7 @@
                 </div>
                 {% endif %}
             {% endfor %}
+            <h6>Laissez le champ vide pour le supprimer</h6>
             {{ form_end(edit_form) }}
         </div>
         <div class="col-md-4">
@@ -59,6 +62,7 @@
         {% endif %}
     </div>
 </div>
+{% block javascript %}
 <script>
     $('.icons_selector').ddslick({
         defaultSelectedIndex:1,
@@ -68,3 +72,4 @@
         }
     });
 </script>
+{% endblock %}
