@@ -8,9 +8,11 @@ use Symfony\Component\Yaml\Yaml;
 class Core
 {
     private $jsonapi;
+    private $rootdir;
 
-    public function __construct(JSONAPI $jsonapi){
+    public function __construct(JSONAPI $jsonapi, $rootdir){
         $this->jsonapi = $jsonapi;
+        $this->rootdir = $rootdir;
 
     }
 
@@ -21,7 +23,7 @@ class Core
 
     public function social_network(){
 
-        return Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'))['parameters']['icons'];
+        return Yaml::parse(file_get_contents($this->rootdir.'/config/parameters.yml'))['parameters']['icons'];
 
 
     }

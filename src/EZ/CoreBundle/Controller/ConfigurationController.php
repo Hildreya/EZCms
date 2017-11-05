@@ -23,10 +23,10 @@ class ConfigurationController extends Controller
 {
     public function indexAction(Request $request){
 
-        $path = $this->get('kernel')->getRootDir();
+        $rootdir = $this->get('kernel')->getRootDir();
 
         //Get current parameters
-        $parameters = Yaml::parse(file_get_contents($path.'/config/parameters.yml'));
+        $parameters = Yaml::parse(file_get_contents($rootdir.'/config/parameters.yml'));
 
         //Setting up general form
         $general_form = $this->createForm(GeneralType::class, null, array('parameters' => $parameters['parameters']));
@@ -49,7 +49,7 @@ class ConfigurationController extends Controller
 
             //Transform array into yaml, then set new parameters back in parameters.yml
             $yaml = YAML::dump( $parameters);
-            file_put_contents($path.'/config/parameters.yml', $yaml);
+            file_put_contents($rootdir.'/config/parameters.yml', $yaml);
 
             //Moving logo/banner/favicon into web/img/
             $logo = $form_data['info_logo'];
@@ -58,7 +58,7 @@ class ConfigurationController extends Controller
 
             if ($logo != NULL )
             {
-                if($logo->move(__DIR__.'/../../../../web/img/', 'logo.'.$logo->guessExtension())){
+                if($logo->move($rootdir.'/../web/img/', 'logo.'.$logo->guessExtension())){
                     $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
                 }else{
                     $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
@@ -66,7 +66,7 @@ class ConfigurationController extends Controller
             }
             if ($favicon != NULL )
             {
-                if($favicon->move(__DIR__.'/../../../../web/img/', 'favicon.'.$favicon->guessExtension())){
+                if($favicon->move($rootdir.'/../web/img/', 'favicon.'.$favicon->guessExtension())){
                     $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
                 }else{
                     $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
@@ -74,7 +74,7 @@ class ConfigurationController extends Controller
             }
             if ($banner != NULL )
             {
-                if($banner->move(__DIR__.'/../../../../web/img/', 'banner.'.$banner->guessExtension())){
+                if($banner->move($rootdir.'/../web/img/', 'banner.'.$banner->guessExtension())){
                     $this->get('session')->getFlashBag()->set('success', 'Changements enregistrés !');
                 }else{
                     $this->get('session')->getFlashBag()->set('danger', 'Une erreur est survenue !');
@@ -128,7 +128,8 @@ class ConfigurationController extends Controller
 
     public function socialnetwork_ajaxformAction(Request $request){
 
-        $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../Resources/config/parameters.yml'));
+        $rootdir = $this->get('kernel')->getRootDir();
+        $parameters = Yaml::parse(file_get_contents($rootdir.'/config/parameters.yml'));
 
         $add_form = $this->createForm(SocialNetworkType::class, null, array('asset' => $this->get('assets.packages')));
         $add_form->handleRequest($request);
@@ -149,7 +150,6 @@ class ConfigurationController extends Controller
             )));
         $edit_form = $form->getForm();
         $edit_form->handleRequest($request);
-
 
 
 

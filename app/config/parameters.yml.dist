@@ -17,3 +17,14 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    # Server parameters
+    server_name: ExtazCMS
+    server_ip: 5.196.182.62
+    server_port: 24812
+
+    #ExtazCMS parameters
+    info_site_url: www.extaz-cms.fr
+    template: red
+    icons: {}
+    presentation: Bonjour
