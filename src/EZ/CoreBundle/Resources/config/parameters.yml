@@ -1,9 +1,0 @@
-parameters:
-    server_name: ExtazCMS
-    server_ip: 5.196.182.62
-    server_port: 24812
-    info_site_url: www.extaz-cms.fr
-    template: red
-    icons: {}
-    presentation: Bonjour
-    email_contact: venard.paul@gmail.com

@@ -14,14 +14,15 @@ class AdminController extends Controller
 
     public function bundleAction()
     {
+        $rootdir = $this->get('kernel')->getRootDir();
         //Get all the bundles present on the cms
         $bundles = array();
-        $directories = __DIR__.'/../../';
+        $directories = $rootdir.'/../src/EZ';
         $scanned_directory = array_diff(scandir($directories), array('..', '.'));
 
         foreach ($scanned_directory as $directory) {
 
-            $bundles[$directory] = Yaml::parse(file_get_contents(__DIR__ . '/../../' . $directory . '/Resources/config/bundle.yml'));
+            $bundles[$directory] = Yaml::parse(file_get_contents($rootdir . '/../src/EZ/' . $directory . '/Resources/config/bundle.yml'));
         }
 
         return $this->render('EZCoreBundle:admin/Layout:module.html.twig', array(

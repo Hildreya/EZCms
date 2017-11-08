@@ -39,21 +39,21 @@ ajax_server_info:
 
 reglement_ajax_form:
     path:     /admin/configuration/form/reglement
-    defaults: { _controller: EZCoreBundle:Configuration:reglement_ajaxform }
+    defaults: { _controller: EZCoreBundle:Configuration:reglementAjaxForm }
     schemes:  [http]
     options:
         expose: true
 
 social_ajax_form:
     path:     /admin/configuration/form/social
-    defaults: { _controller: EZCoreBundle:Configuration:socialnetwork_ajaxform }
+    defaults: { _controller: EZCoreBundle:Configuration:socialNetworkAjaxForm }
     schemes:  [http]
     options:
         expose: true
 
 legal_ajax_form:
     path:     /admin/configuration/form/local
-    defaults: { _controller: EZCoreBundle:Configuration:legal_ajaxform }
+    defaults: { _controller: EZCoreBundle:Configuration:legalAjaxForm }
     schemes:  [http]
     options:
         expose: true

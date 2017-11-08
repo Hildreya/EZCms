@@ -42,7 +42,7 @@ class SocialNetworkType extends AbstractType
                     '' => $asset->getUrl('img/svg/facebook.svg'),
                     ' ' => $asset->getUrl('img/svg/twitter.svg'),
                     '  ' => $asset->getUrl('img/svg/youtube.svg'),
-                    '' => $asset->getUrl('img/svg/github.svg'),
+                    '   ' => $asset->getUrl('img/svg/github.svg'),
                     '     ' => $asset->getUrl('img/svg/googleplus.svg'),
                     '       ' => $asset->getUrl('img/svg/skype.svg'),
                     '        ' => $asset->getUrl('img/svg/instagram.svg'),

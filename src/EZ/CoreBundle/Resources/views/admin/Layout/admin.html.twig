@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}{{ servename }}{% endblock %}</title>
-    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -278,7 +278,6 @@
 <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 
 
-
 <!-- jQuery 2.2.3 -->
 <script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 
@@ -290,7 +289,7 @@
 <!-- JSRouting -->
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/ddslick.js') }}"></script>
 {% block javascript %}{% endblock %}
 <script src="{{ asset('js/main.js') }}"></script>
 
