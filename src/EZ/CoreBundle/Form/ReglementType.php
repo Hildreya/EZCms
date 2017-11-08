@@ -18,10 +18,9 @@ class ReglementType extends AbstractType
     {
         $builder
             ->add('activate', CheckboxType::class, array(
-                    'label' => 'Activer le réglement',
-                    'required' => false
-                )
-            )
+                'label' => 'Activer le réglement',
+                'required' => false
+                ))
             ->add('content', null, array(
                 'label' => 'Réglement',
                 'attr' => array(

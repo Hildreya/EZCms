@@ -6,7 +6,7 @@ parameters:
 services:
     core:
         class: EZ\CoreBundle\Core\Core
-        arguments: ['@jsonapi']
+        arguments: ['@jsonapi', '%kernel.root_dir%']
 
     jsonapi:
         class: EZ\CoreBundle\JSONAPI\JSONAPI

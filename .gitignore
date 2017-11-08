@@ -37,5 +37,5 @@
 # Composer PHAR
 /composer.phar
 
-
 tests/
+app/Resources/

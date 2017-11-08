@@ -1,0 +1,9 @@
+{{ form_start(form, {'action': path('reglement_ajax_form')}) }}
+
+{{ form_end(form) }}
+<h5 class="text-center">Si vous activez le réglement, le lien vers celui-ci sera visible dans le footer (en bas du site, côté utilisateur)</h5>
+{% block javascript %}
+<script>
+    CKEDITOR.replace( 'ez_corebundle_reglement_content' );
+</script>
+{% endblock %}

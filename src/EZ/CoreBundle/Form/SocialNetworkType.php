@@ -4,6 +4,7 @@ namespace EZ\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Asset\Packages;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -11,66 +12,49 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SocialNetworkType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var \Symfony\Component\Asset\Package $asset */
+        $asset = $options['asset'];
+
         $builder
-            ->add('facebook', TextType::class, array(
-                'label' => 'Facebook ',
-                'required' => false,
-                'attr' => array(
-                    'placeholder' => 'Entrez un URL',
-                    'value' => $options['data']['parameters']['icons']['facebook']['link']
-                )))
-            ->add('twitter', TextType::class, array(
-                'label' => 'Twitter',
-                'attr' => array(
-                    'placeholder' => 'Entrez un URL',
-                    'value' => $options['data']['parameters']['icons']['twitter']['link']
-                )))
-            ->add('youtube', TextType::class, array(
-                'label' => 'youtube',
-                'required' => false,
-                'attr' => array(
-                    'placeholder' => 'Entrez un URL',
-                    'value' => $options['data']['parameters']['icons']['youtube']['link']
-            )))
             ->add('name', TextType::class, array(
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'attr' => array(
-                    'class' => 'hidden',
-                    'placeholder' => 'Entrer le nom de   votre réseau social',
-                )
-            ))
-            ->add('icon', ChoiceType::class, array(
-                'required' => false,
-                'label' => false,
-                'choices' => array(
-                    'facebook' => '57705',
-                    'twitter' => '57709',
-                    //'youtube' => '',
-                    'github' => '57738',
-                    'google+' => '57700',
-                    'reddit' => '57758',
-                    'pinterest' => '57766',
-
-                ),
-                'attr' => array(
-                    'placeholder' => 'Veuillez entrer une icon (TO WORK ON)',
-                    'class' => 'icon_selector',
+                    'placeholder' => 'Entrer le nom de votre réseau social',
                 )
             ))
             ->add('link', TextType::class, array(
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'attr' => array(
-                    'placeholder' => 'Entrer un URL',
-                    'class' => 'hidden',
+                    'placeholder' => 'Entrer une URL',
                 )
 
             ))
+            ->add('icons_selector', ChoiceType::class, array(
+                'required' => true,
+                'label' => false,
+                'attr' => array('class'=>'icons_selector'),
+                'choices' => array(
+                    '' => $asset->getUrl('img/svg/facebook.svg'),
+                    ' ' => $asset->getUrl('img/svg/twitter.svg'),
+                    '  ' => $asset->getUrl('img/svg/youtube.svg'),
+                    '   ' => $asset->getUrl('img/svg/github.svg'),
+                    '     ' => $asset->getUrl('img/svg/googleplus.svg'),
+                    '       ' => $asset->getUrl('img/svg/skype.svg'),
+                    '        ' => $asset->getUrl('img/svg/instagram.svg'),
+                    '         ' => $asset->getUrl('img/svg/discord.svg'),
+                    '          ' =>$asset->getUrl('img/svg/ts3.svg')
 
-            ->add('Submit', SubmitType::class, array(
+                ),
+                'choice_attr' => function($key) {
+                    return ['data-imagesrc' => $key];
+                },
+            ))
+            ->add('enregistrer', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'button-green'
                 )))
@@ -80,5 +64,6 @@ class SocialNetworkType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('asset');
     }
 }

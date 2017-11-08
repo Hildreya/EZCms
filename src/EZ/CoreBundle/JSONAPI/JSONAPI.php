@@ -157,7 +157,7 @@ class JSONAPI{
 	 * @param array $params An array of arguments that are to be passed.
 	 * @return array An associative array representing the JSON that was returned.
 	 */
-	function __call($method, $params) {
+	public function __call($method, $params) {
         if(is_array($params)) {
             return $this->call($method, $params);
         } else {

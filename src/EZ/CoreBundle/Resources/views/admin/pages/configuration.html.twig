@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
 {% endblock %}
 
+{% block title %}
+    Configuration - {{ parent() }}
+{% endblock %}
+
 {% block admin_body %}
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -35,80 +39,54 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#general" data-toggle="tab" aria-expanded="true">General</a></li>
-                            <li class=""><a href="#reglement" data-toggle="tab" aria-expanded="false">Réglement</a></li>
-                            <li class=""><a href="#legal" data-toggle="tab" aria-expanded="false">Légal</a></li>
-                            <li class=""><a href="#social" data-toggle="tab" aria-expanded="false">Réseaux Sociaux</a></li>
-                            <li class=""><a href="#option" data-toggle="tab" aria-expanded="false">Options</a></li>
+                            <li><a href="#reglement_ajax_form" data-toggle="tab" aria-expanded="false" class="ajax-form-link">Réglement</a></li>
+                            <li><a href="#legal_ajax_form" data-toggle="tab" aria-expanded="false" class="ajax-form-link">Légal</a></li>
+                            <li><a href="#social_ajax_form" data-toggle="tab" aria-expanded="false" class="ajax-form-link">Réseaux Sociaux</a></li>
+                            <li><a href="#option_ajax_form" data-toggle="tab" aria-expanded="false">Options</a></li>
                         </ul>
                         <div class="tab-content">
+
                             <div class="tab-pane active" id="general">
+                                <div class="container-fluid">
                                 {{ form_start(general_form) }}
+                                <div class="col-md-8">
+                                    <div class="form-group">{{ form_row(general_form.server_name) }}</div>
+                                    <div class="form-group">{{ form_row(general_form.info_site_url) }}</div>
+                                    <div class="form-group">{{ form_row(general_form.presentation) }}</div>
+                                    <div class="form-group">{{ form_row(general_form.server_ip) }}</div>
+                                    <div class="form-group">{{ form_row(general_form.server_port) }}</div>
+                                    <div class="form-group">{{ form_row(general_form.mailer_user) }}</div>
+
+                                    <div class="form-group">{{ form_row(general_form.submit) }}</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row"><div class="form-group">{{ form_row(general_form.info_logo) }}</div></div>
+                                    <div class="row"><div class="form-group">{{ form_row(general_form.info_banner) }}</div></div>
+                                    <div class="row"><div class="form-group">{{ form_row(general_form.info_favicon) }}</div></div>
+                                </div>
+
                                 {{ form_end(general_form) }}
                             </div>
-                            <!-- /.tab-pane -->
-
-                            <div class="tab-pane" id="reglement">
-                                {{ form_start(reglement_form) }}
-                                {{ form_end(reglement_form) }}
-                                <center><h5>Si vous activez le réglement, le lien vers celui-ci sera visible dans le footer (en bas du site, côté utilisateur)</h5></center>
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane" id="legal">
-                                {{ form_start(legal_form) }}
-                                {{ form_widget(legal_form.activate_cc) }}
-                                {{ form_widget(legal_form.activate_lm) }}
-                                <div class="nav-tabs-custom">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#cgv_cgu" data-toggle="tab" aria-expanded="false">CGV / CGU</a></li>
-                                        <li class=""><a href="#mentions_legales" data-toggle="tab" aria-expanded="false">Mention légales</a></li>
-                                    </ul>
-                                    <div class="tab-content">
+                            <div class="tab-pane" id="reglement_ajax_form">
 
-                                        <div class="tab-pane" id="cgv_cgu">
-                                            {{ form_widget(legal_form.cgvCgu) }}
-                                        </div>
-                                        <!-- /.tab-pane -->
-
-                                        <div class="tab-pane" id="mentions_legales">
-                                            {{ form_widget(legal_form.legalMention) }}
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-                                </div>
-                                {{ form_end(legal_form) }}
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane" id="social">
-                                {{ form_start(sn_form) }}
-                                <h6>{{ form_label(sn_form.facebook) }} :</h6>
-                                <div class="input-group col-md-6">
-                                    <span class="input-group-addon"><i class="fa fa-facebook" aria-hidden="true"></i></span>
-                                    {{ form_widget(sn_form.facebook) }}
-                                </div>
-                                <br>
-                                <h6>{{ form_label(sn_form.twitter) }} : </h6>
-                                <div class="input-group col-md-6">
-                                    <span class="input-group-addon"><i class="fa fa-twitter" aria-hidden="true"></i></span>
-                                    {{ form_widget(sn_form.twitter) }}
-                                </div>
-                                <br>
-                                <h6>{{ form_label(sn_form.youtube) }} :</h6>
-                                <div class="input-group col-md-6">
-                                    <span class="input-group-addon"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>
-                                    {{ form_widget(sn_form.youtube) }}
-                                </div>
-                                <br>
-                                {{ form_end(sn_form) }}
-                                <button class="button-green btn"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau réseau social</button>
+                            <div class="tab-pane" id="legal_ajax_form">
+
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane active" id="option">
-                                {{ form_start(general_form) }}
-                                {{ form_end(general_form) }}
+                            <div class="tab-pane" id="social_ajax_form">
+
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="option_ajax_form">
+
                             </div>
                             <!-- /.tab-pane -->
                         </div>
@@ -122,9 +100,7 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
-    <script type="text/javascript">
 
-    </script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+
 {% endblock %}

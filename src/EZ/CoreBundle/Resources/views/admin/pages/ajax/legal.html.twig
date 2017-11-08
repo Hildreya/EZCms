@@ -1,0 +1,30 @@
+    {{ form_start(form, {'action': path('legal_ajax_form')}) }}
+    {{ form_widget(form.activate_cc) }}
+    {{ form_widget(form.activate_lm) }}
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#cgv_cgu" data-toggle="tab" aria-expanded="false">CGV / CGU</a></li>
+            <li class=""><a href="#mentions_legales" data-toggle="tab" aria-expanded="false">Mention légales</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane" id="cgv_cgu">
+                {{ form_widget(form.cgvCgu) }}
+            </div>
+            <!-- /.tab-pane -->
+
+            <div class="tab-pane" id="mentions_legales">
+                {{ form_widget(form.legalMention) }}
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+    </div>
+    {{ form_end(form) }}
+
+{% block javascript %}
+    <script>
+        CKEDITOR.replace( 'ez_corebundle_legal_cgvCgu' );
+        CKEDITOR.replace( 'ez_corebundle_legal_legalMention' );
+    </script>
+{% endblock %}
